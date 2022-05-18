@@ -1,5 +1,6 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
+import Button from '@mui/material/Button'; // KHENAN TERRY: Import Button
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -47,9 +48,16 @@ const Navbar = () => {
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
         <Right>
-          // KHENAN TERRY: Added menu item to be used to switch CSS for dark/light modes
-          <MenuItem onClick={() => {}}</MenuItem>
-          /////////////////////////////////////////////////////////////////////
+          {/*KHENAN TERRY: Added menu item to be used to switch CSS for dark/light modes */}
+          <Button
+            color='primary'
+            variant='contained'
+            sx={{ mt: 0.30, mb: 0 }}
+            onClick={() => {}}>
+
+            Dark/Light Mode
+          </Button>
+          {/*KHENAN TERRY: //////////////////////////////////////////////////////////////*/}
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
