@@ -9,7 +9,7 @@ export default function DarkModeSwitcher(){
             color='primary'
             variant='contained'
             sx={{ mt: 0.30, mb: 0 }}
-            onClick={() => {}}>
+            onClick={() => {sessionStorage.setItem('colorMode', sessionStorage.getItem('colorMode') === 'darkMode' ? 'lightMode' : 'darkMode')}}>
 
             Dark/Light Mode
           </Button>
