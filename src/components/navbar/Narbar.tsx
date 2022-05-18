@@ -4,6 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "../search-bar/SearchBar";
+import DarkModeSwitcher from '../dark-mode-switcher/DarkModeSwitcher'; // KHENAN TERRY: Dark Mode Switcher
 
 const Container = styled.div`
   height: 60px;
@@ -47,9 +48,10 @@ const Navbar = () => {
         <Left>
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
-        
+
         <Right>
-        <SearchBar/>
+          <SearchBar/>
+          <DarkModeSwitcher/>
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
@@ -57,9 +59,8 @@ const Navbar = () => {
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
-          
         </Right>
-        
+
       </Wrapper>
     </Container>
   );
