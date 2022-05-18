@@ -47,6 +47,9 @@ const Navbar = () => {
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
         <Right>
+          // KHENAN TERRY: Added menu item to be used to switch CSS for dark/light modes
+          <MenuItem onClick={() => {}}</MenuItem>
+          /////////////////////////////////////////////////////////////////////
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
