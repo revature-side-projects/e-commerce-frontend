@@ -1,10 +1,10 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import Button from '@mui/material/Button'; // KHENAN TERRY: Import Button
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "../search-bar/SearchBar";
+import DarkModeSwitcher from '../dark-mode-switcher/DarkModeSwitcher'; // KHENAN TERRY: Dark Mode Switcher
 
 const Container = styled.div`
   height: 60px;
