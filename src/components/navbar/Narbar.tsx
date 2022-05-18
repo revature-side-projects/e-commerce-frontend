@@ -51,7 +51,6 @@ const Navbar = () => {
 
         <Right>
           <SearchBar/>
-          {/*KHENAN TERRY: Added menu item to be used to switch CSS for dark/light modes */}
           <Button
             color='primary'
             variant='contained'
@@ -60,7 +59,6 @@ const Navbar = () => {
 
             Dark/Light Mode
           </Button>
-          {/*KHENAN TERRY: //////////////////////////////////////////////////////////////*/}
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
