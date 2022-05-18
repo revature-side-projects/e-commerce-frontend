@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'; // KHENAN TERRY: Import Button
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import SearchBar from "../search-bar/SearchBar";
 
 const Container = styled.div`
   height: 60px;
@@ -47,7 +48,9 @@ const Navbar = () => {
         <Left>
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
+
         <Right>
+          <SearchBar/>
           {/*KHENAN TERRY: Added menu item to be used to switch CSS for dark/light modes */}
           <Button
             color='primary'
@@ -66,6 +69,7 @@ const Navbar = () => {
             </Badge>
           </MenuItem>
         </Right>
+
       </Wrapper>
     </Container>
   );
