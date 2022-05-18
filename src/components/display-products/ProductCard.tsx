@@ -3,9 +3,10 @@ import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { useContext } from "react";
-  import styled from "styled-components";
+import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import ProductDetailView from "./ProductDetailView"
   
   const Info = styled.div`
     opacity: 0;
@@ -97,7 +98,10 @@ import Product from "../../models/Product";
             <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
           </Icon>
           <Icon>
-            <SearchOutlined />
+            {
+              // Button should creates pop up to display details for the product clicked on
+            }
+            <SearchOutlined onClick={() => {ProductDetailView(props.product)}}/>
           </Icon>
         </Info>
       </Container>
