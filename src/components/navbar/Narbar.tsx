@@ -51,14 +51,7 @@ const Navbar = () => {
 
         <Right>
           <SearchBar/>
-          <Button
-            color='primary'
-            variant='contained'
-            sx={{ mt: 0.30, mb: 0 }}
-            onClick={() => {}}>
-
-            Dark/Light Mode
-          </Button>
+          <DarkModeSwitcher/>
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>

@@ -5,14 +5,14 @@ import styled from "styled-components";
 export default function DarkModeSwitcher(){
   return(
       <>
-      <Button
-        color='primary'
-        variant='contained'
-        sx={{ mt: 0.30, mb: 0 }}
-        onClick={() => {}}>
+          <Button
+            color='primary'
+            variant='contained'
+            sx={{ mt: 0.30, mb: 0 }}
+            onClick={() => {}}>
 
-        Dark/Light Mode
-      </Button>
+            Dark/Light Mode
+          </Button>
       </>
   );
 
