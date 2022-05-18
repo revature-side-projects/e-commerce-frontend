@@ -5,12 +5,10 @@ import styled from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const lightMode = createTheme();
-lightMode.palette.primary.main = '#1976d2';
 lightMode.palette.background.default = '#ffffff';
 
 const darkMode = createTheme();
-darkMode.palette.primary.main = '#ef5350';
-lightMode.palette.background.default = '#000000';
+lightMode.palette.background.default = '#121212';
 
 export default function DarkModeSwitcher(){
   const [theme, setTheme] = useState(true);
