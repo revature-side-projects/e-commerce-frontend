@@ -3,6 +3,7 @@ import { ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import SearchBar from "../search-bar/SearchBar";
 
 const Container = styled.div`
   height: 60px;
@@ -46,7 +47,9 @@ const Navbar = () => {
         <Left>
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
+        
         <Right>
+        <SearchBar/>
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
@@ -54,7 +57,9 @@ const Navbar = () => {
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
+          
         </Right>
+        
       </Wrapper>
     </Container>
   );
