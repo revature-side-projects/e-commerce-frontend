@@ -133,6 +133,15 @@ const Button = styled.button`
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
+  /**
+   * Deletes ALL of a certain product in the shopping cart
+   * @param product 
+   */
+   function removeItemFromCart (id: Number) {
+    const newCart = [...cart].filter(p => id !== p.id)
+    setCart(newCart)
+  }
+
   const navigate = useNavigate();
 
   return (
@@ -164,6 +173,7 @@ export const Cart = () => {
                     <PriceDetail>
                       <ProductAmountContainer>
                         <ProductAmount> {product.quantity} </ProductAmount>
+                        <button onClick={() => {removeItemFromCart(product.id)}}>X</button>
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
