@@ -101,7 +101,7 @@ import ProductDetailView from "./ProductDetailView"
             {
               // Button should creates pop up to display details for the product clicked on
             }
-            <SearchOutlined onClick={() => {ProductDetailView(props.product)}}/>
+            <SearchOutlined onClick={() => {<ProductDetailView product={props.product}/>}}/>
           </Icon>
         </Info>
       </Container>
