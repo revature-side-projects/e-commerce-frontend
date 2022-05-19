@@ -13,21 +13,24 @@ darkMode.palette.primary.dark = '#7000a0'; // hover-color for dark mode
 darkMode.palette.background.default = '#121212'; // darkmode's background color
 
 export default function DarkModeSwitcher(){
-  const [theme, setTheme] = useState(true);
-  const activeTheme = createTheme(theme ? lightMode : darkMode);
+
+  function changeMode() {
+    const mode = localStorage.getItem('colorMode');
+    localStorage.setItem('colorMode', mode === 'lightMode' ? 'darkMode' : 'lightMode');
+    console.log(localStorage.getItem('colorMode'));
+    window.location.reload();
+    }
 
   return(
     <>
-      <ThemeProvider theme={activeTheme}>
         <Button
           color='primary'
           variant='contained'
           sx={{ mt: 0.30, mb: 0 }}
-          onClick={() => setTheme(!theme)}>
+          onClick={() => changeMode()}>
 
           Mode
         </Button>
-      </ThemeProvider>
     </>
   );
   // const lightMode = createTheme();
