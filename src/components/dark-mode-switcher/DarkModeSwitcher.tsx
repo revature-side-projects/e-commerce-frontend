@@ -8,7 +8,9 @@ const lightMode = createTheme();
 lightMode.palette.background.default = '#ffffff';
 
 const darkMode = createTheme();
-lightMode.palette.background.default = '#121212';
+darkMode.palette.primary.main = '#a000d0';
+darkMode.palette.primary.dark = '#7000a0';
+darkMode.palette.background.default = '#121212';
 
 export default function DarkModeSwitcher(){
   const [theme, setTheme] = useState(true);
