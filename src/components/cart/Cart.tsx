@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Navbar from "../navbar/Narbar";
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { Button as MuiButton } from "@mui/material";
 
 const Container = styled.div``;
 
@@ -173,7 +175,7 @@ export const Cart = () => {
                     <PriceDetail>
                       <ProductAmountContainer>
                         <ProductAmount> {product.quantity} </ProductAmount>
-                        <button onClick={() => {removeItemFromCart(product.id)}}>X</button>
+                        <MuiButton endIcon={<RemoveShoppingCartIcon />} variant="outlined" color="error" onClick={() => {removeItemFromCart(product.id)}}>Remove</MuiButton>
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
