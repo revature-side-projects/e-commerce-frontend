@@ -37,12 +37,13 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+        {/*bgcolor:'#F26925' revature orange: potential future change */}
+        <Avatar sx={{ m: 1, bgcolor:'secondary.main' }}>
+                < LockOutlinedIcon/>
+        </Avatar>
+        <Typography component="h1" variant="h5">
             Sign in
-          </Typography>
+        </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -64,6 +65,13 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
             />
+            <Grid container>
+              <Grid item>
+                <Link href="/forgot-password" variant="body2" style={{ textDecoration: 'none' }}>
+                  {"Forgot your password?"}
+                </Link>
+              </Grid>
+            </Grid>
             <Button
               type="submit"
               fullWidth
