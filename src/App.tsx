@@ -49,17 +49,11 @@ function App() {
   });
 
   const colorMode = localStorage.getItem('colorMode');
-  let theme = lightMode;
-  let bgColor = '#ffffff'
-  if(colorMode === 'darkMode') {
-    theme = darkMode;
-    bgColor = '#474C55';
-    document.body.style.color = '#ffffff';
-  }
+  let theme = colorMode === 'darkMode' ? lightMode : darkMode;
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles styles ={{ body:{backgroundColor:bgColor}}} />
+      <GlobalStyles styles ={{ body:{backgroundColor:theme.palette.background.default}}} />
       <>
       <DarkModeSwitcher />
       <CartContext.Provider value={value}>
