@@ -2,6 +2,7 @@ import {
     SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
+import React from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -75,6 +76,15 @@ import ProductDetailView from "./ProductDetailView"
 
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     const addItemToCart = (product: Product) => {
 
@@ -101,9 +111,10 @@ import ProductDetailView from "./ProductDetailView"
             {
               // Button should creates pop up to display details for the product clicked on
             }
-            <SearchOutlined onClick={() => {<ProductDetailView product={props.product}/>}}/>
+            <SearchOutlined onClick={handleOpen}/>
           </Icon>
         </Info>
+        <ProductDetailView product={props.product} close={handleClose} open={open}/>
       </Container>
     );
   };

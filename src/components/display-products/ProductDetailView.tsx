@@ -17,12 +17,15 @@ import * as React from 'react';
 
 interface productProps {
   product: Product,
+  close: ()=>void,
+  open: boolean
 }
 
 export default function ProductDetailView(props:productProps){
-  const [open, setOpen] = React.useState(false);
+  //const [open, setOpen] = React.useState(false);
   const fullWidth: boolean = true;
   const maxWidth: DialogProps["maxWidth"] = "lg";
+  /*
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -30,20 +33,19 @@ export default function ProductDetailView(props:productProps){
   const handleClose = () => {
     setOpen(false);
   };
-
+*/
   return (
     <React.Fragment>
 
       <Dialog
         fullWidth={fullWidth}
         maxWidth={maxWidth}
-        onLoad={handleClickOpen}
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.close}
       >
-        <DialogTitle>Product Name</DialogTitle>
+        <DialogTitle>{props.product.name}</DialogTitle>
         <DialogContent>
-          <DialogContentText>Product Description</DialogContentText>
+          <DialogContentText>{`$ ${props.product.price.toFixed(2)}`}</DialogContentText>
           <Box
             component="img"
             sx={{
@@ -52,16 +54,15 @@ export default function ProductDetailView(props:productProps){
               m: "auto",
               width: "fit-content"
             }}
-            alt="The house from the offer."
-            src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+            alt={`Product Image of: ${props.product.name}`}
+            src={props.product.image}
           />
           <DialogContentText>
-            Or Put descriptions down here? Incorporate (or ask the Item Quantity
-            team to incorporate) into Item Quantity feature?
+            {props.product.description}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={props.close}>Close</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
