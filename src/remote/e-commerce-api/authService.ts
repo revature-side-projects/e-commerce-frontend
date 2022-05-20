@@ -20,7 +20,23 @@ export const apiLogout = async (): Promise<eCommerceApiResponse> => {
 export const apiRegister = async (firstName: string, lastName: string, email: string, password: string): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.post<any>(
         `${baseURL}/register`,
-        { firstname: firstName, lastName: lastName, email: email, password: password }
+        { firstName: firstName, lastName: lastName, email: email, password: password }
+    );
+    return { status: response.status, payload: response.data };
+}
+
+export const apiForgotPassword = async (email: string): Promise<eCommerceApiResponse> => {
+    const response = await eCommerceClient.post<any>(
+        `${baseURL}/reset`,
+        {email: email}
+    );
+    return { status: response.status, payload: response.data };
+}
+
+export const apiResetPassword = async (id: number, pass:string): Promise<eCommerceApiResponse> => {
+    const response = await eCommerceClient.patch<any>(
+        `${baseURL}/users/${id}`,
+        pass
     );
     return { status: response.status, payload: response.data };
 }
