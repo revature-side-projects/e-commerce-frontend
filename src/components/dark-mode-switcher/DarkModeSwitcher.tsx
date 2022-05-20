@@ -4,20 +4,11 @@ import Button from '@mui/material/Button';
 import styled from "styled-components";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const lightMode = createTheme();
-lightMode.palette.background.default = '#ffffff'; // lightmode's background color
-
-const darkMode = createTheme();
-darkMode.palette.primary.main = '#a000d0'; // color for dark mode
-darkMode.palette.primary.dark = '#7000a0'; // hover-color for dark mode
-darkMode.palette.background.default = '#121212'; // darkmode's background color
-
 export default function DarkModeSwitcher(){
 
   function changeMode() {
     const mode = localStorage.getItem('colorMode');
     localStorage.setItem('colorMode', mode === 'lightMode' ? 'darkMode' : 'lightMode');
-    console.log(localStorage.getItem('colorMode'));
     window.location.reload();
     }
 

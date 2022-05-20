@@ -12,17 +12,41 @@ function App() {
   const [cart, setCart] = useState<ProductItem[]>([]);
   const value = { cart, setCart };
 
-  const lightMode = createTheme();
-  lightMode.palette.primary.main = '#ff00ff';
-  lightMode.palette.background.default = '#ffffff';
-  lightMode.palette.background.paper = '#ffffff';
-  lightMode.palette.secondary.main = '#474C55';
+  const lightMode = createTheme({
+    palette: {
+      primary: {
+        main: '#474C55',
+      },
+      secondary: {
+        main:'#bbbbbb'
+      },
+      text: {
+        primary: '#000000'
+      },
+      background: {
+        default: '#ffffff'
+      }
+    }
+  });
 
-  const darkMode = createTheme();
-  darkMode.palette.primary.main = '#00ffff';
-  darkMode.palette.background.default = '#474C55';
-  darkMode.palette.background.paper = '#474C55';
-  darkMode.palette.secondary.main = '#474C55';
+  const darkMode = createTheme({
+    palette: {
+      primary: {
+        main: '#000000',
+      },
+      secondary: {
+        main:'#000000'
+      },
+      text: {
+        primary: '#ffffff',
+        secondary: '#ffffff'
+      },
+      background: {
+        default: '#474C55',
+        paper: '#474C55'
+      }
+    }
+  });
 
   const colorMode = localStorage.getItem('colorMode');
   let theme = lightMode;
@@ -30,6 +54,7 @@ function App() {
   if(colorMode === 'darkMode') {
     theme = darkMode;
     bgColor = '#474C55';
+    document.body.style.color = '#ffffff';
   }
 
   return (
