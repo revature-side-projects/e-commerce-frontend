@@ -6,11 +6,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function DarkModeSwitcher(){
 
+  //Switches color modes, and stores the value so the change is persistent.
   function changeMode() {
-    const mode = localStorage.getItem('colorMode');
-    localStorage.setItem('colorMode', mode === 'lightMode' ? 'darkMode' : 'lightMode');
+    const mode = sessionStorage.getItem('colorMode');
+    sessionStorage.setItem('colorMode', mode != 'lightMode' ? 'lightMode' : 'darkMode');
     window.location.reload();
-    }
+  }
 
   return(
     <>
