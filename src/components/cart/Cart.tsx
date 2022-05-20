@@ -136,10 +136,10 @@ export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   /**
-   * Deletes ALL of a certain product in the shopping cart
-   * @param product 
+   * Removes product from {@link CartContext}
+   * @param {number} id - id of product to be removed
    */
-   function removeItemFromCart (id: Number) {
+   function removeItemFromCart (id: number) {
     const newCart = [...cart].filter(p => id !== p.id)
     setCart(newCart)
   }
