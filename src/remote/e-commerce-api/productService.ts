@@ -10,6 +10,13 @@ export const apiGetAllProducts = async (): Promise<eCommerceApiResponse> => {
     return { status: response.status, payload: response.data };
 }
 
+export const apiGetSaleProducts = async (): Promise<eCommerceApiResponse> => {
+    const response = await eCommerceClient.get<any>(
+        `${baseURL}?sale=true`
+    );
+    return {status: response.status, payload: response.data};
+}
+
 export const apiGetProductById = async (id: number): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.get<any>(
         `${baseURL}/${id}`
