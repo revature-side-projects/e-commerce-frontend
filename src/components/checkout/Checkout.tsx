@@ -18,6 +18,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
@@ -40,7 +41,6 @@ let paymentDetail = [
   { name: 'Expiry date', detail: '' },
 ];
 
-const theme = createTheme();
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -77,11 +77,10 @@ export default function Checkout() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <AppBar
         position="absolute"
-        color="default"
+        color='secondary'
         elevation={0}
         sx={{
           position: 'relative',
@@ -126,6 +125,6 @@ export default function Checkout() {
           </React.Fragment>
         </Paper>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

@@ -19,7 +19,7 @@ function App() {
         main: '#474C55',
       },
       secondary: {
-        main:'#bbbbbb'
+        main:'#eeeeee'
       },
       text: {
         primary: '#000000'
@@ -36,7 +36,7 @@ function App() {
         main: '#000000',
       },
       secondary: {
-        main:'#000000'
+        main:'#3E444C'
       },
       text: {
         primary: '#ffffff',
@@ -45,6 +45,11 @@ function App() {
       background: {
         default: '#474C55',
         paper: '#474C55'
+      }
+    },
+    typography: {
+      allVariants: {
+        color: '#ffffff'
       }
     }
   });
