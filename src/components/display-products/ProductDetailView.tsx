@@ -1,8 +1,7 @@
 /*  
  * This code is intended to 
  * Authors: Grayson Howard, Elenor Johnson, Patrick Rwamasirabo
- * Last Modified: 05/18
- * Problems: Error: Invalid hook call. Hooks can only be called inside of the body of a function component. Line: 62 (ProductCard.tsx)
+ * Last Modified: 05/20
  */ 
 
 import Product from "../../models/Product"
