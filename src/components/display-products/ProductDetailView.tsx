@@ -22,18 +22,9 @@ interface productProps {
 }
 
 export default function ProductDetailView(props:productProps){
-  //const [open, setOpen] = React.useState(false);
   const fullWidth: boolean = true;
   const maxWidth: DialogProps["maxWidth"] = "lg";
-  /*
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-*/
   return (
     <React.Fragment>
 
@@ -49,16 +40,17 @@ export default function ProductDetailView(props:productProps){
           <Box
             component="img"
             sx={{
+              maxHeight: 500,
               display: "flex",
               flexDirection: "column",
               m: "auto",
-              width: "fit-content"
+
             }}
             alt={`Product Image of: ${props.product.name}`}
             src={props.product.image}
           />
           <DialogContentText>
-            {props.product.description}
+            {`${props.product.description} Available: ${props.product.quantity}`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
