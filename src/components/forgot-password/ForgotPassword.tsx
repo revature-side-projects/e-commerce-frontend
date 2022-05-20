@@ -11,10 +11,9 @@ import { useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MailLockIcon from '@mui/icons-material/MailLock';
-import { useState } from 'react';
 import FormHelperText from '@mui/material/FormHelperText';
-import InfoIcon from '@mui/icons-material/Info';
 import Grid from '@mui/material/Grid';
+import { apiForgotPassword } from '../../remote/e-commerce-api/authService';
 
 const theme = createTheme();
 
@@ -22,16 +21,11 @@ export default function ForgotPassword(){
 
   const navigate = useNavigate();
 
-  const [showInstructions, setShowInstructions] = React.useState(false)
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        setShowInstructions(true);
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-
-        //HTTP get request to emails goes here 
-        //if (response.status >= 200 && response.status < 300) navigate('/')
-
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    apiForgotPassword(`${data.get('email')}`);
+    navigate('/check-email');
     };
 
     return (
@@ -46,50 +40,46 @@ export default function ForgotPassword(){
                 alignItems: 'center',
               }}
             >
-              {/*bgcolor:'#F26925' revature orange: potential future change  */}
+            {/*bgcolor:'#F26925' revature orange: potential future change */}
             <Avatar sx={{ m: 1, bgcolor:'secondary.main' }}>
-                < MailLockIcon/>
+              < MailLockIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
-                Reset Your Password
+              Reset Your Password
             </Typography>
-             <FormHelperText>
-                    Please enter your registered email.
-              </FormHelperText>
+            <FormHelperText>
+              Please enter your registered email.
+            </FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 400 }}>
-              <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-              />
-              <FormHelperText>
-                  {showInstructions ? <InfoIcon color ='info' fontSize = 'inherit'/> :null}
-                  {showInstructions ? ' You will receive instructions to reset your password if the email address you entered is registered.' :null}
-              </FormHelperText>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2, }}
-                >
-                    Send
-                </Button>
-                <Grid container>
-                  <Grid item>
-                    <Link href="/login"variant="body2" style={{ textDecoration: 'none' }}>
-                      <ArrowBackIosIcon fontSize = 'inherit'/>
-                      {"Back to sign in"}
-                    </Link>  
-                </Grid>
-              </Grid>   
-              </Box>
-            </Box>
-          </Container>
-        </ThemeProvider>
-      );
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, }}
+            >
+              Send
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link href="/login"variant="body2" style={{ textDecoration: 'none' }}>
+                  <ArrowBackIosIcon fontSize = 'inherit'/>
+                  {"Back to sign in"}
+                </Link>  
+              </Grid>
+            </Grid>   
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
+  );
 }
