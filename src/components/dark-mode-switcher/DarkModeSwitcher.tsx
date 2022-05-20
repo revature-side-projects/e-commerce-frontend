@@ -6,8 +6,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function DarkModeSwitcher(){
   const mode = sessionStorage.getItem('colorMode');
-  //Switches color modes, and stores the value so the change is persistent.
 
+  //Switches color modes, and stores the value so the change is persistent.
   function changeMode() {
     sessionStorage.setItem('colorMode', mode != 'lightMode' ? 'lightMode' : 'darkMode');
     window.location.reload();
@@ -32,26 +32,4 @@ export default function DarkModeSwitcher(){
         </Button>
     </Right>
   );
-  // const lightMode = createTheme();
-  // lightMode.palette.primary.main = '#ffffff';
-  // lightMode.palette.secondary.main = '#474C55';
-  //
-  // const darkMode = createTheme();
-  // darkMode.palette.primary.main = '#000000';
-  // darkMode.palette.secondary.main = '#474C55';
-  //
-  // const colorMode = sessionStorage.getItem('colorMode');
-  // const theme = colorMode ==='darkMode' ? darkMode : lightMode;
-  //
-  // return (
-  //   <ThemeProvider>
-  //   <Button>Primary</Button>
-  //     <Button color="secondary">Secondary</Button>
-  //     <CartContext.Provider value={value}>
-  //       <Router>
-  //         <AppRoutes></AppRoutes>
-  //       </Router>
-  //     </CartContext.Provider>
-  //   </ThemeProvider>
-  // );
 }

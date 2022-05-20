@@ -57,6 +57,7 @@ function App() {
   const colorMode = sessionStorage.getItem('colorMode');
   let theme = colorMode != 'lightMode' ? darkMode : lightMode;
  //** EDIT END: Dark Mode Switcher (also adds ThemeProvider, GlobalStyles, and empty tags to the return, but I can't comment inside there.) **//
+ 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles styles ={{ body:{backgroundColor:theme.palette.background.default}}} />
