@@ -18,7 +18,6 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
