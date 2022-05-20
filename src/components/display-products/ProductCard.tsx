@@ -2,8 +2,7 @@ import {
     SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
-import React from "react";
-import { useContext } from "react";
+import { useState, useContext, ChangeEvent } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
@@ -68,6 +67,10 @@ import ProductDetailView from "./ProductDetailView"
       transform: scale(1.1);
     }
   `;
+
+  const CartQuantityInput = styled.input`
+    width: 40px
+  `;
   
   interface productProps {
       product: Product,
@@ -76,7 +79,9 @@ import ProductDetailView from "./ProductDetailView"
 
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [cartQuantity, setCartQuantity] = useState(1);
+    const [showCartQuantityInput, setShowCartQuantityInput] = useState(false);
 
     const handleOpen = () => {
       setOpen(true);
@@ -85,6 +90,18 @@ import ProductDetailView from "./ProductDetailView"
     const handleClose = () => {
       setOpen(false);
     };
+
+    function updateShowCartQuantityInput(){
+      setShowCartQuantityInput(true)
+    }
+
+    function hideShowCartQuantityInput(){
+      setShowCartQuantityInput(false)
+    }
+
+    function updateQuantity(event: ChangeEvent<HTMLInputElement>){
+      setCartQuantity(Number(event.target.value))
+    }
 
     const addItemToCart = (product: Product) => {
 
@@ -103,10 +120,13 @@ import ProductDetailView from "./ProductDetailView"
       <Container>
         <Circle />
         <Image src={props.product.image} />
-        <Info>
-          <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
+        <Info onMouseLeave={hideShowCartQuantityInput}>
+          <Icon >
+            <ShoppingCartOutlined 
+              onMouseOver={updateShowCartQuantityInput} 
+              onClick={() => {addItemToCart({...props.product, quantity: cartQuantity})}} />
           </Icon>
+          {(showCartQuantityInput) ? <CartQuantityInput onChange={updateQuantity} placeholder="1"/> :  null}
           <Icon>
             {
               // Button should creates pop up to display details for the product clicked on
