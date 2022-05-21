@@ -13,6 +13,11 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
+const Heading = styled.div`
+    padding: 20px;
+    font-size:x-large;
+`;
+
 export const DisplayProducts = () => {
 
   const [products, setProducts] = useState<Product[]>([])
@@ -81,13 +86,13 @@ export const DisplayProducts = () => {
   return (
     <React.Fragment>
         <Navbar/>
-        <h4>All Products</h4>
+        <Heading>Sale Products</Heading>
+        <Container>
+        {saleProducts.map(item => <ProductCard product={item} key={item.id} />)}
+        </Container>
+        <Heading>All Products</Heading>
         <Container>
         {products.map(item =><ProductCard product={item} key={item.id}/>)}
-        </Container>
-        <Container>
-        <h4>Sale Products</h4>
-        {saleProducts.map(item => <ProductCard product={item} key={item.id} />)}
         </Container>
     </React.Fragment>
     

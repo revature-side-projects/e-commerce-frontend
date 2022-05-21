@@ -7,9 +7,9 @@ export default class Product {
     saleFlat: number;
     description: string;
     image: string;
-    isSale:boolean;
+    sale: boolean;
 
-    constructor (id: number, name: string, quantity: number, description: string, price: number,saleRate: number,saleFlat: number, image: string, isSale:boolean) {
+    constructor (id: number, name: string, quantity: number, description: string, price: number,saleRate: number,saleFlat: number, image: string, sale:boolean) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -18,6 +18,6 @@ export default class Product {
         this.saleRate = saleRate;
         this.saleFlat = saleFlat;
         this.image = image;
-        this.isSale = isSale;
+        this.sale = sale;
     }
 }

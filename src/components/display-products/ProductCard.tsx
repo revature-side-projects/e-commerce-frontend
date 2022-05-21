@@ -3,7 +3,7 @@ import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { useState, useContext, ChangeEvent } from "react";
-  import styled from "styled-components";
+import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
   
@@ -67,6 +67,32 @@ import Product from "../../models/Product";
     }
   `;
 
+  const Price = styled.div`
+    position:absolute;
+    right: 10px;
+    bottom: 10px;
+    text-align:center;
+    z-index: 10;
+    padding: 10px;
+  `;
+
+  const SaleBanner = styled.div`
+    background-color:rgba(255,0,0,.8);
+    border-radius: 5px;
+    color : white;
+    padding: 5px;
+  `;
+
+  const NewPrice = styled.div`
+
+  `;
+
+  const OldPrice = styled.div`
+    color: red;
+    text-decoration: line-through;
+    padding: 10px;
+  `;
+
   const CartQuantityInput = styled.input`
     width: 40px
   `;
@@ -92,6 +118,13 @@ import Product from "../../models/Product";
 
     function updateQuantity(event: ChangeEvent<HTMLInputElement>){
       setCartQuantity(Number(event.target.value))
+    }
+
+    function salePrice(){
+        const product = props.product
+        const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
+        <NewPrice>${product.price-product.saleFlat}</NewPrice></>
+        return product.sale? sale: "$"+product.price
     }
 
     const addItemToCart = (product: Product) => {
@@ -122,6 +155,7 @@ import Product from "../../models/Product";
             <SearchOutlined />
           </Icon>
         </Info>
+        <Price>{salePrice()}</Price>
       </Container>
     );
   };
