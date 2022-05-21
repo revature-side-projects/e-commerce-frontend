@@ -21,11 +21,12 @@ export default function ForgotPassword(){
 
   const navigate = useNavigate();
 
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    apiForgotPassword(`${data.get('email')}`);
-    navigate('/check-email');
+    /*apiForgotPassword(`${data.get('email')}`);*/
+    navigate('/check-email',{state:{email:`${data.get('email')}`}});
     };
 
     return (

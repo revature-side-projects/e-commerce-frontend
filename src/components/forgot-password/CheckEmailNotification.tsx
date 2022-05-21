@@ -9,10 +9,15 @@ import styles from '../reset-password/SuccessBox.module.css'
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import Link from '@mui/material/Link';
 import FormHelperText from '@mui/material/FormHelperText';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const theme = createTheme();
 
 export default function CheckEmailNotification(){
+
+    const {state}:any = useLocation();
+    const email= state['email'] as any;
 
     return(        
         <ThemeProvider theme={theme}>
@@ -32,18 +37,14 @@ export default function CheckEmailNotification(){
                 <div className={styles.successCheckMark}>
                     <MarkEmailReadIcon color ='success' fontSize='inherit'/>
                 </div>
-                <Typography component="h1" variant="h4">
-                    Check your email
-                </Typography>
                 <Box>
+                <Typography component="h1" variant="h5" align="center">
+                        {email}
+                </Typography>
                 <div className={styles.successTextBox}>
-                    <Typography component="h1" variant="h5" sx={{pt:2}}>
-                        Emailgoeshere@gmail.com
-                    </Typography>
                     <br />
                         You will receive instructions to reset your password if the email address you entered is registered.
                     <br />
-        
                 </div>
                 <Button
                     href="/"      
