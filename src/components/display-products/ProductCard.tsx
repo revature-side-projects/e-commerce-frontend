@@ -1,7 +1,12 @@
 import {
     SearchOutlined,
     ShoppingCartOutlined,
+    Close
   } from "@material-ui/icons";
+  import { 
+    Snackbar,
+    IconButton 
+  } from "@material-ui/core";
 import { useState, useContext, ChangeEvent } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -97,17 +102,22 @@ import ProductDetailView from "./ProductDetailView"
   const CartQuantityInput = styled.input`
     width: 40px
   `;
-  
+
+  const InventoryAlert = Snackbar;
+
   interface productProps {
       product: Product,
       key: number
   }
 
   export const ProductCard = (props: productProps) => {
+
     const { cart, setCart } = useContext(CartContext);
     const [open, setOpen] = useState(false);
     const [cartQuantity, setCartQuantity] = useState(1);
     const [showCartQuantityInput, setShowCartQuantityInput] = useState(false);
+    const [showInventoryAlert, setShowInventoryAlert] = useState(false);
+    const [inventoryAlertMessage, setInventoryAlertMessage] = useState("");
 
     const handleOpen = () => {
       setOpen(true);
@@ -117,44 +127,81 @@ import ProductDetailView from "./ProductDetailView"
       setOpen(false);
     };
 
-    function updateShowCartQuantityInput(){
-      setShowCartQuantityInput(true)
+    const alertCloseAction = (
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={hideInventoryAlert}
+      >
+        <Close fontSize="small" />
+      </IconButton>
+    );
+
+
+    function hideInventoryAlert(){
+      setShowInventoryAlert(false)
     }
 
-    function hideShowCartQuantityInput(){
+    function hideCartQuantityInput(){
       setShowCartQuantityInput(false)
+    }
+
+    function updateShowCartQuantityInput(){
+      setShowCartQuantityInput(true)
     }
 
     function updateQuantity(event: ChangeEvent<HTMLInputElement>){
       setCartQuantity(Number(event.target.value))
     }
-
+ 
     function salePrice(){
-        const product = props.product
-        const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
-        <NewPrice>${product.price-product.saleFlat}</NewPrice></>
-        return product.sale? sale: "$"+product.price
-    }
+      const product = props.product
+      const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
+      <NewPrice>${product.price-product.saleFlat}</NewPrice></>
+      return product.sale? sale: "$"+product.price
+  }
 
-    const addItemToCart = (product: Product) => {
+    const addItemToCart = (product: Product) => {      
 
-      const newCart = [...cart]
-      const index = newCart.findIndex((searchProduct) => {
-        return searchProduct.id === product.id
-      })
+      if(cartQuantity < 1 ){
+        setInventoryAlertMessage(`Quantity must be greater than 1`)
+        setShowInventoryAlert(true)
+        return
+      }
+      if(props.product.quantity < cartQuantity){
+        setInventoryAlertMessage(`We do not have enough in stock. We only have ${props.product.quantity} left.`)
+        setShowInventoryAlert(true)
+      }else{
+        const newCart = [...cart]
+        const index = newCart.findIndex((searchProduct) => {
+          return searchProduct.id === product.id
+        })
 
-      if (index === -1) newCart.push(product)
-      else newCart[index].quantity += product.quantity
-
-      setCart(newCart)
+        if (index === -1){ 
+          newCart.push(product)
+          setCart(newCart)
+        }
+        else{
+          const newCartQuantity = newCart[index].quantity + product.quantity
+          if(props.product.quantity < newCartQuantity){
+            setInventoryAlertMessage(`You can only add up to ${props.product.quantity-newCart[index].quantity} more to your cart. `)
+            setShowInventoryAlert(true)
+            return
+          } else{
+            newCart[index].quantity = newCartQuantity
+            setCart(newCart)
+          }
+        }
+      }
     }
 
     return (
       <Container>
         <Circle />
         <Image src={props.product.image} />
-        <Info onMouseLeave={hideShowCartQuantityInput}>
-          <Icon >
+        <Info onMouseLeave={hideCartQuantityInput}>
+          <Icon>
             <ShoppingCartOutlined 
               onMouseOver={updateShowCartQuantityInput} 
               onClick={() => {addItemToCart({...props.product, quantity: cartQuantity})}} />
@@ -169,6 +216,18 @@ import ProductDetailView from "./ProductDetailView"
         </Info>
         <ProductDetailView product={props.product} close={handleClose} open={open}/>
         <Price>{salePrice()}</Price>
+        <InventoryAlert 
+             style={{ height: "100%"}}
+             anchorOrigin={{
+                vertical: "top",
+                horizontal: "center"
+             }}
+            open={showInventoryAlert}
+            autoHideDuration={6000}
+            onClose={hideInventoryAlert}
+            message= {inventoryAlertMessage}
+            action={alertCloseAction}
+          />
       </Container>
     );
   };
