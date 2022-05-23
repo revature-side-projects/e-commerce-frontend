@@ -32,6 +32,11 @@ export const DisplayProducts = () => {
     }
     fetchData()
   }, [])
+
+  function onSearch(productList: Product[]) {
+    setProducts(productList);
+  }
+
   // const products: Product[] = [
   //   {
   //       id:1,
@@ -85,7 +90,7 @@ export const DisplayProducts = () => {
 
   return (
     <React.Fragment>
-        <Navbar/>
+        <Navbar onProductSearch={onSearch} />
         <Heading>Sale Products</Heading>
         <Container>
         {saleProducts.map(item => <ProductCard product={item} key={item.id} />)}
@@ -95,6 +100,5 @@ export const DisplayProducts = () => {
         {products.map(item =><ProductCard product={item} key={item.id}/>)}
         </Container>
     </React.Fragment>
-    
   );
 };

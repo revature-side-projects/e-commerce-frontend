@@ -17,6 +17,13 @@ export const apiGetSaleProducts = async (): Promise<eCommerceApiResponse> => {
     return {status: response.status, payload: response.data};
 }
 
+export const apiGetFilteredProducts = async (searchParam: string): Promise<eCommerceApiResponse> => {
+    const response = await eCommerceClient.get<any>(
+        `${baseURL}?query=${searchParam}`
+    );
+    return { status: response.status, payload: response.data };
+}
+
 export const apiGetProductById = async (id: number): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.get<any>(
         `${baseURL}/${id}`
@@ -32,7 +39,7 @@ export const apiUpsertProduct = async (product: Product): Promise<eCommerceApiRe
     return { status: response.status, payload: response.data };
 }
 
-export const apiPurchase = async (products: {id: number, quantity: number}[]): Promise<eCommerceApiResponse> => {
+export const apiPurchase = async (products: { id: number, quantity: number }[]): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.patch<any>(
         `${baseURL}`,
         products
