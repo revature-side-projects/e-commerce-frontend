@@ -17,3 +17,7 @@
 .revLightGray {
     color: #B9B9BA
 }
+
+.MuiToolbar-root {
+    background: #dadada;
+}

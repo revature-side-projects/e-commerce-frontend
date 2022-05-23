@@ -52,7 +52,7 @@ const Navbar = (props: any) => {
     <Container>
       <Wrapper>
         <Left>
-          <Logo onClick={() => { navigate('/') }}>Revature Swag Shop</Logo>
+          <Logo className="revOrange" onClick={() => { navigate('/') }}>Revature Swag Shop</Logo>
         </Left>
 
         <Right>

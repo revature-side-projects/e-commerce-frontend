@@ -12,7 +12,7 @@ import { apiRegister } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -12,6 +12,7 @@ import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import ProductDetailView from "./ProductDetailView"
+import { useTheme } from '@mui/material/styles'
   
   const Info = styled.div`
     opacity: 0;
@@ -30,6 +31,7 @@ import ProductDetailView from "./ProductDetailView"
   `;
   
   const Container = styled.div`
+    background: ${sessionStorage.getItem('colorMode') === 'lightMode' ? '#f5fbfd' : '#474C55'};
     flex: 1;
     margin: 5px;
     min-width: 280px;
@@ -37,7 +39,6 @@ import ProductDetailView from "./ProductDetailView"
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5fbfd;
     position: relative;
     &:hover ${Info}{
       opacity: 1;
@@ -62,6 +63,7 @@ import ProductDetailView from "./ProductDetailView"
     height: 40px;
     border-radius: 50%;
     background-color: white;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -195,6 +197,8 @@ import ProductDetailView from "./ProductDetailView"
         }
       }
     }
+
+    const theme = useTheme();
 
     return (
       <Container>
