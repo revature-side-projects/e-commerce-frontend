@@ -68,6 +68,32 @@ import ProductDetailView from "./ProductDetailView"
     }
   `;
 
+  const Price = styled.div`
+    position:absolute;
+    right: 10px;
+    bottom: 10px;
+    text-align:center;
+    z-index: 10;
+    padding: 10px;
+  `;
+
+  const SaleBanner = styled.div`
+    background-color:rgba(255,0,0,.8);
+    border-radius: 5px;
+    color : white;
+    padding: 5px;
+  `;
+
+  const NewPrice = styled.div`
+
+  `;
+
+  const OldPrice = styled.div`
+    color: red;
+    text-decoration: line-through;
+    padding: 10px;
+  `;
+
   const CartQuantityInput = styled.input`
     width: 40px
   `;
@@ -103,6 +129,13 @@ import ProductDetailView from "./ProductDetailView"
       setCartQuantity(Number(event.target.value))
     }
 
+    function salePrice(){
+        const product = props.product
+        const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
+        <NewPrice>${product.price-product.saleFlat}</NewPrice></>
+        return product.sale? sale: "$"+product.price
+    }
+
     const addItemToCart = (product: Product) => {
 
       const newCart = [...cart]
@@ -135,6 +168,7 @@ import ProductDetailView from "./ProductDetailView"
           </Icon>
         </Info>
         <ProductDetailView product={props.product} close={handleClose} open={open}/>
+        <Price>{salePrice()}</Price>
       </Container>
     );
   };
