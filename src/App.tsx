@@ -25,8 +25,8 @@ function App() {
 
   const darkMode = createTheme({
     palette: {
-      primary: {main: '#000000', contrastText: "#fff"},
-      secondary: {main:'#000000', contrastText: "#fff"},
+      primary: {main: '#B9B9BA', contrastText: "#fff"},
+      secondary: {main:'#B9B9BA', contrastText: "#fff"},
       text: {primary: '#ffffff', secondary: '#ffffff'},
       background: {default: '#212121', paper: '#212121'}
     }

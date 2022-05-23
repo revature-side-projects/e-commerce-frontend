@@ -85,7 +85,7 @@ export default function Checkout() {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap onClick={() => navigate('/')}>
+          <Typography variant="h6" className="revOrange" noWrap onClick={() => navigate('/')}>
             Revature Swag Shop
           </Typography>
         </Toolbar>
