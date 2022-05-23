@@ -37,7 +37,6 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-        {/*bgcolor:'#F26925' revature orange: potential future change */}
         <Avatar sx={{ m: 1, bgcolor:'secondary.main' }}>
                 < LockOutlinedIcon/>
         </Avatar>

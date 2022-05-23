@@ -25,7 +25,7 @@ export default function ForgotPassword(){
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    /*apiForgotPassword(`${data.get('email')}`);*/
+    apiForgotPassword(`${data.get('email')}`);
     navigate('/check-email',{state:{email:`${data.get('email')}`}});
     };
 
@@ -41,7 +41,6 @@ export default function ForgotPassword(){
                 alignItems: 'center',
               }}
             >
-            {/*bgcolor:'#F26925' revature orange: potential future change */}
             <Avatar sx={{ m: 1, bgcolor:'secondary.main' }}>
               < MailLockIcon/>
             </Avatar>
