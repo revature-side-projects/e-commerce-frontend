@@ -3,9 +3,10 @@ import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { useState, useContext, ChangeEvent } from "react";
-  import styled from "styled-components";
+import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import ProductDetailView from "./ProductDetailView"
   
   const Info = styled.div`
     opacity: 0;
@@ -67,6 +68,32 @@ import Product from "../../models/Product";
     }
   `;
 
+  const Price = styled.div`
+    position:absolute;
+    right: 10px;
+    bottom: 10px;
+    text-align:center;
+    z-index: 10;
+    padding: 10px;
+  `;
+
+  const SaleBanner = styled.div`
+    background-color:rgba(255,0,0,.8);
+    border-radius: 5px;
+    color : white;
+    padding: 5px;
+  `;
+
+  const NewPrice = styled.div`
+
+  `;
+
+  const OldPrice = styled.div`
+    color: red;
+    text-decoration: line-through;
+    padding: 10px;
+  `;
+
   const CartQuantityInput = styled.input`
     width: 40px
   `;
@@ -78,9 +105,17 @@ import Product from "../../models/Product";
 
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
+    const [open, setOpen] = useState(false);
     const [cartQuantity, setCartQuantity] = useState(1);
     const [showCartQuantityInput, setShowCartQuantityInput] = useState(false);
 
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     function updateShowCartQuantityInput(){
       setShowCartQuantityInput(true)
@@ -92,6 +127,13 @@ import Product from "../../models/Product";
 
     function updateQuantity(event: ChangeEvent<HTMLInputElement>){
       setCartQuantity(Number(event.target.value))
+    }
+
+    function salePrice(){
+        const product = props.product
+        const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
+        <NewPrice>${product.price-product.saleFlat}</NewPrice></>
+        return product.sale? sale: "$"+product.price
     }
 
     const addItemToCart = (product: Product) => {
@@ -119,9 +161,14 @@ import Product from "../../models/Product";
           </Icon>
           {(showCartQuantityInput) ? <CartQuantityInput onChange={updateQuantity} placeholder="1"/> :  null}
           <Icon>
-            <SearchOutlined />
+            {
+              // Button should creates pop up to display details for the product clicked on
+            }
+            <SearchOutlined onClick={handleOpen}/>
           </Icon>
         </Info>
+        <ProductDetailView product={props.product} close={handleClose} open={open}/>
+        <Price>{salePrice()}</Price>
       </Container>
     );
   };

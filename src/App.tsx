@@ -13,6 +13,7 @@ function App() {
   const [cart, setCart] = useState<ProductItem[]>([]);
   const value = { cart, setCart };
 
+  //** EDIT START: Dark Mode Switcher **//
   const lightMode = createTheme({
     palette: {
       primary: {main: '#474C55', contrastText: "#fff"},
@@ -31,8 +32,9 @@ function App() {
     }
   });
 
-  const colorMode = localStorage.getItem('colorMode');
-  let theme = colorMode === 'darkMode' ? lightMode : darkMode;
+  const colorMode = sessionStorage.getItem('colorMode');
+  let theme = colorMode != 'lightMode' ? darkMode : lightMode;
+ //** EDIT END: Dark Mode Switcher (also adds ThemeProvider, GlobalStyles, and empty tags to the return, but I can't comment inside there.) **//
 
   return (
     <ThemeProvider theme={theme}>

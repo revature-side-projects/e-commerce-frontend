@@ -3,8 +3,8 @@ import { ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Product from "../../models/Product";
 import SearchBar from "../search-bar/SearchBar";
-import DarkModeSwitcher from '../dark-mode-switcher/DarkModeSwitcher'; // KHENAN TERRY: Dark Mode Switcher
 
 const Container = styled.div`
   height: 60px;
@@ -39,28 +39,32 @@ const MenuItem = styled.div`
   margin-left: 25px;
 `;
 
-const Navbar = () => {
+const Navbar = (props: any) => {
   const navigate = useNavigate();
+
+  const onSearch = props.onProductSearch;
+
+  function onSearchUpdate(productList: Product[]) {
+    onSearch(productList);
+  }
 
   return (
     <Container>
       <Wrapper>
         <Left>
-        <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
+          <Logo onClick={() => { navigate('/') }}>Revature Swag Shop</Logo>
         </Left>
 
         <Right>
-          <SearchBar/>
-          <DarkModeSwitcher/>
-          <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
-          <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
-          <MenuItem onClick={() => {navigate('/cart')}}>
+          <SearchBar onProductSearch={onSearchUpdate} />
+          <MenuItem onClick={() => { navigate('/register') }}>REGISTER</MenuItem>
+          <MenuItem onClick={() => { navigate('/login') }}>SIGN IN</MenuItem>
+          <MenuItem onClick={() => { navigate('/cart') }}>
             <Badge color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
         </Right>
-
       </Wrapper>
     </Container>
   );
