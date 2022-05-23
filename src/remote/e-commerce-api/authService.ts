@@ -36,7 +36,7 @@ export const apiForgotPassword = async (email: string): Promise<eCommerceApiResp
 export const apiResetPassword = async (id: number, pass:string): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.patch<any>(
         `${baseURL}/users/${id}`,
-        pass
+        {password:pass}
     );
     return { status: response.status, payload: response.data };
 }
