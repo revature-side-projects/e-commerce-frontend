@@ -6,6 +6,7 @@ import { useState, useContext, ChangeEvent } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import ProductDetailView from "./ProductDetailView"
   
   const Info = styled.div`
     opacity: 0;
@@ -104,9 +105,17 @@ import Product from "../../models/Product";
 
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
+    const [open, setOpen] = useState(false);
     const [cartQuantity, setCartQuantity] = useState(1);
     const [showCartQuantityInput, setShowCartQuantityInput] = useState(false);
 
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     function updateShowCartQuantityInput(){
       setShowCartQuantityInput(true)
@@ -152,9 +161,13 @@ import Product from "../../models/Product";
           </Icon>
           {(showCartQuantityInput) ? <CartQuantityInput onChange={updateQuantity} placeholder="1"/> :  null}
           <Icon>
-            <SearchOutlined />
+            {
+              // Button should creates pop up to display details for the product clicked on
+            }
+            <SearchOutlined onClick={handleOpen}/>
           </Icon>
         </Info>
+        <ProductDetailView product={props.product} close={handleClose} open={open}/>
         <Price>{salePrice()}</Price>
       </Container>
     );
