@@ -7,7 +7,7 @@ const eCommerceClient = axios.create({
   baseURL: 'http://revatureswagshop-env.eba-p67i2gpe.us-east-1.elasticbeanstalk.com',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
   },
 });
 
