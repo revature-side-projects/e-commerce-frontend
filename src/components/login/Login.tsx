@@ -82,9 +82,9 @@ export default function Login() {
                 </Link>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </ThemeProvider>
   );
 }
