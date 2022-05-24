@@ -18,11 +18,18 @@ export const apiLogout = async (): Promise<eCommerceApiResponse> => {
 }
 
 export const apiRegister = async (firstName: string, lastName: string, email: string, password: string): Promise<eCommerceApiResponse> => {
-    const response = await eCommerceClient.post<any>(
-        `${baseURL}/register`,
-        { firstName: firstName, lastName: lastName, email: email, password: password }
-    );
-    return { status: response.status, payload: response.data };
+//throws on 400+ errors at least
+    try 
+    {
+        const response = await eCommerceClient.post<any>(
+            `${baseURL}/register`,
+            { firstname: firstName, lastName: lastName, email: email, password: password }
+        );
+        return { status: response.status, payload: response.data };
+    }
+    catch(error){
+        return {status: 400, payload:null}
+    }    
 }
 
 export const apiForgotPassword = async (email: string): Promise<eCommerceApiResponse> => {

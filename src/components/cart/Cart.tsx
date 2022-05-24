@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Navbar from "../navbar/Narbar";
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { Button as MuiButton } from "@mui/material";
 
 const Container = styled.div``;
 
@@ -133,6 +135,15 @@ const Button = styled.button`
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
+  /**
+   * Removes product from {@link CartContext}
+   * @param {number} id - id of product to be removed
+   */
+   function removeItemFromCart (id: number) {
+    const newCart = [...cart].filter(p => id !== p.id)
+    setCart(newCart)
+  }
+
   const navigate = useNavigate();
 
   return (
@@ -164,6 +175,7 @@ export const Cart = () => {
                     <PriceDetail>
                       <ProductAmountContainer>
                         <ProductAmount> {product.quantity} </ProductAmount>
+                        <MuiButton endIcon={<RemoveShoppingCartIcon />} variant="outlined" color="error" onClick={() => {removeItemFromCart(product.id)}}>Remove</MuiButton>
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
