@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,16 +24,17 @@ export default function Login() {
 
   return (
     <Container component="main" maxWidth="xs">
+      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
+          < LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
@@ -58,6 +60,13 @@ export default function Login() {
             id="password"
             autoComplete="current-password"
           />
+          <Grid container>
+            <Grid item>
+              <Link href="/forgot-password" variant="body2" style={{ textDecoration: 'none' }}>
+                {"Forgot your password?"}
+              </Link>
+            </Grid>
+          </Grid>
           <Button
             type="submit"
             fullWidth
