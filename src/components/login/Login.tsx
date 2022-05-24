@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 export default function Login() {
