@@ -1,7 +1,7 @@
 /*  
  * This code is intended to 
  * Authors: Grayson Howard, Elenor Johnson, Patrick Rwamasirabo
- * Last Modified: 05/20
+ * Last Modified: 05/27
  */ 
 
 import Product from "../../models/Product"
@@ -13,16 +13,30 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import * as React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import { useState } from "react";
 
 interface productProps {
   product: Product,
   close: ()=>void,
-  open: boolean
+  open: boolean,
+  addToCart: (product: Product) => void
+  cartQuantity: number
 }
 
 export default function ProductDetailView(props:productProps){
+  const [openSnack, setOpenSnack] = useState(false);
   const fullWidth: boolean = true;
   const maxWidth: DialogProps["maxWidth"] = "lg";
+
+  const handleClick = () => {
+    props.addToCart({...props.product, quantity: props.cartQuantity});
+    setOpenSnack(true);
+  };
+
+  const handleCloseSnack = () => {
+    setOpenSnack(false);
+  };
 
   return (
     <React.Fragment>
@@ -53,8 +67,15 @@ export default function ProductDetailView(props:productProps){
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.close}>Close</Button>
+            <Button 
+              onClick={() => {handleClick()}} >Add to Cart</Button>
         </DialogActions>
+        <Snackbar
+            open={openSnack}
+            onClose={handleCloseSnack}
+            autoHideDuration={3000}
+            message="Added to Cart"
+        />
       </Dialog>
     </React.Fragment>
   );

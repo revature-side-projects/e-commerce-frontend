@@ -218,7 +218,7 @@ import { useTheme } from '@mui/material/styles'
             <SearchOutlined onClick={handleOpen}/>
           </Icon>
         </Info>
-        <ProductDetailView product={props.product} close={handleClose} open={open}/>
+        <ProductDetailView product={props.product} close={handleClose} open={open} addToCart={addItemToCart} cartQuantity={cartQuantity}/>
         <Price>{salePrice()}</Price>
         <InventoryAlert 
              style={{ height: "100%"}}
