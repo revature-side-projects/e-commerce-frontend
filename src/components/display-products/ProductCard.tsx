@@ -120,6 +120,7 @@ import { useTheme } from '@mui/material/styles'
     const [showCartQuantityInput, setShowCartQuantityInput] = useState(false);
     const [showInventoryAlert, setShowInventoryAlert] = useState(false);
     const [inventoryAlertMessage, setInventoryAlertMessage] = useState("");
+    const [openSnack, setOpenSnack] = useState(false);
 
     const handleOpen = () => {
       setOpen(true);
@@ -127,6 +128,14 @@ import { useTheme } from '@mui/material/styles'
   
     const handleClose = () => {
       setOpen(false);
+    };
+
+    const handleClick = () => {
+      addItemToCart({...props.product, quantity: cartQuantity});
+    };
+  
+    const handleCloseSnack = () => {
+      setOpenSnack(false);
     };
 
     const alertCloseAction = (
@@ -183,6 +192,7 @@ import { useTheme } from '@mui/material/styles'
         if (index === -1){ 
           newCart.push(product)
           setCart(newCart)
+          setOpenSnack(true)
         }
         else{
           const newCartQuantity = newCart[index].quantity + product.quantity
@@ -193,6 +203,7 @@ import { useTheme } from '@mui/material/styles'
           } else{
             newCart[index].quantity = newCartQuantity
             setCart(newCart)
+            setOpenSnack(true)
           }
         }
       }
@@ -218,7 +229,7 @@ import { useTheme } from '@mui/material/styles'
             <SearchOutlined onClick={handleOpen}/>
           </Icon>
         </Info>
-        <ProductDetailView product={props.product} close={handleClose} open={open} addToCart={addItemToCart} cartQuantity={cartQuantity}/>
+        <ProductDetailView product={props.product} close={handleClose} open={open} handleClick={handleClick}/>
         <Price>{salePrice()}</Price>
         <InventoryAlert 
              style={{ height: "100%"}}
@@ -232,6 +243,12 @@ import { useTheme } from '@mui/material/styles'
             message= {inventoryAlertMessage}
             action={alertCloseAction}
           />
+          <Snackbar
+            open={openSnack}
+            onClose={handleCloseSnack}
+            autoHideDuration={3000}
+            message="Added to Cart"
+        />
       </Container>
     );
   };
