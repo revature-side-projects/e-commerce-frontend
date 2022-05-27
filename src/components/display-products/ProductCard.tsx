@@ -156,13 +156,13 @@ import { useTheme } from '@mui/material/styles'
     function updateQuantity(event: ChangeEvent<HTMLInputElement>){
       setCartQuantity(Number(event.target.value))
     }
- 
-    function salePrice(){
-      const product = props.product
-      const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
-      <NewPrice>${product.price-product.saleFlat}</NewPrice></>
-      return product.sale? sale: "$"+product.price
-  }
+  
+  function salePrice(){
+    const product = props.product
+    const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
+    <NewPrice>${product.price-(product.price *(product.saleRate/100))}</NewPrice></>
+    return product.sale? sale: "$"+product.price
+}
 
     const addItemToCart = (product: Product) => {      
 
