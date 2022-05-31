@@ -184,7 +184,7 @@ export const Cart = () => {
                         <ProductAmount> {product.quantity} </ProductAmount>
                         <MuiButton endIcon={<RemoveShoppingCartIcon />} variant="outlined" color="error" onClick={() => {removeItemFromCart(product.id)}}>Remove</MuiButton>
                       </ProductAmountContainer>
-                      <ProductPrice>$ {product.sale?product.price-(product.price *(product.saleRate/100)):product.price}</ProductPrice>         
+                      <ProductPrice>$ {product.sale?(product.price-(product.price *(product.saleRate/100))).toFixed(2):product.price.toFixed(2)}</ProductPrice>         
                     </PriceDetail>
                   </Product>
                   <Hr/>
@@ -199,8 +199,8 @@ export const Cart = () => {
               <SummaryItemPrice>${Number(
                 cart.filter(product=>!product.sale).reduce<number>((total, product) => total + product.price * product.quantity, 0)+
                 cart.filter(product=>product.sale).reduce<number>((total, product) => total + 
-                  (product.price-(product.price *(product.saleRate/100))) * product.quantity, 0)
-              )}
+                  (product.price-(product.price *(product.saleRate/100)))* product.quantity, 0)
+              ).toFixed(2)}
               </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
@@ -217,7 +217,7 @@ export const Cart = () => {
                 cart.filter(product=>!product.sale).reduce<number>((total, product) => total + product.price * product.quantity, 0)+
                 cart.filter(product=>product.sale).reduce<number>((total, product) => total + 
                   (product.price-(product.price *(product.saleRate/100))) * product.quantity, 0)
-              )}
+              ).toFixed(2)}
               </SummaryItemPrice>
             </SummaryItem>
             <Button onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</Button>
