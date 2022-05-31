@@ -45,14 +45,14 @@ export default function CheckEmailNotification(){
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor: '#F26925' }}
+                sx={{ mt: 3, mb: 2, bgcolor: '#72A4C2' }}
             >
             Ok
             </Button>
             <FormHelperText>
-                <Typography align="center" variant='inherit'>
+                <Typography align="center" variant='body2'>
                     Didn't get the email? If it doesn't arrive soon, check your spam folder or&nbsp;
-                    <Link href="/forgot-password" underline="hover">
+                    <Link href="/forgot-password" color="#72A4C2" underline="hover">
                         {"send the email again."}
                     </Link>
                 </Typography>

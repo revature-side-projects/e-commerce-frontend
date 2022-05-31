@@ -241,13 +241,13 @@ export default function Register() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2, bgcolor: '#F26925' }}
+            sx={{ mt: 3, mb: 2, bgcolor: '#72A4C2' }}
           >
             Sign Up
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="login" variant="body2">
+              <Link href="login" variant="body2" color="#72A4C2">
                 Already have an account? Sign in
               </Link>
             </Grid>

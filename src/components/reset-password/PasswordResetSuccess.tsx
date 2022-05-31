@@ -48,7 +48,7 @@ export default function ResetPasswordSuccess(){
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor: '#F26925' }}
+                sx={{ mt: 3, mb: 2, bgcolor: '#72A4C2' }}
             >
                 Sign in now
             </Button>

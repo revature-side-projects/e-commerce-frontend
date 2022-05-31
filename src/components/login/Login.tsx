@@ -79,7 +79,7 @@ export default function Login() {
           />
           <Grid container>
             <Grid item>
-              <Link href="/forgot-password" variant="body2" style={{ textDecoration: 'none' }}>
+              <Link href="/forgot-password" variant="body2" color="#72A4C2" style={{ textDecoration: 'none' }}>
                 {"Forgot your password?"}
               </Link>
             </Grid>
@@ -88,13 +88,13 @@ export default function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2,  bgcolor: '#F26925' }}
+            sx={{ mt: 3, mb: 2,  bgcolor: '#72A4C2' }}
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="register" variant="body2">
+              <Link href="register" variant="body2" color="#72A4C2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
