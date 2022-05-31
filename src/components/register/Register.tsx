@@ -103,7 +103,6 @@ export default function Register() {
     if (text.length == 0) {
       setPasswordError(false);
       setPasswordHelper(defaultPasswordHelper);
-      console.log(event);
       return;
     }
 
