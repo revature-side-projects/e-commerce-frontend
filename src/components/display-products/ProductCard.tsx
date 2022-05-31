@@ -170,8 +170,8 @@ import { useTheme } from '@mui/material/styles'
   
   function salePrice(){
     const product = props.product
-    const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price}</OldPrice>
-    <NewPrice>${product.price-(product.price *(product.saleRate/100))}</NewPrice></>
+    const sale = <><SaleBanner>Sale {product.saleRate}% Off</SaleBanner><OldPrice>${product.price.toFixed(2)}</OldPrice>
+    <NewPrice>${(product.price-(product.price *(product.saleRate/100))).toFixed(2)}</NewPrice></>
     return product.sale? sale: "$"+product.price.toFixed(2);
 }
 
