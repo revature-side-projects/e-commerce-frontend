@@ -97,7 +97,7 @@ export default function ResetPassword(){
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <Avatar sx={{ m: 1,  bgcolor: '#F26925' }}>
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
@@ -151,7 +151,7 @@ export default function ResetPassword(){
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ mt: 3, mb: 2,  bgcolor: '#F26925' }}
                 >
                   Reset Password
                 </Button>
