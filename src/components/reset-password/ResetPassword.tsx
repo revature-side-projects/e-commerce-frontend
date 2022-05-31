@@ -22,9 +22,9 @@ export default function ResetPassword(){
     
     const {id} = useParams();
 
-    const [inputErrors, setInputErrors] = useState({
-        misMatch:'',
-    })
+    const [error, setError] = useState({
+      errorMessage:'',
+  })
 
     const[showErrorIcon, setShowErrorIcon] = React.useState(false);
     const[visibleIcon1,setVisibleIcon1] = React.useState(true);
@@ -37,28 +37,34 @@ export default function ResetPassword(){
      * @returns {boolean} - true if the two passwords are mismatched, false if they are the same.
      */
     function checkMismatch (password:string, passwordVerify:string):boolean { 
-        let error = false; 
-        if(password !== passwordVerify){
-            setInputErrors(state=>({...state, misMatch: 'Please make sure that both passwords match.'}));
-            setShowErrorIcon(true);
-            error = true;
-        } else{
-          //clear errors if the two passwords are the same
-          setInputErrors(state=>({...state, misMatch: ''}));
-          setShowErrorIcon(false);
-          error = false;
-        }
-        return error;
-    }
+      let error = false; 
+      if(password !== passwordVerify){
+          setError(state=>({...state, errorMessage: 'Please make sure that both passwords match.'}));
+          error = true;
+      } else{
+        //clear errors if the two passwords are the same
+        setError(state=>({...state, errorMessage: ''}));
+        error = false;
+      }
+      setShowErrorIcon(error);
+      return error;
+  }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         //check if the two password inputs are the same before submitting
         if(!checkMismatch(`${data.get('password')}`, `${data.get('passwordVerify')}`)){
+          console.log("before api call");
           const response = await apiResetPassword(parseInt(id!),`${data.get('password')}`);
-          console.log(response.payload);
-          if(response.status >= 200 && response.status < 300){
+          console.log("after api call");
+          if(response.status === 205){
+            setError(state=>({...state, errorMessage: 'Your password reset link has expired. Password reset links last 24 hours. Please request a new one.'}));
+            setShowErrorIcon(true);
+          } else if(response.status >= 200 && response.status < 300){
+            console.log(response);
+            setError(state=>({...state, errorMessage: ''}));
+            setShowErrorIcon(false);
             navigate('/reset-password-success');
           }
         }
@@ -122,7 +128,7 @@ export default function ResetPassword(){
                   }}
                 />
                 <FormHelperText error>
-                  {showErrorIcon ? <ErrorOutlineOutlinedIcon color ='error' fontSize = 'inherit'/> :null} {inputErrors.misMatch}
+                  {showErrorIcon ? <ErrorOutlineOutlinedIcon color ='error' fontSize = 'inherit'/> :null} {error.errorMessage}
                 </FormHelperText>
                 <Button
                   type="submit"
