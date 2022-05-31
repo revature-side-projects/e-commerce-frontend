@@ -104,7 +104,7 @@ import { useTheme } from '@mui/material/styles'
   `;
 
   const CartQuantityInput = styled.input`
-    width: 40px
+    width: 40px;
   `;
 
   const InventoryAlert = Snackbar;
@@ -223,7 +223,7 @@ import { useTheme } from '@mui/material/styles'
               onMouseOver={updateShowCartQuantityInput} 
               onClick={() => {addItemToCart({...props.product, quantity: cartQuantity})}} />
           </Icon>
-          {(showCartQuantityInput) ? <CartQuantityInput onChange={updateQuantity} placeholder="1"/> :  null}
+          {(showCartQuantityInput) ? <CartQuantityInput type="number" min="1" onChange={updateQuantity} placeholder="1"/> :  null}
           <Icon>
             {
               // Button should creates pop up to display details for the product clicked on
