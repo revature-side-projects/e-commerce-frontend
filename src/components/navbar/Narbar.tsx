@@ -1,6 +1,6 @@
-import { Badge } from "@material-ui/core";
+import { Badge, Input } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import React from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -39,17 +39,26 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
+
+  let search = (e: SyntheticEvent) => {
+    setSearchValue((e.target as HTMLInputElement).value);
+    console.log(searchValue);
+  }
 
   return (
     <Container>
       <Wrapper>
         <Left>
-        <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
+          <Logo onClick={() => { navigate('/') }}>Revature Swag Shop</Logo>
         </Left>
         <Right>
-          <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
-          <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
-          <MenuItem onClick={() => {navigate('/cart')}}>
+          <MenuItem>          
+          <Input type="text" onChange={search} ></Input>
+          </MenuItem>
+          <MenuItem onClick={() => { navigate('/register') }}>REGISTER</MenuItem>
+          <MenuItem onClick={() => { navigate('/login') }}>SIGN IN</MenuItem>
+          <MenuItem onClick={() => { navigate('/cart') }}>
             <Badge color="primary">
               <ShoppingCartOutlined />
             </Badge>
