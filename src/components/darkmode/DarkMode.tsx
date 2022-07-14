@@ -16,10 +16,10 @@ const setLight = () => {
 
 const storedTheme = localStorage.getItem("theme");
 
-const prefersDark = 
+const prefersDark =
     window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-const defaultDark = 
+const defaultDark =
     storedTheme === "dark" || (storedTheme === null && prefersDark);
 
 if (defaultDark) {
@@ -34,17 +34,17 @@ const toggleTheme: ChangeEventHandler<HTMLInputElement> = (e) => {
     }
 };
 
-const DarkMode = () => { 
+const DarkMode = () => {
     return (
         <div className="toggle-theme-wrapper">
             <span>☀️</span>
             <Switch
-              role="switch"
-              defaultChecked={defaultDark}
-              onChange={toggleTheme}
+                role="switch"
+                defaultChecked={storedTheme ? true : false}
+                onChange={toggleTheme}
 
-                 inputProps={{ 'aria-label': 'controlled' }}
-            />                                                      
+                inputProps={{ 'aria-label': 'controlled' }}
+            />
             <span>🌑</span>
         </div>
     );
