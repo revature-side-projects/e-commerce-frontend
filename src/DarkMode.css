@@ -1,0 +1,31 @@
+:root {
+    --font-color: #333;
+    --background-color: ghostwhite;
+    --link-color: blue;
+}
+
+[data-theme="dark"] {
+    --font-color: ghostwhite;
+    --background-color: #333;
+    --link-color: lightblue;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--font-color);
+}
+
+a {
+    color: var(--link-color);
+}
+
+/* Dark Mode Toggle Button CSS */
+.toggle-theme-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toggle-theme-wrapper span {
+    font-size: 20px;
+}
