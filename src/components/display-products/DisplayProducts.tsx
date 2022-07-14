@@ -70,4 +70,4 @@ export const DisplayProducts = () => {
     </React.Fragment>
     
   );
-};  
+};
