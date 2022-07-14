@@ -39,10 +39,11 @@ const DarkMode = () => {
         <div className="toggle-theme-wrapper">
             <span>☀️</span>
             <Switch
+              role="switch"
               defaultChecked={defaultDark}
               onChange={toggleTheme}
 
-                //  inputProps={{ 'aria-label': 'controlled' }}
+                 inputProps={{ 'aria-label': 'controlled' }}
             />                                                      
             <span>🌑</span>
         </div>
