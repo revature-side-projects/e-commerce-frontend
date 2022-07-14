@@ -1,33 +1,41 @@
 :root {
-    --font-color: #333;
+    --font-color: #333 !important;
     --background-color: ghostwhite;
     --link-color: blue;
 }
 
 [data-theme="dark"] {
-    --font-color: ghostwhite;
+    --font-color: ghostwhite !important;
     --background-color: #333;
     --link-color: lightblue;
 }
 
 body {
     background-color: var(--background-color);
-    color: var(--font-color);
+    color: var(--font-color) !important;
 }
 
 html {
     background-color: var(--background-color);
-    color: var(--font-color);
+    color: var(--font-color) !important;
 }
 
 #root {
     background-color: var(--background-color);
-    color: var(--font-color);
+    color: var(--font-color) !important;
 }
 
 
 a {
-    color: var(--link-color);
+    color: var(--link-color) !important;
+}
+
+input {
+    color: var(--font-color) !important;
+}
+
+label {
+    color: var(--font-color) !important;
 }
 
 /* Dark Mode Toggle Button CSS */
@@ -40,3 +48,4 @@ a {
 .toggle-theme-wrapper span {
     font-size: 20px;
 }
+

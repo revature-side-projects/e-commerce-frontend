@@ -14,7 +14,7 @@ import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 import DarkMode from '../darkmode/DarkMode';
 
-// const theme = createTheme();
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Login() {
   };
 
   return (
-    // <ThemeProvider theme={theme}>
+    
       <Container className="login-container"component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -46,6 +46,7 @@ export default function Login() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              className="textbox"
               margin="normal"
               required
               fullWidth
@@ -56,6 +57,7 @@ export default function Login() {
               autoFocus
             />
             <TextField
+              className="textbox"
               margin="normal"
               required
               fullWidth
@@ -82,10 +84,9 @@ export default function Login() {
             </Grid>
           </Box>
         </Box> 
-        <DarkMode/>
       </Container>
      
-    // </ThemeProvider>
+     
 
     
   );
