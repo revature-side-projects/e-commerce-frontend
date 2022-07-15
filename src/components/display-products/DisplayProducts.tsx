@@ -6,6 +6,7 @@ import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
 import Navbar from '../navbar/Narbar';
 import { ProductCard } from "./ProductCard";
 
+//Container Styling Componenet
 const Container = styled.div`
     padding: 20px;
     display: flex;
@@ -13,6 +14,7 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
+//SearchDiv Styling Componenet
 const SearchDiv = styled.div`
     display: flex;
     justify-content: center;
@@ -20,6 +22,7 @@ const SearchDiv = styled.div`
     font-size: 30px;
 `;
 
+//SearchBar Styling Componenet
 const SearchBar = styled.input`
     border: none;
     width: 30%;
@@ -29,6 +32,7 @@ const SearchBar = styled.input`
     padding: 10px 0px;
 `;
 
+//H1 Styling Component
 const Text = styled.h1`
     font-size: 30px;
     font-weight: bold;
@@ -39,62 +43,58 @@ const Text = styled.h1`
 
 export const DisplayProducts = () => {
 
+  //State initalizers
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [filterBy, setFilterBy] = useState("name");
   const [category, setCategory] = useState("category");
 
-  //Search Function
-  //let value = value of Input Tag.
-  //If value is null, setFilteredProducts to products.
-  //If value is not null, let results = filtered products list using value and product name.
-  //setFilteredProducts to the results list.
+  /**
+   * Searches through event listener to find products with matching name.
+   * @param e event listener
+   */
   let search = (e: SyntheticEvent) => {
-    let value = (e.target as HTMLInputElement).value;
+    let value = (e.target as HTMLInputElement).value; // gets value from input element.
 
     if (!value) {
-      setFilteredProducts(products);
+      setFilteredProducts(products); // if true then setFilteredProducts to empty list.
     } else {
       let results = products.filter((product: Product) => {
-        return product.name.toLowerCase().includes(value.toLowerCase());
+        return product.name.toLowerCase().includes(value.toLowerCase()); //returns filtered products list using value and product name.
       })
-      setFilteredProducts(results);
+      setFilteredProducts(results); // else setFilteredProducts to the results list.
     }
 
   }
 
-  //Search by Category Function
-  //Checks if category state equals "category", if true then setFilteredProducts to products.
-  //If category state does not equal "category", 
-  //let results = filtered products list using value and product category.
-  //If results length is 0, setFilteredProducts to empty list.
-  //setFilteredProducts to the results list.
+  /**
+   * Checks if category state equals "category", 
+   * If category does not equal "category", 
+   * then it will filter the products.
+   */
   let categorySearch = () => {
     if (category === "category") {
-      setFilteredProducts(products);
+      setFilteredProducts(products); // if true then setFilteredProducts to products.
     } else {
       let results = products.filter((product: Product) => {
-        return product.category.toLowerCase().includes(category.toLowerCase());
+        return product.category.toLowerCase().includes(category.toLowerCase()); //returns filtered products list using value and product category.
       })
       if (results.length === 0) {
-        setFilteredProducts([]);
+        setFilteredProducts([]); // if true then setFilteredProducts to empty list.
       } else {
-        setFilteredProducts(results);
+        setFilteredProducts(results); // else setFilteredProducts to the results list.
       }
     }
   }
 
-  //Checks filterBy state to determine when categorySearch() is run.
-  useEffect(() => {
+  useEffect(() => { // Runs categorySearch() when true.
     if (filterBy === "category") {
       categorySearch();
     }
   })
 
-  //fetchData async fuction gets all product using apiGetAllProducts function
-  //setProducts to result.payload
-  //setFilteredProducts to result.payload
-  useEffect(() => {
+
+  useEffect(() => { // Fetch's products and set state of products and filteredProducts.
     const fetchData = async () => {
       const result = await apiGetAllProducts();
       setProducts(result.payload);
@@ -108,7 +108,9 @@ export const DisplayProducts = () => {
     <React.Fragment>
       <Navbar />
       <SearchDiv>
+        {/*Conditionally renders SearchByName*/}
         {filterBy === "name" ? <SearchBar type='text' onChange={search} placeholder="Search" className='searchbar'></SearchBar> : null}
+        {/*Conditionally renders SearchByCategory*/}
         {filterBy === "category" ?
           <Select
             labelId="demo-simple-select-helper-label"
@@ -122,6 +124,7 @@ export const DisplayProducts = () => {
             <MenuItem value="Sun">Suns</MenuItem>
             <MenuItem value="Star">Stars</MenuItem>
           </Select> : null}
+        {/*Filter Option Dropdown Selector*/}
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
@@ -133,7 +136,9 @@ export const DisplayProducts = () => {
         </Select>
       </SearchDiv>
       <Container>
+        {/*if filteredProducts length less than or equal to 0, it renders Text componenet*/}
         {filteredProducts.length <= 0 && <Text>No Products Found</Text>}
+        {/*if filteredProducts length is greater than 0, it renders mapped products*/}
         {filteredProducts.length > 0 && filteredProducts.map((item) => (
           <ProductCard product={item} key={item.id} />))}
       </Container>
