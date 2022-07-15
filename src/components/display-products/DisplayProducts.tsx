@@ -44,6 +44,11 @@ export const DisplayProducts = () => {
   const [filterBy, setFilterBy] = useState("name");
   const [category, setCategory] = useState("category");
 
+  //Search Function
+  //let value = value of Input Tag.
+  //If value is null, setFilteredProducts to products.
+  //If value is not null, let results = filtered products list using value and product name.
+  //setFilteredProducts to the results list.
   let search = (e: SyntheticEvent) => {
     let value = (e.target as HTMLInputElement).value;
 
@@ -58,6 +63,12 @@ export const DisplayProducts = () => {
 
   }
 
+  //Search by Category Function
+  //Checks if category state equals "category", if true then setFilteredProducts to products.
+  //If category state does not equal "category", 
+  //let results = filtered products list using value and product category.
+  //If results length is 0, setFilteredProducts to empty list.
+  //setFilteredProducts to the results list.
   let categorySearch = () => {
     if (category === "category") {
       setFilteredProducts(products);
@@ -73,12 +84,16 @@ export const DisplayProducts = () => {
     }
   }
 
+  //Checks filterBy state to determine when categorySearch() is run.
   useEffect(() => {
     if (filterBy === "category") {
       categorySearch();
     }
   })
 
+  //fetchData async fuction gets all product using apiGetAllProducts function
+  //setProducts to result.payload
+  //setFilteredProducts to result.payload
   useEffect(() => {
     const fetchData = async () => {
       const result = await apiGetAllProducts();
