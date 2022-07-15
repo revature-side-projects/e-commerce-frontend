@@ -3,7 +3,7 @@ import React, { SyntheticEvent, useEffect, useState } from 'react';
 import styled from "styled-components";
 import Product from '../../models/Product';
 import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
-import Navbar from '../navbar/Narbar';
+import Navbar from '../navbar/Navbar';
 import { ProductCard } from "./ProductCard";
 
 //Container Styling Componenet
@@ -145,4 +145,4 @@ export const DisplayProducts = () => {
     </React.Fragment>
 
   );
-};
+}

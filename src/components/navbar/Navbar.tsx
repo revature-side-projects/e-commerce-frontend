@@ -1,11 +1,9 @@
-import { Badge, Input, TextField } from "@material-ui/core";
+import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import { Autocomplete } from "@mui/material";
-import React, { SyntheticEvent, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Product from "../../models/Product";
-import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
+import DarkMode from "../darkmode/DarkMode";
 
 //Container Styling Componenet
 const Container = styled.div`
@@ -61,6 +59,7 @@ const Navbar = () => {
         </Left>
         <Right>
           {/*Right Side of Navbar*/}
+          <DarkMode />
           <MenuItem onClick={() => { navigate('/register') }}>REGISTER</MenuItem>
           <MenuItem onClick={() => { navigate('/login') }}>SIGN IN</MenuItem>
           <MenuItem onClick={() => { navigate('/cart') }}>
