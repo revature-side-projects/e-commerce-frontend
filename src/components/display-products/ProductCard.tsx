@@ -77,7 +77,7 @@ const Icon = styled.div`
 //Props for ProductCard
 interface productProps {
   product: Product,
-  key: number
+  key: number;
 }
 
 export const ProductCard = (props: productProps) => {
@@ -85,22 +85,23 @@ export const ProductCard = (props: productProps) => {
   const { cart, setCart } = useContext(CartContext);
 
   /**
-   * Checks if product is in cart.
+   * Adds product to cart.
    * If product is in cart, then it will add 1 to the quantity.
    * If product is not in cart, then it will add product to cart.
    * @param product product to be added to cart
    */
   const addItemToCart = (product: Product) => {
-
-    const newCart = [...cart] // creates new cart list.
+    const newCart = [...cart]; // creates new cart list.
     const index = newCart.findIndex((searchProduct) => {
-      return searchProduct.id === product.id // checks if product is in cart.
-    })
+      return searchProduct.id === product.id; // checks if product is in cart.
+    });
 
-    if (index === -1) newCart.push(product) // if product is not in cart, then add product to cart.
-    else newCart[index].quantity += product.quantity // if product is in cart, then add 1 to quantity.
+    if (index === -1)
+      newCart.push(product); // if product is not in cart, then add product to cart.
+    else
+      newCart[index].quantity += product.quantity; // if product is in cart, then add 1 to quantity.
 
-    setCart(newCart) // sets cart to new cart list.
+    setCart(newCart); // sets cart to new cart list.
   }
 
   return (
