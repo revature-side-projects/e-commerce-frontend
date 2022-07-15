@@ -104,7 +104,7 @@ export const ProductCard = (props: productProps) => { // CODE STARTS HERE
     // On click, tells the parent component to display a larger version of selected image
     <Container 
       onClick={() => {props.setSelection(props.product)}} 
-      style={{backgroundColor:"rgba(255,255,240,0.8)"}}> {/* Ivory color, 80% visible */}
+      style={{backgroundColor:"rgba(150,150,135,0.3)"}}> {/* Ivory color, 80% visible */}
       {/* <Circle /> */}
       <Image src={props.product.image_url_s}/>
       <Info>
