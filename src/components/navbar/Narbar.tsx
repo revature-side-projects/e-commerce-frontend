@@ -1,14 +1,19 @@
-import { Badge } from "@material-ui/core";
+import { Badge, Input, TextField } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Autocomplete } from "@mui/material";
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Product from "../../models/Product";
+import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
 import DarkMode from "../darkmode/DarkMode";
 
+//Container Styling Componenet
 const Container = styled.div`
   height: 60px;
 `;
 
+//Wrapper Styling Component
 const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
@@ -16,15 +21,19 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
+//Left Styling Component
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
 `;
 
+//Logo Styling Component
 const Logo = styled.h1`
   font-weight: bold;
 `;
+
+//Right Styling Component
 const Right = styled.div`
   flex: 1;
   display: flex;
@@ -32,6 +41,7 @@ const Right = styled.div`
   justify-content: flex-end;
 `;
 
+//MenuItem Styling Component
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
@@ -39,20 +49,23 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+
+  //Navigate variable to useNavigate function.
   const navigate = useNavigate();
 
   return (
     <Container>
       <Wrapper>
         <Left>
-        <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
+          {/*Left Side of Navbar*/}
+          <Logo onClick={() => { navigate('/') }}>Revature Swag Shop</Logo>
         </Left>
-          
         <Right>
-          <DarkMode/>
-          <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
-          <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
-          <MenuItem onClick={() => {navigate('/cart')}}>
+          {/*Right Side of Navbar*/}
+          <DarkMode />
+          <MenuItem onClick={() => { navigate('/register') }}>REGISTER</MenuItem>
+          <MenuItem onClick={() => { navigate('/login') }}>SIGN IN</MenuItem>
+          <MenuItem onClick={() => { navigate('/cart') }}>
             <Badge color="primary">
               <ShoppingCartOutlined />
             </Badge>
