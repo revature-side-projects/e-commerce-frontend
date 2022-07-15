@@ -3,7 +3,7 @@ import React, { SyntheticEvent, useContext, useEffect, useState } from 'react';
 import styled from "styled-components";
 import Product from '../../models/Product';
 import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
-import Navbar from '../navbar/Narbar';
+import Navbar from '../navbar/Navbar';
 import { ProductCard } from "./ProductCard";
 import Draggable from "react-draggable";
 import { CartContext } from '../../context/cart.context';

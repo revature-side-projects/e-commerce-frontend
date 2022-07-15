@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
-import Navbar from "../navbar/Narbar";
+import Navbar from "../navbar/Navbar";
 
 const Container = styled.div``;
 
@@ -141,13 +141,13 @@ export const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton onClick={() => {navigate('/')}}>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</TopButton>
+          <TopButton onClick={() => { navigate('/') }}>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => { navigate('/checkout') }}>CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
             {
-              cart.map((product)=> (
+              cart.map((product) => (
                 <>
                   <Product>
                     <ProductDetail>
@@ -168,7 +168,7 @@ export const Cart = () => {
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
                   </Product>
-                  <Hr/>
+                  <Hr />
                 </>
               ))
             }
@@ -195,7 +195,7 @@ export const Cart = () => {
                 {cart.reduce<number>((total, product) => total + product.price * 1, 0)}
               </SummaryItemPrice>
             </SummaryItem>
-            <Button onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</Button>
+            <Button onClick={() => { navigate('/checkout') }}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
