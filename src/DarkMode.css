@@ -57,6 +57,40 @@ Colors are set in the root element.
 */
 input {
     color: var(--font-color) !important;
+    background: var(--background-color) !important;
+}
+
+/*
+Styling for input tag placeholder
+Colors are set in the root element.
+*/
+input::placeholder {
+    color: var(--font-color) !important;
+
+}
+
+/*
+Styling for input tag
+Colors are set in the root element.
+*/
+#demo-simple-select-helper {
+    color: var(--font-color) !important;
+}
+
+/*
+Styling for filter dropdown
+Colors are set in the root element.
+*/
+.MuiInput-underline:before {
+    border-bottom: 1px solid var(--font-color) !important;
+}
+
+/*
+Styling for SVG tag
+Colors are set in the root element.
+*/
+svg {
+    color: var(--font-color) !important;
 }
 
 /*
