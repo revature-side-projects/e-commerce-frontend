@@ -27,8 +27,8 @@ export default function Review(props: reviewProps) {
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
     let productPurchaseDtos = cart.map((product) => ({
-      id: product.id,
-      quantity: product.quantity
+      id: product.product_id,
+      quantity: 1
     }))
     apiPurchase(productPurchaseDtos)
     setCart([])
@@ -43,14 +43,14 @@ export default function Review(props: reviewProps) {
       <List disablePadding>
         {cart.map((product) => (
           <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={`${product.name} x${product.quantity}`} secondary={product.description} />
-            <Typography variant="body2">{product.price * product.quantity}</Typography>
+            <ListItemText primary={`${product.name} x${1}`} secondary={product.description} />
+            <Typography variant="body2">{product.price * 1}</Typography>
           </ListItem>
         ))}
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $ {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
+            $ {cart.reduce<number>((total, product) => total + product.price * 1, 0)}
           </Typography>
         </ListItem>
       </List>
