@@ -1,6 +1,5 @@
-import { Badge } from "@material-ui/core";
-import { ShoppingCartOutlined } from "@material-ui/icons";
-// import MenuItem from "@mui/material/MenuItem";
+import { ShoppingCartOutlined } from "@mui/icons-material";
+import { Badge } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import DarkMode from "../darkmode/DarkMode";

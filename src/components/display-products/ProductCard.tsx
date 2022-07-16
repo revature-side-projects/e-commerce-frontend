@@ -1,7 +1,5 @@
-import {
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from "@material-ui/icons";
+
+import { SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 import { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
