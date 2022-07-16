@@ -6,7 +6,7 @@ import DarkMode from "../darkmode/DarkMode";
 
 //Container Styling Componenet
 const Container = styled.div`
-  height: 60px;
+  box-shadow: 0 1px 2px 1px #00000026;
 `;
 
 //Wrapper Styling Component
