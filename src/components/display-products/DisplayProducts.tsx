@@ -1,4 +1,4 @@
-import { Select, MenuItem, InputLabel } from '@mui/material';
+import { Select, MenuItem } from '@mui/material';
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import styled from "styled-components";
 import Product from '../../models/Product';

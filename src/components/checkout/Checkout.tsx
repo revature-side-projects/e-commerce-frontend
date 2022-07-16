@@ -14,15 +14,12 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import Address from '../../models/Address';
 import PaymentDetail from '../../models/PaymentDetail';
-import { useContext } from 'react';
-import { CartContext } from '../../context/cart.context';
-import Product from '../../models/Product';
+// import { useContext } from 'react';
+// import { CartContext } from '../../context/cart.context';
 import { useNavigate } from 'react-router-dom';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-const products: Product[] = [
-];
 let address = {
   firstName: "",
   lastName: "",
@@ -44,7 +41,7 @@ const theme = createTheme();
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const { cart, setCart } = useContext(CartContext);
+  // const { cart, setCart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const handleNext = () => {
