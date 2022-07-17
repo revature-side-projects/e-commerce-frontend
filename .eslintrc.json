@@ -24,6 +24,7 @@
         "prettier"
     ],
     "rules": {
+        "semi":["error", "always"],
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
         "spaced-comment": ["error", "always"],
