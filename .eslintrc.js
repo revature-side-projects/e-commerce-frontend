@@ -30,6 +30,7 @@ module.exports = {
         "spaced-comment": ["error", "always"], // errors if comments do not have spaces 
         "quotes": ["error", "single"], // enforces single quotes
         "no-duplicate-imports": "error",
+        "@typescript-eslint/no-empty-function": "warn"
     },
     "settings": {
         "import/resolver": {
