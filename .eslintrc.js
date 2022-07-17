@@ -5,30 +5,30 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
+        "plugin:react/recommended", // recommended rules for react
+        "plugin:@typescript-eslint/recommended", // recommended rules for typescript
+        "prettier" // adds formatting support for prettier
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": "latest",
+        "ecmaVersion": "latest", // parses to latest version of ecmascript
         "sourceType": "module"
     },
     "plugins": [
-        "react",
+        "react", // react
         "react-hooks",
-        "@typescript-eslint",
+        "@typescript-eslint", // ts support
         "prettier"
     ],
     "rules": {
-        "semi":["error", "always"],
+        "semi":["error", "always"], // enforces semicolons
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
-        "spaced-comment": ["error", "always"],
-        "quotes": ["error", "single"],
+        "spaced-comment": ["error", "always"], // errors if comments do not have spaces 
+        "quotes": ["error", "single"], // enforces single quotes
         "no-duplicate-imports": "error",
     },
     "settings": {
