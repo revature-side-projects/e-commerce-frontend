@@ -1,14 +1,14 @@
 export default class Address {
-  firstName: string
-  lastName: string
-  address1: string
-  address2: string
-  city: string
-  state: string
-  zip: string
-  country: string
+  firstName: string;
+  lastName: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
 
-  constructor (
+  constructor(
     firstName: string,
     lastName: string,
     address1: string,
@@ -16,15 +16,15 @@ export default class Address {
     city: string,
     state: string,
     zip: string,
-    country: string
+    country: string,
   ) {
-    this.firstName = firstName
-    this.lastName = lastName
-    this.address1 = address1
-    this.address2 = address2
-    this.city = city
-    this.state = state
-    this.zip = zip
-    this.country = country
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address1 = address1;
+    this.address2 = address2;
+    this.city = city;
+    this.state = state;
+    this.zip = zip;
+    this.country = country;
   }
 }
