@@ -6,7 +6,7 @@ import ProductItem from './models/Product';
 import { AppRoutes } from './router/AppRoutes';
 
 /**
- *
+ *@returns {void}
  */
 function App() {
     const [cart, setCart] = useState<ProductItem[]>([]);

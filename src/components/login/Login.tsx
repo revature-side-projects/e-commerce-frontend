@@ -13,7 +13,7 @@ import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 
 /**
- *
+ * @returns {void}
  */
 export default function Login() {
     // Navigate variable to useNavigate hook
@@ -22,7 +22,7 @@ export default function Login() {
     /**
      * Handles login button click, sends login request to API
      *
-     * @param event event listener
+     * @param {React.FormEvent<HTMLFormElement>}event event listener
      */
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevents page from refreshing
@@ -79,7 +79,7 @@ export default function Login() {
                         <Grid item>
                             {/* Link to register page */}
                             <Link href='register' variant='body2'>
-                                {"Don't have an account? Sign Up"}
+                                {'You do not have an account? Sign Up'}
                             </Link>
                         </Grid>
                     </Grid>

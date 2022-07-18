@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 const theme = createTheme();
 
 /**
- *
+ * @returns {void}
  */
 export default function Register() {
     const navigate = useNavigate();

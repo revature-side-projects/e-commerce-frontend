@@ -92,7 +92,7 @@ export const ProductCard = (props: productProps) => {
      * If product is in cart, then it will add 1 to the quantity.
      * If product is not in cart, then it will add product to cart.
      *
-     * @param product product to be added to cart
+     * @param {Product} product product to be added to cart
      */
     const addItemToCart = (product: Product) => {
         const newCart = [...cart]; // creates new cart list.

@@ -6,16 +6,19 @@ import { Box, Button } from '@mui/material';
 import Address from '../../models/Address';
 import '../../css/customMUI.css';
 
-interface addressFormProps {
+
+interface IAddressProps {
     updateAddress: (addresses: Address) => void;
     handleNext: () => void;
 }
 
 /**
- *
- * @param props
+ * Handles sumbission of addresses.
+ * 
+ * @returns {void}
+ * @param {IAddressProps} props Address properties
  */
-export default function AddressForm(props: addressFormProps) {
+export default function AddressForm(props: IAddressProps) {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);

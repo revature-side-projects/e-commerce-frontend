@@ -37,7 +37,7 @@ let paymentDetail = [
 const theme = createTheme();
 
 /**
- *
+ * @returns {void}
  */
 export default function Checkout() {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -59,8 +59,9 @@ export default function Checkout() {
     };
 
     /**
-     *
-     * @param step
+     * @returns {void} 
+     * @param {number} step  
+     * array index ='Shipping address', 'Payment details', 'Review your order'
      */
     function getStepContent(step: number) {
         switch (step) {
