@@ -12,8 +12,8 @@ interface paymentFormProps {
 }
 
 /**
- *@returns {void}
- * @param {paymentFormProps} props updates payment form
+ * @returns {void}
+ * @param {paymentFormProps} props props for payment form
  */
 export default function PaymentForm(props: paymentFormProps) {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

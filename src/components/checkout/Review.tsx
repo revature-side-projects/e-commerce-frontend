@@ -19,7 +19,7 @@ interface reviewProps {
 
 /**
  * @returns {void}
- * @param {reviewProps} props review of checkout info
+ * @param {reviewProps} props props for review
  */
 export default function Review(props: reviewProps) {
     const { cart, setCart } = React.useContext(CartContext);

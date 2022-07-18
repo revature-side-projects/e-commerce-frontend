@@ -60,8 +60,7 @@ export default function Checkout() {
 
     /**
      * @returns {void} 
-     * @param {number} step  
-     * array index ='Shipping address', 'Payment details', 'Review your order'
+     * @param {number} step current case number
      */
     function getStepContent(step: number) {
         switch (step) {
