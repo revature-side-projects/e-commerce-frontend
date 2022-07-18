@@ -52,7 +52,7 @@ export const DisplayProducts = () => {
     /**
      * Searches through event listener to find products with matching name.
      *
-     * @param e event listener
+     * @param {SyntheticEvent} e event listener
      */
     const search = (e: SyntheticEvent) => {
         const value = (e.target as HTMLInputElement).value; // gets value from input element.

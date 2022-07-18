@@ -26,13 +26,13 @@ module.exports = {
         "jsdoc" // jsdoc support
     ],
     "rules": {
-        "semi":["error", "always"], // enforces semicolons
+        "semi": ["error", "always"], // enforces semicolons
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
         "spaced-comment": ["error", "always"], // errors if comments do not have spaces 
         "quotes": ["warn", "single", { "allowTemplateLiterals": true }], // enforces single quotes
         "no-duplicate-imports": "error",
-        "@typescript-eslint/no-empty-function": "warn"
+        "@typescript-eslint/no-empty-function": "off"
     },
     "settings": {
         "import/resolver": {
