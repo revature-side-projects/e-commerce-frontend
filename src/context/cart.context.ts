@@ -2,8 +2,8 @@ import React from 'react';
 import Product from '../models/Product';
 
 interface CartContextState {
-  cart: Product[];
-  setCart: (cart: Product[]) => void;
+    cart: Product[];
+    setCart: (cart: Product[]) => void;
 }
 
 // Define the Cart Context
@@ -13,6 +13,12 @@ interface CartContextState {
 // const { cart, setCart } = useContext(CartContext);
 // And then the cart can be used and updated in a standard fashion
 export const CartContext = React.createContext<CartContextState>({
+<<<<<<< HEAD
   cart: [],
   setCart: () => {},
 });
+=======
+    cart: [],
+    setCart: () => { }
+});
+>>>>>>> parent of 3a33ba1 (format the files)
