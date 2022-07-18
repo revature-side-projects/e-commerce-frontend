@@ -81,13 +81,8 @@ export default function Login() {
           <Grid container>
             <Grid item>
               {/* Link to register page */}
-<<<<<<< HEAD
-              <Link href='register' variant='body2'>
-                {'Don\'t have an account? Sign Up'}
-=======
               <Link href="register" variant="body2">
                 {"Don't have an account? Sign Up"}
->>>>>>> parent of 3a33ba1 (format the files)
               </Link>
             </Grid>
           </Grid>
