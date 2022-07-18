@@ -7,7 +7,8 @@ module.exports = {
         "eslint:recommended",
         "plugin:react/recommended", // recommended rules for react
         "plugin:@typescript-eslint/recommended", // recommended rules for typescript
-        "prettier" // adds formatting support for prettier
+        "prettier", // adds formatting support for prettier
+        "plugin:jsdoc/recommended" // recommended rules for jsdoc
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,14 +22,15 @@ module.exports = {
         "react", // react
         "react-hooks",
         "@typescript-eslint", // ts support
-        "prettier"
+        "prettier",
+        "jsdoc" // jsdoc support
     ],
     "rules": {
         "semi":["error", "always"], // enforces semicolons
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
         "spaced-comment": ["error", "always"], // errors if comments do not have spaces 
-        "quotes": ["error", "single"], // enforces single quotes
+        "quotes": ["warn", "single", { "allowTemplateLiterals": true }], // enforces single quotes
         "no-duplicate-imports": "error",
         "@typescript-eslint/no-empty-function": "warn"
     },
