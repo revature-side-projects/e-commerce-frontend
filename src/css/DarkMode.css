@@ -103,3 +103,8 @@ label {
 .toggle-theme-wrapper span {
     font-size: 20px;
 }
+
+/* Styling for Product Info */
+.productInfo {
+    background-color: var(--background-color) !important;
+}

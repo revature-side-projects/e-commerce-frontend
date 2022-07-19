@@ -154,20 +154,17 @@ export const Cart = () => {
                             <>
                                 <Product>
                                     <ProductDetail>
-                                        <Image src={product.image} />
+                                        <Image src={product.imgUrlSmall} />
                                         <Details>
                                             <ProductName>
                                                 <b>Product:</b> {product.name}
                                             </ProductName>
                                             <ProductId>
-                                                <b>ID:</b> {product.id}
+                                                <b>ID:</b> {product.productId}
                                             </ProductId>
                                         </Details>
                                     </ProductDetail>
                                     <PriceDetail>
-                                        <ProductAmountContainer>
-                                            <ProductAmount> {product.quantity} </ProductAmount>
-                                        </ProductAmountContainer>
                                         <ProductPrice>$ {product.price}</ProductPrice>
                                     </PriceDetail>
                                 </Product>
@@ -182,7 +179,7 @@ export const Cart = () => {
                             <SummaryItemPrice>
                                 $
                                 {cart.reduce<number>(
-                                    (total, product) => total + product.price * product.quantity,
+                                    (total, product) => total + product.price,
                                     0,
                                 )}
                             </SummaryItemPrice>
@@ -200,7 +197,7 @@ export const Cart = () => {
                             <SummaryItemPrice>
                                 $
                                 {cart.reduce<number>(
-                                    (total, product) => total + product.price * product.quantity,
+                                    (total, product) => total + product.price,
                                     0,
                                 )}
                             </SummaryItemPrice>
