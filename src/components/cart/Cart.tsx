@@ -70,17 +70,6 @@ const PriceDetail = styled.div`
     justify-content: center;
 `;
 
-const ProductAmountContainer = styled.div`
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-`;
-
-const ProductAmount = styled.div`
-    font-size: 24px;
-    margin: 5px;
-`;
-
 const ProductPrice = styled.div`
     font-size: 30px;
     font-weight: 200;
@@ -154,20 +143,17 @@ export const Cart = () => {
                             <>
                                 <Product>
                                     <ProductDetail>
-                                        <Image src={product.image} />
+                                        <Image src={product.imgUrlSmall} />
                                         <Details>
                                             <ProductName>
                                                 <b>Product:</b> {product.name}
                                             </ProductName>
                                             <ProductId>
-                                                <b>ID:</b> {product.id}
+                                                <b>ID:</b> {product.productId}
                                             </ProductId>
                                         </Details>
                                     </ProductDetail>
                                     <PriceDetail>
-                                        <ProductAmountContainer>
-                                            <ProductAmount> {product.quantity} </ProductAmount>
-                                        </ProductAmountContainer>
                                         <ProductPrice>$ {product.price}</ProductPrice>
                                     </PriceDetail>
                                 </Product>
@@ -182,7 +168,7 @@ export const Cart = () => {
                             <SummaryItemPrice>
                                 $
                                 {cart.reduce<number>(
-                                    (total, product) => total + product.price * product.quantity,
+                                    (total, product) => total + product.price,
                                     0,
                                 )}
                             </SummaryItemPrice>
@@ -200,7 +186,7 @@ export const Cart = () => {
                             <SummaryItemPrice>
                                 $
                                 {cart.reduce<number>(
-                                    (total, product) => total + product.price * product.quantity,
+                                    (total, product) => total + product.price,
                                     0,
                                 )}
                             </SummaryItemPrice>
