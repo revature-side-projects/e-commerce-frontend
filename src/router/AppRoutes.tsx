@@ -6,6 +6,7 @@ import { DisplayProducts } from '../components/display-products/DisplayProducts'
 import ProductDetail from '../components/display-products/ProductDetails';
 import Login from '../components/login/Login';
 import Register from '../components/register/Register';
+import Dashboard from '../components/dashboard/Dashboard';
 
 export const AppRoutes: React.FC<unknown> = () => (
     <Routes>
@@ -15,5 +16,6 @@ export const AppRoutes: React.FC<unknown> = () => (
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/cart' element={<Cart />} />
         <Route path="/:id/" element={<ProductDetail />} />
+        <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
 );
