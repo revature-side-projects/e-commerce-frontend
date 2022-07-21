@@ -7,8 +7,7 @@ const eCommerceClient = axios.create({
     baseURL: 'http://localhost:5000/skyview',
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'text/plain',
-
+        Authorization: 'text/plain',
     },
 });
 

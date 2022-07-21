@@ -16,7 +16,7 @@ function App() {
     return (
         <CartContext.Provider value={value}>
             <Router>
-                <Navbar/>
+                <Navbar />
                 <AppRoutes></AppRoutes>
             </Router>
         </CartContext.Provider>

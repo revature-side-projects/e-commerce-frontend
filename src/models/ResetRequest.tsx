@@ -4,4 +4,4 @@ export type ResetRequest = {
     newEmail: undefined | string;
     newPassword: undefined | string;
     currentPassword: string;
-}
+};

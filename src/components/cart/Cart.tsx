@@ -164,11 +164,7 @@ export const Cart = () => {
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
                             <SummaryItemPrice>
-                                $
-                                {cart.reduce<number>(
-                                    (total, product) => total + product.price,
-                                    0,
-                                )}
+                                ${cart.reduce<number>((total, product) => total + product.price, 0)}
                             </SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
@@ -182,11 +178,7 @@ export const Cart = () => {
                         <SummaryItem>
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>
-                                $
-                                {cart.reduce<number>(
-                                    (total, product) => total + product.price,
-                                    0,
-                                )}
+                                ${cart.reduce<number>((total, product) => total + product.price, 0)}
                             </SummaryItemPrice>
                         </SummaryItem>
                         <Button

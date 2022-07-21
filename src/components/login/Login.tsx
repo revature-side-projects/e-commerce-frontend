@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store/hooks';
 import { updateUser } from '../../store/userSlice';
 
-
 /**
  * @returns {void}
  */
@@ -32,8 +31,7 @@ export default function Login() {
         event.preventDefault(); // Prevents page from refreshing
         const data = new FormData(event.currentTarget); // Gets form data
         const response = await apiLogin(`${data.get('email')}`, `${data.get('password')}`); // Sends login request to API
-        if (response.status >= 200 && response.status < 300)
-            navigate('/'); // If login successful, navigate to home page
+        if (response.status >= 200 && response.status < 300) navigate('/'); // If login successful, navigate to home page
         const user = response.payload; // Gets user from response
         user.token = response.headers.authorization; // Gets token from headers
         dispatch(updateUser(user)); // sets user in redux store

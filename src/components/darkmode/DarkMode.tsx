@@ -31,7 +31,7 @@ if (storedTheme === 'dark') {
 /**
  * Toggles "theme" between "dark" and "light"
  *
- * @param {ChangeEventHandler} e event listener 
+ * @param {ChangeEventHandler} e event listener
  */
 const toggleTheme: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.checked) {

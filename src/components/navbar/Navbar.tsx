@@ -69,26 +69,63 @@ const Navbar = () => {
                     {/* Right Side of Navbar*/}
                     <DarkMode />
                     {/* Navbar Rendering for Guest/Not Logged in*/}
-                    {user.id === 0 &&
+                    {user.id === 0 && (
                         <>
-                            <MenuItem onClick={() => { navigate('/register'); }}> REGISTER </MenuItem>
-                            <MenuItem onClick={() => { navigate('/login'); }}>SIGN IN</MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate('/register');
+                                }}
+                            >
+                                {' '}
+                                REGISTER{' '}
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate('/login');
+                                }}
+                            >
+                                SIGN IN
+                            </MenuItem>
                         </>
-                    }
+                    )}
                     {/* Navbar Rendering for Admins*/}
-                    {user.role === 'ADMIN' &&
+                    {user.role === 'ADMIN' && (
                         <>
-                            <MenuItem onClick={() => { navigate('/createproduct'); }}>CREATE PRODUCT</MenuItem>
-                            <MenuItem onClick={() => { navigate('/login'); }}>LOGOUT</MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate('/createproduct');
+                                }}
+                            >
+                                CREATE PRODUCT
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate('/login');
+                                }}
+                            >
+                                LOGOUT
+                            </MenuItem>
                         </>
-                    }
+                    )}
                     {/* Navbar Rendering for Basic Users*/}
-                    {user.id !== 0 && user.role !== 'ADMIN' &&
+                    {user.id !== 0 && user.role !== 'ADMIN' && (
                         <>
-                            <MenuItem onClick={() => { navigate('/profile'); }}>PROFILE</MenuItem>
-                            <MenuItem onClick={() => { navigate('/login'); }}>LOGOUT</MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate('/profile');
+                                }}
+                            >
+                                PROFILE
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate('/login');
+                                }}
+                            >
+                                LOGOUT
+                            </MenuItem>
                         </>
-                    }
+                    )}
                     <MenuItem
                         onClick={() => {
                             navigate('/cart');

@@ -5,11 +5,15 @@ import styled from 'styled-components';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import Rating from '../../models/RatingResponse';
-import { apiGetProductById, apiGetReviewByProductId, apiPostReviewByProductId } from '../../remote/e-commerce-api/productService';
+import {
+    apiGetProductById,
+    apiGetReviewByProductId,
+    apiPostReviewByProductId,
+} from '../../remote/e-commerce-api/productService';
 import { useAppSelector } from '../../store/hooks';
 import { currentUser } from '../../store/userSlice';
 
-const baseURL:string = '/products';
+const baseURL = '/products';
 const Container = styled.div`
     padding: 20px;
     display: flex;
@@ -39,7 +43,7 @@ const ProductInfo = styled.div`
     border-radius: 10px;
     background-color: #eee;
     box-shadow: 0 1px 2px 1px #00000026;
-    `;
+`;
 
 const ProductInfoBottom = styled.div`
     width: 100%;
@@ -59,8 +63,8 @@ const AddToCart = styled.button`
     transition: all 0.5s ease;
     &:hover {
         background-color: #0a71bb;
-        }
-    `;
+    }
+`;
 
 const ProductReviews = styled.div`
     display: flex;
@@ -91,7 +95,6 @@ const ProductDetail = () => {
         imgUrlSmall: '',
         imgUrlMed: '',
         category: '',
-
     });
     const [reviews, setReviews] = useState<Rating[]>([]);
     const [display, setDisplay] = useState(false);
@@ -116,7 +119,6 @@ const ProductDetail = () => {
         fetchReviews();
     }, []);
 
-
     /**
      * Adds product to cart.
      * If product is in cart, then it will add 1 to the quantity.
@@ -130,8 +132,7 @@ const ProductDetail = () => {
             return searchProduct.productId === product.productId; // checks if product is in cart.
         });
 
-        if (index === -1)
-            newCart.push(product); // if product is not in cart, then add product to cart.
+        if (index === -1) newCart.push(product); // if product is not in cart, then add product to cart.
 
         setCart(newCart); // sets cart to new cart list.
     };
@@ -139,7 +140,6 @@ const ProductDetail = () => {
     const addReview = () => {
         console.log('clicked');
         setDisplay(true);
-
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -148,16 +148,19 @@ const ProductDetail = () => {
         const rating = `${data.get('rating')}`;
         const description = `${data.get('description')}`;
 
-        apiPostReviewByProductId(`${product.productId}`, JSON.parse(JSON.stringify({rating: rating, description: description})), user.token);
- 
-      };
+        apiPostReviewByProductId(
+            `${product.productId}`,
+            JSON.parse(JSON.stringify({ rating: rating, description: description })),
+            user.token,
+        );
+    };
 
     return (
         <React.Fragment>
             <Container>
                 <Flex>
                     <Image src={product.imgUrlMed} />
-                    <ProductInfo className="productInfo">
+                    <ProductInfo className='productInfo'>
                         <div>
                             <h1>{product.name.toUpperCase()}</h1>
                             <h5>Price: ${product.price}</h5>
@@ -166,56 +169,72 @@ const ProductDetail = () => {
                         <ProductInfoBottom>
                             <h5>Category: {product.category}</h5>
                             <h5>Product Id: {product.productId}</h5>
-                            <AddToCart onClick={() => {
-                                addItemToCart({ ...product });
-                            }}>
+                            <AddToCart
+                                onClick={() => {
+                                    addItemToCart({ ...product });
+                                }}
+                            >
                                 Add to Cart
                             </AddToCart>
                         </ProductInfoBottom>
                     </ProductInfo>
                 </Flex>
                 <ProductReviews>
-                    
                     <h1>Product Reviews</h1>
-                    { (user.id!=0 && display) ? 
-                    <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            className='textbox'
-                            margin='normal'
-                            required
-                            fullWidth
-                            id='rating'
-                            label='rating'
-                            name='rating'
-                            autoComplete='rating'
-                            autoFocus
-                        />
-                        <TextField
-                            className='textbox'
-                            margin='normal'
-                            required
-                            fullWidth
-                            name='description'
-                            label='description'
-                            type='description'
-                            id='description'
-                            autoComplete='current-description'
-                        />
-                        <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-                            Submit review
-                        </Button>
-                    </Box>
-                    : (user.id!=0 && !display) ? <h3 onClick={addReview}>Click here to add your own review</h3>
-                    : <h3>You must login to leave a review</h3>
-                    }
+                    {user.id != 0 && display ? (
+                        <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                            <TextField
+                                className='textbox'
+                                margin='normal'
+                                required
+                                fullWidth
+                                id='rating'
+                                label='rating'
+                                name='rating'
+                                autoComplete='rating'
+                                autoFocus
+                            />
+                            <TextField
+                                className='textbox'
+                                margin='normal'
+                                required
+                                fullWidth
+                                name='description'
+                                label='description'
+                                type='description'
+                                id='description'
+                                autoComplete='current-description'
+                            />
+                            <Button
+                                type='submit'
+                                fullWidth
+                                variant='contained'
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Submit review
+                            </Button>
+                        </Box>
+                    ) : user.id != 0 && !display ? (
+                        <h3 onClick={addReview}>Click here to add your own review</h3>
+                    ) : (
+                        <h3>You must login to leave a review</h3>
+                    )}
                     {/* This is mapping through reviews to display each review */}
-                    {reviews ? reviews.map((review) => <> 
-                        <Review>
-                        <h3>{'☆'.repeat((review.rating)?review.rating:1)}</h3>
-                        <h5>{review.description}</h5>
-                        <h6>- {review.reviewerName}</h6>
-                        </Review>
-                    </>) : <><h1>No reviews yet!</h1></>}
+                    {reviews ? (
+                        reviews.map((review) => (
+                            <>
+                                <Review>
+                                    <h3>{'☆'.repeat(review.rating ? review.rating : 1)}</h3>
+                                    <h5>{review.description}</h5>
+                                    <h6>- {review.reviewerName}</h6>
+                                </Review>
+                            </>
+                        ))
+                    ) : (
+                        <>
+                            <h1>No reviews yet!</h1>
+                        </>
+                    )}
                 </ProductReviews>
             </Container>
         </React.Fragment>

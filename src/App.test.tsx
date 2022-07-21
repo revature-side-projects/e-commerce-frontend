@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 
 test('renders learn react link', () => {
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>);
+    render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+    );
 });

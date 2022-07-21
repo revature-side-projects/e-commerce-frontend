@@ -6,7 +6,6 @@ import { Box, Button } from '@mui/material';
 import Address from '../../models/Address';
 import '../../css/customMUI.css';
 
-
 interface IAddressProps {
     updateAddress: (addresses: Address) => void;
     handleNext: () => void;
@@ -14,7 +13,7 @@ interface IAddressProps {
 
 /**
  * Handles sumbission of addresses.
- * 
+ *
  * @returns {void}
  * @param {IAddressProps} props Address properties
  */

@@ -73,62 +73,59 @@ const Icon = styled.div`
 `;
 
 const styles = {
-  icon: {
-    fill: 'black !important',
-  },
+    icon: {
+        fill: 'black !important',
+    },
 };
 
 // Props for ProductCard
 interface productProps {
-  product: Product;
-  key: number;
+    product: Product;
+    key: number;
 }
 
 export const ProductCard = (props: productProps) => {
-  // Context for Cart
-  const { cart, setCart } = useContext(CartContext);
+    // Context for Cart
+    const { cart, setCart } = useContext(CartContext);
 
-  // Navigate variable to useNavigate
-  const navigate = useNavigate();
+    // Navigate variable to useNavigate
+    const navigate = useNavigate();
 
-  /**
-   * Adds product to cart.
-   * If product is in cart, then it will add 1 to the quantity.
-   * If product is not in cart, then it will add product to cart.
-   *
-   * @param {Product} product product to be added to cart
-   */
-  const addItemToCart = (product: Product) => {
-    const newCart = [...cart]; // creates new cart list.
-    const index = newCart.findIndex((searchProduct) => {
-      return searchProduct.productId === product.productId; // checks if product is in cart.
-    });
+    /**
+     * Adds product to cart.
+     * If product is in cart, then it will add 1 to the quantity.
+     * If product is not in cart, then it will add product to cart.
+     *
+     * @param {Product} product product to be added to cart
+     */
+    const addItemToCart = (product: Product) => {
+        const newCart = [...cart]; // creates new cart list.
+        const index = newCart.findIndex((searchProduct) => {
+            return searchProduct.productId === product.productId; // checks if product is in cart.
+        });
 
-    if (index === -1)
-      newCart.push(product); // if product is not in cart, then add product to cart.
+        if (index === -1) newCart.push(product); // if product is not in cart, then add product to cart.
 
-    setCart(newCart); // sets cart to new cart list.
-  };
+        setCart(newCart); // sets cart to new cart list.
+    };
 
-  return (
-    <Container>
-      <Circle />
-      <Image src={props.product.imgUrlSmall} />
-      <Info>
-        <Icon onClick={() => {
-          addItemToCart({ ...props.product });
-        }}>
-          {/* Icon for adding product to cart */}
-          <ShoppingCartOutlined
-            style={{ ...styles.icon }}
-
-          />
-        </Icon>
-        <Icon onClick={() => navigate(`/${props.product.productId}`)}>
-          <SearchOutlined />
-        </Icon>
-      </Info>
-    </Container>
-  );
+    return (
+        <Container>
+            <Circle />
+            <Image src={props.product.imgUrlSmall} />
+            <Info>
+                <Icon
+                    onClick={() => {
+                        addItemToCart({ ...props.product });
+                    }}
+                >
+                    {/* Icon for adding product to cart */}
+                    <ShoppingCartOutlined style={{ ...styles.icon }} />
+                </Icon>
+                <Icon onClick={() => navigate(`/${props.product.productId}`)}>
+                    <SearchOutlined />
+                </Icon>
+            </Info>
+        </Container>
+    );
 };
-

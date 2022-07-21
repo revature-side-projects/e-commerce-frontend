@@ -59,7 +59,7 @@ export default function Checkout() {
     };
 
     /**
-     * @returns {void} 
+     * @returns {void}
      * @param {number} step current case number
      */
     function getStepContent(step: number) {

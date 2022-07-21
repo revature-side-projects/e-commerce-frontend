@@ -4,7 +4,10 @@ import eCommerceClient, { eCommerceApiResponse, eCommerceLoginResponse } from '.
 
 const baseURL = '/auth';
 
-export const apiLogin = async (email: string, password: string): Promise<eCommerceLoginResponse> => {
+export const apiLogin = async (
+    email: string,
+    password: string,
+): Promise<eCommerceLoginResponse> => {
     const response = await eCommerceClient.post<LoginRequest>(`${baseURL}/login`, {
         email: email,
         password: password,

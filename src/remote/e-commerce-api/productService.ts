@@ -16,17 +16,24 @@ export const apiGetProductById = async (id: string): Promise<eCommerceApiRespons
 
 export const apiGetReviewByProductId = async (id: string): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.get<Rating>(`${baseURL}/rating/${id}`);
-    return { status: response.status, payload: response.data }; 
-    
+    return { status: response.status, payload: response.data };
 };
 
-export const apiPostReviewByProductId = async (id: string, rating: Record<string, never>, token: string): Promise<eCommerceApiResponse> => {
-    const response = await eCommerceClient.post<Rating>(`${baseURL}/rating/${id}`, JSON.parse(JSON.stringify(rating)), {
-        headers: {
-            'Authorization': token
-        }
-    });
-     return { status: response.status, payload: response.data }; 
+export const apiPostReviewByProductId = async (
+    id: string,
+    rating: Record<string, never>,
+    token: string,
+): Promise<eCommerceApiResponse> => {
+    const response = await eCommerceClient.post<Rating>(
+        `${baseURL}/rating/${id}`,
+        JSON.parse(JSON.stringify(rating)),
+        {
+            headers: {
+                Authorization: token,
+            },
+        },
+    );
+    return { status: response.status, payload: response.data };
 };
 
 export const apiUpsertProduct = async (product: Product): Promise<eCommerceApiResponse> => {
@@ -34,9 +41,7 @@ export const apiUpsertProduct = async (product: Product): Promise<eCommerceApiRe
     return { status: response.status, payload: response.data };
 };
 
-export const apiPurchase = async (
-    products: { id: string; }[],
-): Promise<eCommerceApiResponse> => {
+export const apiPurchase = async (products: { id: string }[]): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.patch<Product[]>(`${baseURL}`, products);
     return { status: response.status, payload: response.data };
 };

@@ -118,18 +118,26 @@ export const DisplayProducts = () => {
                     ></SearchBar>
                 ) : null}
                 {/* Conditionally renders SearchByCategory*/}
-                {filterBy === 'category' ?
+                {filterBy === 'category' ? (
                     <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
+                        labelId='demo-simple-select-helper-label'
+                        id='demo-simple-select-helper'
                         value={category}
-                        label="Search"
-                        onChange={event => setCategory(event.target.value as string)}            >
-                        <MenuItem value="category">Category</MenuItem>
-                        {categories.map((cat) => (  // builds dropdown menu from categories
-                            <MenuItem value={cat} key={cat}>{cat}</MenuItem>
-                        ))}
-                    </Select> : null}
+                        label='Search'
+                        onChange={(event) => setCategory(event.target.value as string)}
+                    >
+                        <MenuItem value='category'>Category</MenuItem>
+                        {categories.map(
+                            (
+                                cat, // builds dropdown menu from categories
+                            ) => (
+                                <MenuItem value={cat} key={cat}>
+                                    {cat}
+                                </MenuItem>
+                            ),
+                        )}
+                    </Select>
+                ) : null}
                 {/* Filter Option Dropdown Selector*/}
                 <Select
                     id='demo-simple-select-helper'
@@ -145,7 +153,9 @@ export const DisplayProducts = () => {
                 {filteredProducts.length <= 0 && <Text>No Products Found</Text>}
                 {/* if filteredProducts length is greater than 0, it renders mapped products*/}
                 {filteredProducts.length > 0 &&
-                    filteredProducts.map((item) => <ProductCard product={item} key={item.productId} />)}
+                    filteredProducts.map((item) => (
+                        <ProductCard product={item} key={item.productId} />
+                    ))}
             </Container>
         </React.Fragment>
     );
