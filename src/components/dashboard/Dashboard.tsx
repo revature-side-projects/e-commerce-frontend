@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { UserCredentials } from "./UserCredentials";
+import { ResetRequest } from "../../models/ResetRequest";
 import { useAppSelector } from "../../store/hooks";
 import { UserState, currentUser } from "../../store/userSlice";
 
@@ -16,7 +16,9 @@ export default function Dashboard() {
   let [errorMsg, setErrorMsg] = useState('');
 
   /* This const along with the handleChange function below will be used to store a user's email and/or password. */
-  const [updateData, setUpdateData] = useState<UserCredentials>({
+  const [updateData, setUpdateData] = useState<ResetRequest>({
+    newFirstName: '',
+    newLastName: '',
     newEmail: '',
     newPassword: '',
     currentPassword: ''
@@ -33,37 +35,37 @@ export default function Dashboard() {
   * If user password is correct and either field contains input, the update function will update the user's credentials.
   */
   let update = async (e: SyntheticEvent) => {
-    const { newEmail, newPassword, currentPassword } = updateData;
+    const { newFirstName, newLastName, newEmail, newPassword, currentPassword } = updateData;
 
     if (!currentPassword || (!newPassword && !newEmail)) {
       errorMsg = 'Invalid entry. Please try again.';
       return;
     }
 
-    try {
-      let resp = await authenticate({ currentPassword });
+    // try {
+    //   let resp = await authenticate({ currentPassword });
 
-      if (resp.status === 400) {
-        setErrorMsg('Invalid request. Please try again.')
-      }
-      if (resp.status === 401) {
-        setErrorMsg('Invalid password. Please try again.')
-      }
-      if (resp.status === 200) {
-        if (newEmail !== null) {
-          user.email = newEmail;
-        }
-        if (newPassword !== null) {
-          user.email = newPassword;
-        }
-        user.email = newEmail;
-        user.password = newPassword;
-      }
-    } catch (e: any) {
-      setErrorMsg('There was an error communicating with the backend');
-    }
+    //   if (resp.status === 400) {
+    //     setErrorMsg('Invalid request. Please try again.')
+    //   }
+    //   if (resp.status === 401) {
+    //     setErrorMsg('Invalid password. Please try again.')
+    //   }
+    //   if (resp.status === 200) {
+    //     if (newEmail !== null) {
+    //       user.email = newEmail;
+    //     }
+    //     if (newPassword !== null) {
+    //       user. = newPassword;
+    //     }
+    //     user.email = newEmail;
+    //     user.password = newPassword;
+    //   }
+    // } catch (e: any) {
+    //   setErrorMsg('There was an error communicating with the backend');
+    // }
 
-    console.log('You\'ve successfully updated your info!');
+    // console.log('You\'ve successfully updated your info!');
   }
 
   /*
