@@ -35,6 +35,7 @@ export default function Dashboard() {
   * If user password is correct and either field contains input, the update function will update the user's credentials.
   */
   let update = async (e: SyntheticEvent) => {
+    console.log(e);
     const { newFirstName, newLastName, newEmail, newPassword, currentPassword } = updateData;
 
     if (!currentPassword || (!newPassword && !newEmail)) {
