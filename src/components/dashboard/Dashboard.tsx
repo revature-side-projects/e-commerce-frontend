@@ -44,7 +44,7 @@ export const Dashboard = () => {
    * @returns React element
    */
 
-  let update = async (e: SyntheticEvent) => {
+  const update = async (e: SyntheticEvent) => {
     console.log(e);
     // const { newFirstName, newLastName, newEmail, newPassword, currentPassword } = updateData;
 
