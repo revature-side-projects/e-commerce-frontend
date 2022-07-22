@@ -1,7 +1,9 @@
 import { ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { CartContext } from '../../context/cart.context';
 import { useAppSelector } from '../../store/hooks';
 import { currentUser, UserState } from '../../store/userSlice';
 import DarkMode from '../darkmode/DarkMode';
@@ -51,6 +53,9 @@ const Navbar = () => {
     const navigate = useNavigate();
     // Retrieves user from redux
     const user: UserState = useAppSelector(currentUser);
+
+    const { cart } = useContext(CartContext);
+    const cartLength =  cart.length;
 
     return (
         <Container>
@@ -131,7 +136,7 @@ const Navbar = () => {
                             navigate('/cart');
                         }}
                     >
-                        <Badge color='primary'>
+                        <Badge color='primary' badgeContent={cartLength} max={999} showZero>
                             <ShoppingCartOutlined />
                         </Badge>
                     </MenuItem>
