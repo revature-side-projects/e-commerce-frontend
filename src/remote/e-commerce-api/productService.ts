@@ -56,8 +56,3 @@ export const apiDeleteProduct = async (id: number): Promise<eCommerceApiResponse
     const response = await eCommerceClient.delete<Product>(`${baseURL}/${id}`);
     return { status: response.status, payload: response.data };
 };
-
-export const apiGetReviewByProductId = async (id: string): Promise<eCommerceApiResponse> => {
-    const response = await eCommerceClient.get<Rating>(`${baseURL}/rating/${id}`);
-    return { status: response.status, payload: response.data }; 
-};

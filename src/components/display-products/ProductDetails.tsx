@@ -12,14 +12,13 @@ import {
     apiGetProductById,
     apiGetReviewByProductId,
     apiPostReviewByProductId,
+    apiUpdateProduct,
 } from '../../remote/e-commerce-api/productService';
 
 import UpdateProductRequest from '../../models/UpdateProduct';
 
 import { useAppSelector } from '../../store/hooks';
 import { currentUser, UserState } from '../../store/userSlice';
-import Rating from '../../models/RatingResponse';
-import { apiGetProductById, apiGetReviewByProductId, apiUpdateProduct } from '../../remote/e-commerce-api/productService';
 
 const Container = styled.div`
     padding: 20px;
