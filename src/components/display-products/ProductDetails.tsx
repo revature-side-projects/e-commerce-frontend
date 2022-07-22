@@ -1,17 +1,25 @@
-import { Box, TextField, Button } from '@mui/material';
-import React, { useState, useEffect, useContext } from 'react';
+
+import { MenuItem, Select, Box, TextField, Button, FormControl, InputLabel } from '@mui/material';
+import axios from 'axios';
+import React, { useState, useEffect, useContext, SyntheticEvent } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
+
 import Rating from '../../models/RatingResponse';
 import {
     apiGetProductById,
     apiGetReviewByProductId,
     apiPostReviewByProductId,
 } from '../../remote/e-commerce-api/productService';
+
+import UpdateProductRequest from '../../models/UpdateProduct';
+
 import { useAppSelector } from '../../store/hooks';
-import { currentUser } from '../../store/userSlice';
+import { currentUser, UserState } from '../../store/userSlice';
+import Rating from '../../models/RatingResponse';
+import { apiGetProductById, apiGetReviewByProductId, apiUpdateProduct } from '../../remote/e-commerce-api/productService';
 
 const Container = styled.div`
     padding: 20px;
@@ -65,6 +73,22 @@ const AddToCart = styled.button`
     }
 `;
 
+const UpdateProduct = styled.button`
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    margin: 10px 0px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    &:hover {
+        background-color: #0a71bb;
+        }
+    `;
+
 const ProductReviews = styled.div`
     display: flex;
     flex-direction: column;
@@ -95,18 +119,25 @@ const ProductDetail = () => {
         imgUrlMed: '',
         category: '',
     });
+
+    const [name, setName] = useState<string>('');
+    const [price, setPrice] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [category, setCategory] = useState<number>(0);
+    const [message, setMessage] = useState<string>('');
+
+    const { id } = useParams();
+    // Grabing the current user from state
+    const user: UserState = useAppSelector(currentUser);
+
     const [reviews, setReviews] = useState<Rating[]>([]);
     const [display, setDisplay] = useState(false);
 
-    const { id } = useParams();
-    const user = useAppSelector(currentUser);
-    console.log(user);
     useEffect(() => {
         // Fetch's product by Id and set state of current product
         const fetchData = async () => {
             const result = await apiGetProductById(id!);
             setProduct(result.payload);
-            console.log(result.payload);
         };
         fetchData();
 
@@ -117,6 +148,43 @@ const ProductDetail = () => {
         };
         fetchReviews();
     }, []);
+
+
+    useEffect(() => { // if fields empty set default information
+        if (!name || !price || !description) {
+            setMessage('ribbit, fields are empty');
+            setName(product.name);
+            setPrice((product.price).toString());
+            setDescription(product.description);
+            console.log(message);
+        }
+    });
+
+    /**
+     * update product funtion
+     */
+    const updateProduct = async () => {
+        // create a product request object
+        const productResponse: UpdateProductRequest = {
+            category: category,
+            id: +id!,
+            name: name,
+            description: description,
+            price: +price,
+            imageUrlS: product.imgUrlSmall,
+            imageUrlM: product.imgUrlMed
+        };
+
+        if (!name || !price || !description || category == 0) { // checks if fields are empty
+            console.log('Ribbit');
+        } else {
+            const response = await apiUpdateProduct(productResponse); // Sends login request to API
+            if (response.status >= 200 && response.status < 300) {
+                setMessage('update successful');
+            }
+        }
+
+    };
 
     /**
      * Adds product to cart.
@@ -146,7 +214,6 @@ const ProductDetail = () => {
         const data = new FormData(event.currentTarget); // Gets form data
         const rating = `${data.get('rating')}`;
         const description = `${data.get('description')}`;
-
         apiPostReviewByProductId(
             `${product.productId}`,
             JSON.parse(JSON.stringify({ rating: rating, description: description })),
@@ -160,10 +227,33 @@ const ProductDetail = () => {
                 <Flex>
                     <Image src={product.imgUrlMed} />
                     <ProductInfo className='productInfo'>
+                    {/* checking to see if a user is an ADMIN. if they are then render input tags to allow them to edit and update the product. Else we render h tags instead. */}
+                    {user.role === 'ADMIN' ? <ProductInfo className="productInfo">
                         <div>
-                            <h1>{product.name.toUpperCase()}</h1>
-                            <h5>Price: ${product.price}</h5>
-                            <h5>Product Description: {product.description}</h5>
+                            <label>Name:</label>
+                            <input onChange={(e: SyntheticEvent) => setName((e.target as HTMLInputElement).value)}
+                                placeholder={product.name.toUpperCase()} defaultValue={name}></input>
+                            <label>Price:</label>
+                            <input onChange={(e: SyntheticEvent) => setPrice((e.target as HTMLInputElement).value)}
+                                placeholder={product.price.toString()} defaultValue={price.toString()}></input>
+                            <label>Product Description:</label>
+                            <input onChange={(e: SyntheticEvent) => setDescription((e.target as HTMLInputElement).value)}
+                                placeholder={product.description} defaultValue={description} ></input>
+                            <Select
+                                id="demo-simple-select-helper"
+                                value={category}
+                                label="Search"
+                                onChange={event => setCategory(event.target.value as number)}>
+                                <MenuItem value={0}>Category</MenuItem>
+                                <MenuItem value={1}>Cloud</MenuItem>
+                                <MenuItem value={2}>Dawn</MenuItem>
+                                <MenuItem value={3}>Day</MenuItem>
+                                <MenuItem value={4}>Dusk</MenuItem>
+                                <MenuItem value={5}>Moon</MenuItem>
+                                <MenuItem value={6}>Night</MenuItem>
+                                <MenuItem value={7}>Space</MenuItem>
+                                <MenuItem value={8}>Sun</MenuItem>
+                            </Select>
                         </div>
                         <ProductInfoBottom>
                             <h5>Category: {product.category}</h5>
@@ -175,24 +265,50 @@ const ProductDetail = () => {
                             >
                                 Add to Cart
                             </AddToCart>
+
+                            <UpdateProduct onClick={updateProduct}>
+                                Update Product
+                            </UpdateProduct>
                         </ProductInfoBottom>
                     </ProductInfo>
+                        :
+                        <ProductInfo className="productInfo">
+                            <div>
+                                <h1>{product.name.toUpperCase()}</h1>
+                                <h5>Price: ${product.price}</h5>
+                                <h5>Product Description: {product.description}</h5>
+                            </div>
+                            <ProductInfoBottom>
+                                <h5>Category: {product.category}</h5>
+                                <h5>Product Id: {product.productId}</h5>
+                                <AddToCart onClick={() => {
+                                    addItemToCart({ ...product });
+                                }}>
+                                    Add to Cart
+                                </AddToCart>
+                            </ProductInfoBottom>
+                        </ProductInfo>}
                 </Flex>
                 <ProductReviews>
+
                     <h1>Product Reviews</h1>
-                    {user.id != 0 && display ? (
+                    {(user.id != 0 && display) ?
                         <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                            <TextField
-                                className='textbox'
-                                margin='normal'
-                                required
-                                fullWidth
-                                id='rating'
-                                label='rating'
-                                name='rating'
-                                autoComplete='rating'
-                                autoFocus
-                            />
+                            <FormControl className='stars'>
+                                <InputLabel id="demo-simple-select-helper">Star Rating</InputLabel>
+                                <Select
+                                    id='demo-simple-select-helper'
+                                    name='rating'
+                                    autoComplete='rating'
+                                >
+                                    <MenuItem value="">Star Rating</MenuItem>
+                                    <MenuItem value={1}>&#9734;</MenuItem>
+                                    <MenuItem value={2}>&#9734;&#9734;</MenuItem>
+                                    <MenuItem value={3}>&#9734;&#9734;&#9734;</MenuItem>
+                                    <MenuItem value={4}>&#9734;&#9734;&#9734;&#9734;</MenuItem>
+                                    <MenuItem value={5}>&#9734;&#9734;&#9734;&#9734;&#9734;</MenuItem>
+                                </Select>
+                            </FormControl>
                             <TextField
                                 className='textbox'
                                 margin='normal'
@@ -204,39 +320,24 @@ const ProductDetail = () => {
                                 id='description'
                                 autoComplete='current-description'
                             />
-                            <Button
-                                type='submit'
-                                fullWidth
-                                variant='contained'
-                                sx={{ mt: 3, mb: 2 }}
-                            >
+                            <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
                                 Submit review
                             </Button>
                         </Box>
-                    ) : user.id != 0 && !display ? (
-                        <h3 onClick={addReview}>Click here to add your own review</h3>
-                    ) : (
-                        <h3>You must login to leave a review</h3>
-                    )}
+                        : (user.id != 0 && !display) ? <h3 onClick={addReview}>Click here to add your own review</h3>
+                            : <h3>You must login to leave a review</h3>
+                    }
                     {/* This is mapping through reviews to display each review */}
-                    {reviews ? (
-                        reviews.map((review) => (
-                            <>
-                                <Review>
-                                    <h3>{'☆'.repeat(review.rating ? review.rating : 1)}</h3>
-                                    <h5>{review.description}</h5>
-                                    <h6>- {review.reviewerName}</h6>
-                                </Review>
-                            </>
-                        ))
-                    ) : (
-                        <>
-                            <h1>No reviews yet!</h1>
-                        </>
-                    )}
+                    {reviews ? reviews.map((review) => <>
+                        <Review>
+                            <h3>{'☆'.repeat((review.rating) ? review.rating : 1)}</h3>
+                            <h5>{review.description}</h5>
+                            <h6>- {review.reviewerName}</h6>
+                        </Review>
+                    </>) : <><h1>No reviews yet!</h1></>}
                 </ProductReviews>
             </Container>
-        </React.Fragment>
+        </React.Fragment >
     );
 };
 
