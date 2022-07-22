@@ -11,7 +11,10 @@ export default function Dashboard() {
     /* This method will be used to create & store an error message and display it later if needed. */
     let [errorMsg, setErrorMsg] = useState('');
 
-    /* This const along with the handleChange function below will be used to store a user's email and/or password. */
+    /**
+     * This const along with the handleChange function below will be used to store a user's email and/or password.
+     */
+
     const [updateData, setUpdateData] = useState<ResetRequest>({
         newFirstName: '',
         newLastName: '',
@@ -37,6 +40,7 @@ export default function Dashboard() {
       * @param {SyntheticEvent} e The event that handles the update. 
       * @returns React element
       */
+     
     let update = async (e: SyntheticEvent) => {
         console.log(e);
         const { newFirstName, newLastName, newEmail, newPassword, currentPassword } = updateData;

@@ -13,7 +13,6 @@ import {
 import { useAppSelector } from '../../store/hooks';
 import { currentUser } from '../../store/userSlice';
 
-const baseURL = '/products';
 const Container = styled.div`
     padding: 20px;
     display: flex;

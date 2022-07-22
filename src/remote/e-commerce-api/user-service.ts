@@ -1,6 +1,6 @@
 import { ResetRequest } from '../../models/ResetRequest';
 import eCommerceClient, { eCommerceApiResponse } from './eCommerceClient';
-const baseURL = '/user';
+const baseURL = '/auth';
 
 export const apiUpdateUser = async (
     newFirstName: string,
@@ -9,7 +9,7 @@ export const apiUpdateUser = async (
     oldPassword: string,
     newPassword: string,
 ) => {
-    const response = await eCommerceClient.post<ResetRequest>(`${baseURL}/update`, {
+    const response = await eCommerceClient.patch<ResetRequest>(`${baseURL}/reset`, {
         newFirstName: newFirstName,
         newLastName: newLastName,
         newEmail: newEmail,
