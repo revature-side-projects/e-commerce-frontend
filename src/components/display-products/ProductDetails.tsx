@@ -1,24 +1,14 @@
-
 import { MenuItem, Select, Box, TextField, Button, FormControl, InputLabel } from '@mui/material';
-import axios from 'axios';
 import React, { useState, useEffect, useContext, SyntheticEvent } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
-
-import Rating from '../../models/RatingResponse';
-import {
-    apiGetProductById,
-    apiGetReviewByProductId,
-    apiPostReviewByProductId,
-    apiUpdateProduct,
-} from '../../remote/e-commerce-api/productService';
-
 import UpdateProductRequest from '../../models/UpdateProduct';
-
 import { useAppSelector } from '../../store/hooks';
 import { currentUser, UserState } from '../../store/userSlice';
+import Rating from '../../models/RatingResponse';
+import { apiGetProductById, apiGetReviewByProductId, apiPostReviewByProductId, apiUpdateProduct } from '../../remote/e-commerce-api/productService';
 
 const Container = styled.div`
     padding: 20px;
@@ -49,7 +39,7 @@ const ProductInfo = styled.div`
     border-radius: 10px;
     background-color: #eee;
     box-shadow: 0 1px 2px 1px #00000026;
-`;
+    `;
 
 const ProductInfoBottom = styled.div`
     width: 100%;
@@ -69,8 +59,8 @@ const AddToCart = styled.button`
     transition: all 0.5s ease;
     &:hover {
         background-color: #0a71bb;
-    }
-`;
+        }
+    `;
 
 const UpdateProduct = styled.button`
     width: 100%;
@@ -117,6 +107,7 @@ const ProductDetail = () => {
         imgUrlSmall: '',
         imgUrlMed: '',
         category: '',
+
     });
 
     const [name, setName] = useState<string>('');
@@ -147,7 +138,6 @@ const ProductDetail = () => {
         };
         fetchReviews();
     }, []);
-
 
     useEffect(() => { // if fields empty set default information
         if (!name || !price || !description) {
@@ -198,14 +188,15 @@ const ProductDetail = () => {
             return searchProduct.productId === product.productId; // checks if product is in cart.
         });
 
-        if (index === -1) newCart.push(product); // if product is not in cart, then add product to cart.
+        if (index === -1)
+            newCart.push(product); // if product is not in cart, then add product to cart.
 
         setCart(newCart); // sets cart to new cart list.
     };
 
     const addReview = () => {
-        console.log('clicked');
         setDisplay(true);
+
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -225,7 +216,6 @@ const ProductDetail = () => {
             <Container>
                 <Flex>
                     <Image src={product.imgUrlMed} />
-                    <ProductInfo className='productInfo'>
                     {/* checking to see if a user is an ADMIN. if they are then render input tags to allow them to edit and update the product. Else we render h tags instead. */}
                     {user.role === 'ADMIN' ? <ProductInfo className="productInfo">
                         <div>
@@ -255,16 +245,6 @@ const ProductDetail = () => {
                             </Select>
                         </div>
                         <ProductInfoBottom>
-                            <h5>Category: {product.category}</h5>
-                            <h5>Product Id: {product.productId}</h5>
-                            <AddToCart
-                                onClick={() => {
-                                    addItemToCart({ ...product });
-                                }}
-                            >
-                                Add to Cart
-                            </AddToCart>
-
                             <UpdateProduct onClick={updateProduct}>
                                 Update Product
                             </UpdateProduct>

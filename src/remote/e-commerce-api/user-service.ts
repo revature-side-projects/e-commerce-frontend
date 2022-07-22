@@ -1,5 +1,5 @@
 import { ResetRequest } from '../../models/ResetRequest';
-import eCommerceClient, { eCommerceApiResponse } from './eCommerceClient';
+import eCommerceClient from './eCommerceClient';
 const baseURL = '/auth';
 
 export const apiUpdateUser = async (
