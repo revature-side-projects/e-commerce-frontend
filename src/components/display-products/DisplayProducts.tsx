@@ -50,6 +50,8 @@ export const DisplayProducts = () => {
     const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
     const [filterBy, setFilterBy] = useState('name');
     const [category, setCategory] = useState('category');
+    filteredProducts?.sort((a: Product, b: Product) => (a.productId > b.productId ? 1 : -1)); // sorts products by productId.
+
     /**
      * Searches through event listener to find products with matching name.
      *
