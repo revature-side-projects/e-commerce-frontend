@@ -37,9 +37,12 @@ export const CreateProducts = () => {
     const user: UserState = useAppSelector(currentUser);
 
     const sendNewProduct = async () => {
+        const priceNum = parseFloat(price).toFixed(2); // converts price to a number with 2 decimal places
 
         if (!name || !description || !price || !imageS || !imageM) { // If fields are empty, a message will display an error
             setMessage('All fields must be completed');
+        } else if (!Number(price)) { // If price is not a number, a message will display an error
+            setMessage('Price must be a number');
         } else if (category === 0) { // If category hasn't been selected, a message will display an error
             setMessage('Please select a category for this image');
         } else { // If all fields and category has been set, send the information to the API
@@ -47,7 +50,7 @@ export const CreateProducts = () => {
                 category: category,
                 name: name,
                 description: description,
-                price: +price,
+                price: +priceNum,
                 imageUrlS: imageS,
                 imageUrlM: imageM
             };
@@ -148,12 +151,13 @@ export const CreateProducts = () => {
                         <MenuItem value={7}>Space</MenuItem>
                         <MenuItem value={8}>Sun</MenuItem>
                     </Select>
-                    <Button id="createButton" onClick={sendNewProduct} variant="contained">Create</Button>
                     {message ?
                         <h4>{message}</h4>
                         :
                         <><br /></>
                     }
+                    <Button id="createButton" onClick={sendNewProduct} variant="contained">Create</Button>
+
                 </Box>
             </CreateDiv>
         </React.Fragment>

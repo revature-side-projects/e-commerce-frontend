@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MenuItem, Select, Box, TextField, Button, FormControl, InputLabel } from '@mui/material';
 import React, { useState, useEffect, useContext, SyntheticEvent } from 'react';
 import { useParams } from 'react-router';
@@ -164,13 +165,26 @@ const ProductDetail = () => {
             imageUrlM: product.imgUrlMed
         };
 
-        if (!name || !price || !description || category == 0) { // checks if fields are empty
+        if (category === 0) { // if category is not selected set error message
+            setError('Please select a category');
+        } else if (!name || !price || !description) { // checks if fields are empty
             console.log(error);
-        } else {
-            const response = await apiUpdateProduct(productResponse, user.token); // Sends login request to API
-            if (response.status >= 200 && response.status < 300) {
-                setError('update successful');
+        } else if (!Number(price)) { // checks if price is a number
+            setError('Please enter a valid price');
+            console.log(price);
+        }
+
+        else {
+            try {
+                console.log(productResponse);
+                const response = await apiUpdateProduct(productResponse, user.token); // Sends update product request to API
+                if (response.status >= 200 && response.status < 300) {
+                    setError('Update Successful'); // if successful, set error message
+                }
+            } catch (error: any) {
+                setError(error.response.data.message.toString()); // if error set error message
             }
+
         }
 
     };
@@ -254,6 +268,7 @@ const ProductDetail = () => {
                             </Select>
                         </div>
                         <ProductInfoBottom>
+                            {error && <p>{error}</p>}
                             <UpdateProduct onClick={updateProduct}>
                                 Update Product
                             </UpdateProduct>
