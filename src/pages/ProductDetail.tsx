@@ -33,6 +33,7 @@ if (loading) {
     <>
     <div>Product Detail</div>
     <div>{product.payload.name}</div>
+  
 
     </>
   )
