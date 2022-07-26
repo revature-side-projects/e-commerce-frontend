@@ -12,6 +12,7 @@ const ProductDetail = (props: Props) => {
     function getProductById(){
         const location = window.location.href;
         const productId = location.split("/")[4];
+      
         return parseInt(productId);
     }
     
@@ -24,7 +25,7 @@ const ProductDetail = (props: Props) => {
             .catch(console.log)
     }, [])
         
-console.log(product);
+console.log("products", product);
     
 
 
@@ -32,6 +33,7 @@ console.log(product);
     <>
     <div>Product Detail</div>
     <div>{product.payload.name}</div>
+  
 
     </>
   )
