@@ -1,33 +1,34 @@
 
-import React from 'react'
+import React, {useEffect, useState} from 'react';
 import { apiGetProductById } from "../remote/e-commerce-api/productService";
 
 type Props = {}
 
 const ProductDetail = (props: Props) => {
 
-    const [product, setProduct] = React.useState<any>({})
-
-
-    function getProductById(){
+    const [product, setProduct] = React.useState<any>({});
+    const [loading, setLoading] = React.useState<boolean>(true);
+ 
         const location = window.location.href;
-        const productId = location.split("/")[4];
-        return parseInt(productId);
-    }
-    
+        const productId = parseInt(location.split("/")[4]);
 
-    React.useEffect(() => {
-        const productId =  getProductById(); 
+      useEffect(() => {
+        getProduct();
+      },[])
 
-        apiGetProductById(productId)
-            .then(setProduct)   // setProduct is a function
-            .catch(console.log)
-    }, [])
-        
-console.log(product);
-    
+      const getProduct = async() =>{
+        const currentProd = await apiGetProductById(productId);        
+        setProduct(currentProd);
+        setLoading(false);
+      };    
 
-
+if (loading) {
+  return (
+    <>
+      Loading
+    </>
+  )
+}
   return (
     <>
     <div>Product Detail</div>
