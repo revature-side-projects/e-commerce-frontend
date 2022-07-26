@@ -32,7 +32,12 @@ if (loading) {
   return (
     <>
     <div>Product Detail</div>
-    <div>{product.payload.name}</div>
+    <div>Name: {product.payload.name}</div>
+    <div>Description: {product.payload.description}</div>
+    <div>Quantity: {product.payload.quantity}</div>
+    <div>Price: {product.payload.price}</div>
+    <div><img src={product.payload.image} /></div>
+ 
   
 
     </>
