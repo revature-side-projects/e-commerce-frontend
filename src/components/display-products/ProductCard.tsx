@@ -6,6 +6,7 @@ import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import React,{useState} from "react";
   
   const Info = styled.div`
     opacity: 0;
@@ -73,6 +74,29 @@ import Product from "../../models/Product";
   }
 
   export const ProductCard = (props: productProps) => {
+
+    let [counter, setCount] = useState(0);
+
+    if(counter < 0){
+        counter = 0;
+    };
+    
+    // Function to increment count by 1
+    const incrementCount = () => {
+      // Update state with incremented value
+      setCount(counter + 1);
+    };
+    
+    const decrementCount = () => {
+        setCount(counter -1);
+    };
+
+
+
+
+
+
+
     const { cart, setCart } = useContext(CartContext);
 
     const addItemToCart = (product: Product) => {
@@ -89,17 +113,27 @@ import Product from "../../models/Product";
     }
 
     return (
+      
+      <>
+      
       <Container>
         <Circle />
         <Image src={props.product.image} />
         <Info>
           <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
+            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: counter})}} />
           </Icon>
           <Icon>
             <SearchOutlined />
           </Icon>
         </Info>
       </Container>
+      <div className="app">
+    <button onClick={incrementCount}>+</button>
+    {counter}
+    <button onClick={decrementCount}>-</button>
+    
+  </div>
+      </>
     );
   };

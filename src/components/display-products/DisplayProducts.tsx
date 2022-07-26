@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Product from '../../models/Product';
 import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
 import Navbar from '../navbar/Narbar';
-import { Quantity } from '../quantity/Quantity';
+// import { Quantity } from '../quantity/Quantity';
 import { ProductCard } from "./ProductCard";
 
 const Container = styled.div`
@@ -88,7 +88,10 @@ export const DisplayProducts = () => {
         <Container>
           
         {products.map((item) => (
-            <><ProductCard product={item} key={item.id} /><Quantity products={products}/></>
+            <><ProductCard product={item} key={item.id} /> 
+            
+            {/* <Quantity products={products}/> */}
+            </> 
         ))}
         </Container>
     </React.Fragment>
