@@ -12,9 +12,11 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-export const DisplayProducts = () => {
+export const DisplayProducts = ({updateLoginUser}: any) => {
 
   const [products, setProducts] = useState<Product[]>([])
+
+  console.log(updateLoginUser)
 
   useEffect(() => {
     const fetchData = async () => {
