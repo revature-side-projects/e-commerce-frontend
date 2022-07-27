@@ -1,10 +1,10 @@
 import Navbar from "../navbar/Narbar"
 import { Box, TextField, ThemeProvider, Container, createTheme, Button, Typography, Grid, InputAdornment } from "@mui/material"
 import { useEffect, useState } from "react";
-import Product from "../../models/Product";
 import { apiGetProductById } from "../../remote/e-commerce-api/productService";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
+import { useParams, useNavigate } from "react-router-dom";
+import { apiUpsertProduct } from "../../remote/e-commerce-api/productService";
+import Product from "../../models/Product";
 
 const theme = createTheme();
 
@@ -12,6 +12,7 @@ export default function UpdateProduct() {
 
     const [product, setProduct] = useState<Product>()
     const { id } = useParams()
+    const navigate = useNavigate();
 
     const intId = id ? id : "0";
     
@@ -22,7 +23,23 @@ export default function UpdateProduct() {
             }
             fetchData()
         }, [])
-    console.log(product)
+    //console.log(product)
+
+    const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        apiUpsertProduct(new Product(
+            parseInt(intId),
+            `${data.get('pName')}`,
+            parseInt(`${data.get('pQuantity')}`),
+            `${data.get('pDescription')}`,
+            parseFloat(`${data.get('pPrice')}`),
+            `${data.get('pImage')}`
+        ));
+
+        // TODO: navigate to updated product rather than home
+        navigate('/');
+      }
       
 
     return (
@@ -31,7 +48,7 @@ export default function UpdateProduct() {
         <ThemeProvider theme={theme}>
             <Navbar/>
             
-            <Container component="main" maxWidth="lg">
+            <Container component="form" onSubmit={handleUpdate} maxWidth="lg">
                 <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -40,7 +57,7 @@ export default function UpdateProduct() {
                             </Typography>
                             
                         </Grid>
-                        <Grid xs={6}>
+                        <Grid container xs={6}>
                             <Container>
                                 <img src={product.image} height="470"/>
                             </Container>
@@ -49,7 +66,7 @@ export default function UpdateProduct() {
                         <Grid container xs={6}>
                             <Grid xs={12}>
                                 <TextField margin="normal" required fullWidth id="pName" label="Product Name" name="pName" autoFocus defaultValue={product.name}/>
-                                <TextField margin="normal" required fullWidth id="pDescription" label="Product Description" name="oDescription" multiline rows={15} defaultValue={product.description}/>
+                                <TextField margin="normal" required fullWidth id="pDescription" label="Product Description" name="pDescription" multiline rows={15} defaultValue={product.description}/>
                             </Grid>
                             <Grid container xs={12}>
                                 <Grid item xs={6}>
