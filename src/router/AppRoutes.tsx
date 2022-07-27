@@ -7,7 +7,7 @@ import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 
 export const AppRoutes: React.FC<unknown> = () => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState("");
   return (
   <Routes>
     <Route path="/" element={<DisplayProducts updateLoginUser={user}/>} />
