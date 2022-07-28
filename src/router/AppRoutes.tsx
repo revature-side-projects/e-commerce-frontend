@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { Cart } from '../components/cart/Cart';
 import Checkout from '../components/checkout/Checkout';
@@ -7,14 +7,17 @@ import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 import UpdateProduct from '../components/modify-products/UpdateProduct';
 
-export const AppRoutes: React.FC<unknown> = () => (
+export const AppRoutes: React.FC<unknown> = () => {
+  const [user, setUser] = useState("");
+  return (
   <Routes>
-    <Route path="/" element={<DisplayProducts />} />
-    <Route path="/login" element={<Login />} />
+    <Route path="/" element={<DisplayProducts updateLoginUser={user}/>} />
+    <Route path="/login" element={<Login updateLoginUser={setUser}/>} />
     <Route path="/register" element={<Register />} />
-    <Route path="/checkout" element={<Checkout />} />
+    <Route path="/checkout" element={<Checkout updateLoginUser={user}/>} />
     <Route path="/cart" element={<Cart />} />
 
     <Route path="/product/:id/update" element={<UpdateProduct />} />
   </Routes>
-)
+  )
+}
