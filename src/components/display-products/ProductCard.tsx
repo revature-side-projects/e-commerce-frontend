@@ -8,6 +8,7 @@ import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import { useNavigate } from "react-router-dom";
   
   const Info = styled.div`
     opacity: 0;
@@ -90,6 +91,8 @@ import Product from "../../models/Product";
       setCart(newCart)
     }
 
+    const navigate = useNavigate();
+
     return (
       <Container>
         <Circle />
@@ -102,7 +105,7 @@ import Product from "../../models/Product";
             <SearchOutlined />
           </Icon>
           <Icon>
-            <UpgradeOutlinedIcon />
+            <UpgradeOutlinedIcon onClick={() => navigate("/product/:id/update")}/>
           </Icon>
           
         </Info>
