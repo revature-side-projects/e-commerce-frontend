@@ -1,7 +1,9 @@
 import {
     SearchOutlined,
     ShoppingCartOutlined,
+    
   } from "@material-ui/icons";
+  import UpgradeOutlinedIcon from '@mui/icons-material/UpgradeOutlined';
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -99,6 +101,10 @@ import Product from "../../models/Product";
           <Icon>
             <SearchOutlined />
           </Icon>
+          <Icon>
+            <UpgradeOutlinedIcon />
+          </Icon>
+          
         </Info>
       </Container>
     );
