@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiUpsertProduct } from "../../remote/e-commerce-api/productService";
 import noIdProduct from "../../models/noIdProduct";
+import No_Image from "./No_Image.png"
 
 const theme = createTheme();
 
@@ -43,6 +44,9 @@ export function CreateProduct() {
                             
                         </Grid>
                         <Grid container xs={6}>
+                        <Container>
+                                <img id="pPlaceHolder"src = {No_Image} height="470"/>
+                        </Container>
                             <TextField margin="normal" required fullWidth id="pImage" label="Product Image URL" name="pImage" autoFocus/>
                         </Grid>
                         <Grid container xs={6}>
