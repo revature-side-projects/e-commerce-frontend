@@ -27,11 +27,11 @@ export default function EditProfile({updateLoginUser}: any) {
         const response = await eCommerceClient.put<any>(
             `users/${updateLoginUser.id}`,
             { 
-            firstname: `${data.get('firstName')}`,
             id: updateLoginUser.id,
-            lastName: `${data.get('lastName')}`, 
-            email: `${data.get('email')}`, 
+            email: `${data.get('email')}`,
             password: `${data.get('password')}`,
+            firstname: `${data.get('firstName')}`,
+            lastName: `${data.get('lastName')}`, 
             role: updateLoginUser.role
             }
         );
@@ -65,7 +65,6 @@ export default function EditProfile({updateLoginUser}: any) {
                   name="firstName"
                   id="firstName"
                   label="First Name"
-                  autoFocus
                   defaultValue={updateLoginUser.firstName}
                 />
               </Grid>
@@ -111,7 +110,14 @@ export default function EditProfile({updateLoginUser}: any) {
               Edit
             </Button>
             <Button
-              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => navigate('/')}
+            >
+             Cancel
+            </Button>
+            <Button
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
