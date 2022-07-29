@@ -30,7 +30,6 @@ export function CreateProduct() {
       
     return (
         <>
-        {product ?
         <ThemeProvider theme={theme}>
             <Navbar/>
             
@@ -44,24 +43,21 @@ export function CreateProduct() {
                             
                         </Grid>
                         <Grid container xs={6}>
-                            <Container>
-                                <img src={product.image} height="470"/>
-                            </Container>
-                            <TextField margin="normal" required fullWidth id="pImage" label="Product Image URL" name="pImage" autoFocus defaultValue={product.image}/>
+                            <TextField margin="normal" required fullWidth id="pImage" label="Product Image URL" name="pImage" autoFocus/>
                         </Grid>
                         <Grid container xs={6}>
                             <Grid xs={12}>
-                                <TextField margin="normal" required fullWidth id="pName" label="Product Name" name="pName" autoFocus defaultValue={product.name}/>
-                                <TextField margin="normal" required fullWidth id="pDescription" label="Product Description" name="pDescription" multiline rows={15} defaultValue={product.description}/>
+                                <TextField margin="normal" required fullWidth id="pName" label="Product Name" name="pName" autoFocus/>
+                                <TextField margin="normal" required fullWidth id="pDescription" label="Product Description" name="pDescription" multiline rows={15}/>
                             </Grid>
                             <Grid container xs={12}>
                                 <Grid item xs={6}>
-                                    <TextField name="pPrice" required fullWidth id="pPrice" label="Price" defaultValue={product.price.toFixed(2)} InputProps={{startAdornment: 
+                                    <TextField name="pPrice" required fullWidth id="pPrice" label="Price" InputProps={{startAdornment: 
                                         <InputAdornment position="start">$</InputAdornment>,}}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <TextField required fullWidth id="pQuantity" label="Quantity" name="pQuantity" defaultValue={product.quantity} type="number"/>
+                                    <TextField required fullWidth id="pQuantity" label="Quantity" name="pQuantity" type="number"/>
                                 </Grid>
                             </Grid>
 
@@ -74,11 +70,7 @@ export function CreateProduct() {
                 
             </Container>
         </ThemeProvider>
-        :
-        <Typography component="h1" variant="h5">
-            Loading...
-        </Typography>
-        }
+
         </>
     )
 
