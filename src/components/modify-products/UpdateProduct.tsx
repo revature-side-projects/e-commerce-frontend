@@ -1,30 +1,48 @@
 import Navbar from "../navbar/Narbar"
-import { Box, TextField, ThemeProvider, Container, createTheme, Button, Typography, Grid, InputAdornment } from "@mui/material"
+import { Box, TextField, ThemeProvider, Container, createTheme, Button, Typography, Grid, InputAdornment, TextFieldClasses } from "@mui/material"
 import { useEffect, useState } from "react";
 import { apiGetProductById } from "../../remote/e-commerce-api/productService";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiUpsertProduct } from "../../remote/e-commerce-api/productService";
 import Product from "../../models/Product";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { IconButton } from "@material-ui/core";
 
 const theme = createTheme();
 
 export default function UpdateProduct() {
 
+    // funcitons and state varible to handle changing image
+    let [URL, setURL] = useState(null);
+    //sets changed image when button pressed
+    function changeImage(event: any) {
+        {URL && ((document.getElementById("pPreview") as HTMLImageElement).src=URL)};
+    }
+    //sets url when product image url changed
+    function handleChangeURL(event: any){
+        setURL(event.target.value);
+    }
+
+    //sets product as state variable
     const [product, setProduct] = useState<Product>()
-    const { id } = useParams()
+    const { id } = useParams() //prams
     const navigate = useNavigate();
 
+    // removes falsyness
     const intId = id ? id : "0";
     
+    //retrieves and sets products
     useEffect(() => {
             const fetchData = async () => {
             const result = await apiGetProductById(parseInt(intId))
             setProduct(result.payload)
             }
-            fetchData()
-        }, [])
-    //console.log(product)
+            fetchData();
+        }, []
+    )
 
+    
+    // updates the database with given variables and redirects user
     const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -36,10 +54,9 @@ export default function UpdateProduct() {
             parseFloat(`${data.get('pPrice')}`),
             `${data.get('pImage')}`
         ));
-
         // TODO: navigate to updated product rather than home
         navigate('/');
-      }
+    }
       
 
     return (
@@ -59,9 +76,13 @@ export default function UpdateProduct() {
                         </Grid>
                         <Grid container xs={6}>
                             <Container>
-                                <img src={product.image} height="470"/>
+                                <img id="pPreview" src={product.image} height="470"/>
+                                
                             </Container>
-                            <TextField margin="normal" required fullWidth id="pImage" label="Product Image URL" name="pImage" autoFocus defaultValue={product.image}/>
+                            <TextField margin="normal" required fullWidth id="pImage" label="Product Image URL" name="pImage" autoFocus defaultValue={product.image} onChange={handleChangeURL} InputProps={{endAdornment:
+                                <InputAdornment position="end"><IconButton onClick={changeImage} onMouseDown={(event)=>event.preventDefault}><AutorenewIcon/></IconButton></InputAdornment>}}
+                            />
+
                         </Grid>
                         <Grid container xs={6}>
                             <Grid xs={12}>
