@@ -78,13 +78,15 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
   //       quantity: 10,
   //     },
   // ]
+  
+  
 
   return (
     <React.Fragment>
         <Navbar/>
         <Container>
         {products.map((item) => (
-            <ProductCard product={item} key={item.id} />
+            <ProductCard product={item} key={item.id} updateUser={updateLoginUser}/>
         ))}
         <Box
             sx={{
