@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -140,6 +140,7 @@ export const Cart = () => {
   const navigate = useNavigate();
 
   let [count, setCount] = useState(0);
+  
  
 
   const editQuantityUp =(id: any)=>{
@@ -161,6 +162,16 @@ export const Cart = () => {
       }
     }
   }
+
+  const removeButton =(id: any, image: any)=>{
+    for (let i =0;i<cart.length;i++){
+      if(cart[i].id == id){
+           setCart(cart.filter(product => product.image !== image));
+      }
+    }
+  }
+
+ 
 
   return (
     <Container>
@@ -190,9 +201,10 @@ export const Cart = () => {
                     </ProductDetail>
                     <PriceDetail>
                       <ProductAmountContainer>
-                        <button className="qb" onClick={() => editQuantityUp(product.id)}>+</button>
+                        <button className="qb" onClick={() => editQuantityUp(product.id)}>^</button>
                         <ProductAmount> {product.quantity} </ProductAmount>
-                        <button className="qb" onClick={() => editQuantityDown(product.id)}>-</button>
+                        <button className="qb" onClick={() => editQuantityDown(product.id)}>v</button>
+                        <button className="qb" onClick={() => removeButton(product.id, product.image)}>-</button>
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
