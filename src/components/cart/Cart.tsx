@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Navbar from "../navbar/Narbar";
 import {useState} from "react";
+import { CardTravel } from "@mui/icons-material";
 
 
 const Container = styled.div``;
@@ -137,14 +138,25 @@ export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
-
+  
   let [count, setCount] = useState(0);
+ 
 
-  const editQuantityUp =()=>{
-    setCount(count + 1)
+  const editQuantityUp =(id: any)=>{
+    for (let i =0;i<cart.length;i++){
+      if(cart[i].id == id){
+        cart[i].quantity = cart[i].quantity + 1
+        setCount(cart[i].quantity)
+      }
+    }
   }
-  const editQuantityDown =()=>{
-    setCount(count - 1)
+  const editQuantityDown =(id: any)=>{
+    for (let i =0;i<cart.length;i++){
+      if(cart[i].id == id){
+        cart[i].quantity = cart[i].quantity - 1
+        setCount(cart[i].quantity)
+      }
+    }
   }
 
   return (
@@ -175,9 +187,9 @@ export const Cart = () => {
                     </ProductDetail>
                     <PriceDetail>
                       <ProductAmountContainer>
-                        <button className="qb" onClick={editQuantityUp}>+</button>
-                        <ProductAmount> {product.quantity + count} </ProductAmount>
-                        <button className="qb" onClick={editQuantityDown}>-</button>
+                        <button className="qb" onClick={() => editQuantityUp(product.id)}>+</button>
+                        <ProductAmount> {product.quantity} </ProductAmount>
+                        <button className="qb" onClick={() => editQuantityDown(product.id)}>-</button>
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
@@ -192,7 +204,7 @@ export const Cart = () => {
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
               <SummaryItemPrice>$ 
-                  {cart.reduce<number>((total, product) => total + product.price * (product.quantity + count), 0)}
+                  {cart.reduce<number>((total, product) => total + product.price * (product.quantity), 0)}
               </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
@@ -206,7 +218,7 @@ export const Cart = () => {
             <SummaryItem>
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ 
-                {cart.reduce<number>((total, product) => total + product.price * (product.quantity + count), 0)}
+                {cart.reduce<number>((total, product) => total + product.price * (product.quantity), 0)}
               </SummaryItemPrice>
             </SummaryItem>
             <Button onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</Button>
