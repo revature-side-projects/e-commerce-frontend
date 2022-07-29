@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import styled from "styled-components";
 import Product from '../../models/Product';
 import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
@@ -83,6 +86,21 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
         {products.map((item) => (
             <ProductCard product={item} key={item.id} />
         ))}
+        <Box
+            sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+            m: 2,
+            width: 300,
+            height: 350,
+            },
+            }}
+          >
+          <Button href="/addproduct" color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />}>
+          Add new product
+          </Button>
+        </Box>
         </Container>
     </React.Fragment>
     
