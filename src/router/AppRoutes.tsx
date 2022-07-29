@@ -6,7 +6,7 @@ import { DisplayProducts } from "../components/display-products/DisplayProducts"
 import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 import UpdateProduct from '../components/modify-products/UpdateProduct';
-import CreateProduct from '../components/create-product/CreateProduct';
+import { CreateProduct } from '../components/create-product/CreateProduct';
 
 export const AppRoutes: React.FC<unknown> = () => {
   const [user, setUser] = useState("");
