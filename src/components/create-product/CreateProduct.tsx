@@ -5,13 +5,24 @@ import { useNavigate } from "react-router-dom";
 import { apiUpsertProduct } from "../../remote/e-commerce-api/productService";
 import noIdProduct from "../../models/noIdProduct";
 import No_Image from "./No_Image.png"
+import { IconButton } from "@material-ui/core";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+
 
 const theme = createTheme();
 
 export function CreateProduct() {
-
-    const [product] = useState<noIdProduct>()
-
+    // funcitons and state varible to handle changing image
+    let [URL, setURL] = useState(null);
+    //sets changed image when button pressed
+    function changeImage(event: any) {
+        {URL && ((document.getElementById("pPreview") as HTMLImageElement).src=URL)};
+    }
+    //sets url when product image url changed
+    function handleChangeURL(event: any){
+        setURL(event.target.value);
+    }
+    
     const navigate = useNavigate();
     
     const handleCreate = (event: React.FormEvent<HTMLFormElement>) => {
@@ -45,9 +56,11 @@ export function CreateProduct() {
                         </Grid>
                         <Grid container xs={6}>
                         <Container>
-                                <img id="pPlaceHolder"src = {No_Image} height="470"/>
+                                <img id="pPreview"src = {No_Image} height="470"/>
                         </Container>
-                            <TextField margin="normal" required fullWidth id="pImage" label="Product Image URL" name="pImage" autoFocus/>
+                            <TextField margin="normal" required fullWidth id="pImage" label="Product Image URL" name="pImage" autoFocus onChange={handleChangeURL} InputProps={{endAdornment:
+                                <InputAdornment position="end"><IconButton onClick={changeImage} onMouseDown={(event)=>event.preventDefault}><AutorenewIcon/></IconButton></InputAdornment>}}
+                            />
                         </Grid>
                         <Grid container xs={6}>
                             <Grid xs={12}>
