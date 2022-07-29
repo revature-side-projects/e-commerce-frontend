@@ -138,7 +138,7 @@ export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
-  
+
   let [count, setCount] = useState(0);
  
 
@@ -154,6 +154,9 @@ export const Cart = () => {
     for (let i =0;i<cart.length;i++){
       if(cart[i].id == id){
         cart[i].quantity = cart[i].quantity - 1
+        if(cart[i].quantity <= 0){
+          cart[i].quantity = 0 
+        }
         setCount(cart[i].quantity)
       }
     }
