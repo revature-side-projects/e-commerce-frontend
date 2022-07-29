@@ -66,7 +66,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  placeholder={updateLoginUser.firstName}
+                  defaultValue={updateLoginUser.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -76,7 +76,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   name="lastName"
                   id="lastName"
                   label="Last Name"
-                  placeholder={updateLoginUser.lastName}
+                  defaultValue={updateLoginUser.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,7 +86,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   name="email"
                   id="email"
                   label="Email Address"
-                  placeholder={updateLoginUser.email}
+                  defaultValue={updateLoginUser.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -98,7 +98,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  placeholder={updateLoginUser.password}
+                  defaultValue={updateLoginUser.password}
                 />
               </Grid>
             </Grid>
