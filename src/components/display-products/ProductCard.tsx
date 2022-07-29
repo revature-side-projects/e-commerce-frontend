@@ -1,12 +1,19 @@
 import {
     SearchOutlined,
     ShoppingCartOutlined,
+    
   } from "@material-ui/icons";
+  import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+  import UpgradeOutlinedIcon from '@mui/icons-material/UpgradeOutlined';
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import { useNavigate } from "react-router-dom";
 import React,{useState} from "react";
+
   
   const Info = styled.div`
     opacity: 0;
@@ -70,7 +77,9 @@ import React,{useState} from "react";
   
   interface productProps {
       product: Product,
-      key: number
+      key: number,
+      updateUser: any
+    
   }
 
   export const ProductCard = (props: productProps) => {
@@ -112,16 +121,17 @@ import React,{useState} from "react";
       setCart(newCart)
     }
 
+    const navigate = useNavigate();
+
     return (
-      
-      <>
-      
-      <Container>
+      <><Container>
+
         <Circle />
         <Image src={props.product.image} />
         <Info>
           <Icon>
             <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: counter})}} />
+
           </Icon>
           <Icon>
             <SearchOutlined />
@@ -131,6 +141,10 @@ import React,{useState} from "react";
             {counter}
             <button className="qb" onClick={decrementCount}>-</button>
           </div>
+          {props.updateUser.role == "ADMIN" && <Icon>
+
+            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)} />
+          </Icon>}
         </Info>
       </Container>
 
