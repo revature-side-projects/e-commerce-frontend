@@ -77,8 +77,8 @@ import React,{useState} from "react";
 
     let [counter, setCount] = useState(0);
 
-    if(counter < 0){
-        counter = 0;
+    if(counter < 1){
+        counter = 1;
     };
     
     // Function to increment count by 1
@@ -126,14 +126,14 @@ import React,{useState} from "react";
           <Icon>
             <SearchOutlined />
           </Icon>
+          <div className="app">
+            <button className="qb"  onClick={incrementCount}>+</button>
+            {counter}
+            <button className="qb" onClick={decrementCount}>-</button>
+          </div>
         </Info>
       </Container>
-      <div className="app">
-    <button onClick={incrementCount}>+</button>
-    {counter}
-    <button onClick={decrementCount}>-</button>
-    
-  </div>
+
       </>
     );
   };

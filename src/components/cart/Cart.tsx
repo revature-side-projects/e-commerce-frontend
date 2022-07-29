@@ -175,9 +175,9 @@ export const Cart = () => {
                     </ProductDetail>
                     <PriceDetail>
                       <ProductAmountContainer>
-                        <button onClick={editQuantityUp}>+</button>
+                        <button className="qb" onClick={editQuantityUp}>+</button>
                         <ProductAmount> {product.quantity + count} </ProductAmount>
-                        <button onClick={editQuantityDown}>-</button>
+                        <button className="qb" onClick={editQuantityDown}>-</button>
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>

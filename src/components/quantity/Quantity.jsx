@@ -20,9 +20,9 @@ const decrementCount = () => {
 };
 return (
   <div className="app">
-    <button onClick={incrementCount}>+</button>
+    <button className="qb" onClick={incrementCount}>+</button>
     {count}
-    <button onClick={decrementCount}>-</button>
+    <button className="qb" onClick={decrementCount}>-</button>
     
   </div>
 )
