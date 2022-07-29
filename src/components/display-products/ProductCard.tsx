@@ -72,7 +72,9 @@ import { useNavigate } from "react-router-dom";
   
   interface productProps {
       product: Product,
-      key: number
+      key: number,
+      updateUser: any
+    
   }
 
   export const ProductCard = (props: productProps) => {
@@ -104,9 +106,11 @@ import { useNavigate } from "react-router-dom";
           <Icon>
             <SearchOutlined />
           </Icon>
-          <Icon>
-            <UpgradeOutlinedIcon onClick={() => navigate("/product/:id/update")}/>
-          </Icon>
+          
+          {props.updateUser.role == "ADMIN" && <Icon >
+
+            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)}/>
+          </Icon>}
           
         </Info>
       </Container>
