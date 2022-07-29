@@ -146,7 +146,7 @@ export const Cart = () => {
     for (let i =0;i<cart.length;i++){
       if(cart[i].id == id){
         cart[i].quantity = cart[i].quantity + 1
-        setCount(cart[i].quantity)
+        setCount(cart[i].quantity + 1) 
       }
     }
   }
@@ -157,7 +157,7 @@ export const Cart = () => {
         if(cart[i].quantity <= 0){
           cart[i].quantity = 0 
         }
-        setCount(cart[i].quantity)
+        setCount(cart[i].quantity - 1)
       }
     }
   }
