@@ -3,6 +3,9 @@ import {
     ShoppingCartOutlined,
     
   } from "@material-ui/icons";
+  import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
   import UpgradeOutlinedIcon from '@mui/icons-material/UpgradeOutlined';
 import { useContext } from "react";
   import styled from "styled-components";
@@ -96,23 +99,23 @@ import { useNavigate } from "react-router-dom";
     const navigate = useNavigate();
 
     return (
-      <Container>
+      <><Container>
         <Circle />
         <Image src={props.product.image} />
         <Info>
           <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
+            <ShoppingCartOutlined onClick={() => { addItemToCart({ ...props.product, quantity: 1 }); } } />
           </Icon>
           <Icon>
             <SearchOutlined />
           </Icon>
-          
-          {props.updateUser.role == "ADMIN" && <Icon >
 
-            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)}/>
+          {props.updateUser.role == "ADMIN" && <Icon>
+
+            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)} />
           </Icon>}
-          
         </Info>
       </Container>
+      </>
     );
   };

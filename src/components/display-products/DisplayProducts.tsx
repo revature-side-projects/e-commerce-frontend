@@ -7,6 +7,7 @@ import Product from '../../models/Product';
 import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
 import Navbar from '../navbar/Narbar';
 import { ProductCard } from "./ProductCard";
+import { PropaneSharp } from '@mui/icons-material';
 
 const Container = styled.div`
     padding: 20px;
@@ -28,6 +29,8 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
     }
     fetchData()
   }, [])
+
+
   // const products: Product[] = [
   //   {
   //       id:1,
@@ -88,6 +91,7 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
         {products.map((item) => (
             <ProductCard product={item} key={item.id} updateUser={updateLoginUser}/>
         ))}
+          {updateLoginUser.role == "ADMIN" && 
         <Box
             sx={{
             display: 'flex',
@@ -102,7 +106,7 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
           <Button href="/product/create" color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />}>
           Add new product
           </Button>
-        </Box>
+        </Box>}
         </Container>
     </React.Fragment>
     
