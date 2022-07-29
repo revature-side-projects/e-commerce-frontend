@@ -15,15 +15,22 @@ import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function Login() {
+export default function Login({updateLoginUser}: any) {
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const response = await apiLogin(`${data.get('email')}`, `${data.get('password')}`);
+    handleData(response.payload);
     if (response.status >= 200 && response.status < 300) navigate('/')
   };
+
+  async function handleData(data: any) {
+      const {id, email, firstName, lastName} = data;
+
+      updateLoginUser(data);
+  }
 
   return (
     <ThemeProvider theme={theme}>

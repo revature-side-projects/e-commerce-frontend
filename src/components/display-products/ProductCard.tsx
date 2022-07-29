@@ -1,11 +1,14 @@
 import {
     SearchOutlined,
     ShoppingCartOutlined,
+    
   } from "@material-ui/icons";
+  import UpgradeOutlinedIcon from '@mui/icons-material/UpgradeOutlined';
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import { useNavigate } from "react-router-dom";
   
   const Info = styled.div`
     opacity: 0;
@@ -88,6 +91,8 @@ import Product from "../../models/Product";
       setCart(newCart)
     }
 
+    const navigate = useNavigate();
+
     return (
       <Container>
         <Circle />
@@ -99,6 +104,10 @@ import Product from "../../models/Product";
           <Icon>
             <SearchOutlined />
           </Icon>
+          <Icon>
+            <UpgradeOutlinedIcon onClick={() => navigate("/product/:id/update")}/>
+          </Icon>
+          
         </Info>
       </Container>
     );
