@@ -4,6 +4,8 @@ import './App.css';
 import { CartContext } from './context/cart.context';
 import ProductItem from './models/Product';
 import { AppRoutes } from './router/AppRoutes';
+import DarkMode from "./DarkMode";
+import logo from "./logo.svg";
 
 function App() {
   const [cart, setCart] = useState<ProductItem[]>([]);
@@ -12,9 +14,16 @@ function App() {
   return (
     <CartContext.Provider value={value}>
       <Router>
-        <AppRoutes></AppRoutes>
+        <DarkMode /><AppRoutes></AppRoutes>
+    <div className="App">
+      <header className="App-header">
+   
+      </header>
+    </div>
       </Router>
     </CartContext.Provider>
+    
+
   );
 }
 
