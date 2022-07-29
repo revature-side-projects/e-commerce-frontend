@@ -78,7 +78,7 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
 
   return (
     <React.Fragment>
-        <Navbar/>
+        <Navbar updateLoginUser={updateLoginUser}/>
         <Container>
         {products.map((item) => (
             <ProductCard product={item} key={item.id} />

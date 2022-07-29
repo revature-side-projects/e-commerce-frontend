@@ -10,24 +10,36 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { apiRegister } from '../../remote/e-commerce-api/authService';
+import eCommerceClient from '../../remote/e-commerce-api/eCommerceClient';
 import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function Register() {
+export default function EditProfile({updateLoginUser}: any) {
   const navigate = useNavigate(); 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log(`${data.get('firstName')}`)
-    const response = await apiRegister(`${data.get('firstName')}`, `${data.get('lastName')}`, `${data.get('email')}`, `${data.get('password')}`)
-    if (response.status >= 200 && response.status < 300) navigate('/login')
+
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log(`${data.get('firstName')}`)
+
+        const response = await eCommerceClient.put<any>(
+            `users/${updateLoginUser.id}`,
+            { 
+            firstname: `${data.get('firstName')}`,
+            id: updateLoginUser.id,
+            lastName: `${data.get('lastName')}`, 
+            email: `${data.get('email')}`, 
+            password: `${data.get('password')}`,
+            role: updateLoginUser.role
+            }
+        );
+        if (response.status >= 200 && response.status < 300) navigate('/')
+
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -42,39 +54,39 @@ export default function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Edit Profile
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
                   required
                   fullWidth
+                  name="firstName"
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  placeholder={updateLoginUser.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
+                  name="lastName"
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  placeholder={updateLoginUser.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  name="email"
                   id="email"
                   label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  placeholder={updateLoginUser.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,6 +98,7 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  placeholder={updateLoginUser.password}
                 />
               </Grid>
             </Grid>
@@ -95,18 +108,24 @@ export default function Register() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Edit
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Delete Profile
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="login" variant="body2">
-                  Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
