@@ -97,7 +97,7 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
             },
             }}
           >
-          <Button href="/addproduct" color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />}>
+          <Button href="/product/create" color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />}>
           Add new product
           </Button>
         </Box>
