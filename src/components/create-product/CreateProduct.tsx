@@ -1,34 +1,22 @@
 import Navbar from "../navbar/Narbar"
 import { Box, TextField, ThemeProvider, Container, createTheme, Button, Typography, Grid, InputAdornment } from "@mui/material"
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { apiUpsertProduct } from "../../remote/e-commerce-api/productService";
-import Product from "../../models/Product";
 import noIdProduct from "../../models/noIdProduct";
 
 const theme = createTheme();
 
-export default function UpdateProduct() {
+export function CreateProduct() {
 
-    const [product, setProduct] = useState<Product>()
-    const { id } = useParams()
+    const [product] = useState<noIdProduct>()
+
     const navigate = useNavigate();
-
-    const intId = id ? id : "0";
     
-    useEffect(() => {
-            const fetchData = async () => {
-            const result = await apiUpsertProduct(new noIdProduct("", 0, "", 0, ""))
-            setProduct(result.payload)
-            }
-            fetchData()
-        }, [])
-
-    const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleCreate = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        apiUpsertProduct(new Product(
-            parseInt(intId),
+        apiUpsertProduct(new noIdProduct(
             `${data.get('pName')}`,
             parseInt(`${data.get('pQuantity')}`),
             `${data.get('pDescription')}`,
@@ -39,16 +27,14 @@ export default function UpdateProduct() {
         // TODO: navigate to updated product rather than home
         navigate('/');
         }
-    //console.log(product)
       
-
     return (
         <>
         {product ?
         <ThemeProvider theme={theme}>
             <Navbar/>
             
-            <Container component="form" onSubmit={handleUpdate} maxWidth="lg">
+            <Container component="form" onSubmit={handleCreate} maxWidth="lg">
                 <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -90,7 +76,7 @@ export default function UpdateProduct() {
         </ThemeProvider>
         :
         <Typography component="h1" variant="h5">
-            Loading Product...
+            Loading...
         </Typography>
         }
         </>
