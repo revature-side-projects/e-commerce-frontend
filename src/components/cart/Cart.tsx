@@ -1,3 +1,9 @@
+import {
+  CancelPresentationOutlined,
+  KeyboardArrowUpOutlined,
+  KeyboardArrowDownOutlined
+} from '@mui/icons-material';
+
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -60,6 +66,22 @@ const Details = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
+
+const Icon = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    transition: all 0.5s ease;
+    &:hover {
+      background-color: #e9f5f5;
+      transform: scale(1.1);
+    }
+  `;
 
 const ProductName = styled.span``;
 
@@ -202,10 +224,22 @@ export const Cart = () => {
                     </ProductDetail>
                     <PriceDetail>
                       <ProductAmountContainer>
+                        <Icon>
+                          <KeyboardArrowUpOutlined onClick={() => editQuantityUp(product.id)} />
+                        </Icon>
+                        <ProductAmount> {product.quantity} </ProductAmount>
+                        <Icon>
+                          <KeyboardArrowDownOutlined onClick={() => editQuantityDown(product.id, product.image)} />
+                        </Icon>
+                        <Icon>
+                          <CancelPresentationOutlined onClick={() => removeButton(product.id, product.image)} />
+                        </Icon>
+                        {/*}
                         <button className="qb" onClick={() => editQuantityUp(product.id)}>^</button>
                         <ProductAmount> {product.quantity} </ProductAmount>
                         <button className="qb" onClick={() => editQuantityDown(product.id, product.image)}>v</button>
                         <button className="qb" onClick={() => removeButton(product.id, product.image)}>-</button>
+                      */}
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>

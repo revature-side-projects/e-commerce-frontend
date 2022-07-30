@@ -2,6 +2,13 @@ import {
     SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
+
+import {
+  CancelPresentationOutlined,
+  KeyboardArrowUpOutlined,
+  KeyboardArrowDownOutlined
+} from '@mui/icons-material';
+
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -68,6 +75,12 @@ import React,{useState} from "react";
     }
   `;
   
+  const ProductAmount = styled.div`
+  font-size: 24px;
+  margin: 5px;
+`;
+
+
   interface productProps {
       product: Product,
       key: number
@@ -126,11 +139,18 @@ import React,{useState} from "react";
           <Icon>
             <SearchOutlined />
           </Icon>
-          <div className="app">
+          <Icon>
+            <KeyboardArrowUpOutlined onClick={incrementCount} />
+          </Icon>
+          <ProductAmount>{counter}</ProductAmount>
+          <Icon>
+            <KeyboardArrowDownOutlined onClick={incrementCount} />
+          </Icon>
+           {/*<div className="app">
             <button className="qb"  onClick={incrementCount}>+</button>
             {counter}
             <button className="qb" onClick={decrementCount}>-</button>
-          </div>
+          </div>*/}
         </Info>
       </Container>
 
