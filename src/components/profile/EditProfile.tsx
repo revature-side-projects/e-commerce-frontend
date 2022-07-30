@@ -6,13 +6,14 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import eCommerceClient from '../../remote/e-commerce-api/eCommerceClient';
 import { useNavigate } from 'react-router-dom';
 import { apiLogout } from '../../remote/e-commerce-api/authService';
+import { EditOutlined } from '@material-ui/icons';
+
 
 const theme = createTheme();
 
@@ -59,14 +60,14 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <EditOutlined />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" >
             Edit Profile
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" textAlign='center' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -76,7 +77,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
                   defaultValue={loginUser.firstName}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -111,14 +112,12 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
             </Grid>
             <Button
               type="submit"
-              fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, mr:4, width:90 }}
             >
               Edit
             </Button>
             <Button
-              fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={() => navigate('/')}
@@ -132,12 +131,6 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
             >
               Delete Profile
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="login" variant="body2">
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
