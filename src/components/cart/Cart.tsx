@@ -151,12 +151,13 @@ export const Cart = () => {
       }
     }
   }
-  const editQuantityDown =(id: any)=>{
+  const editQuantityDown =(id: any, image: any)=>{
     for (let i =0;i<cart.length;i++){
       if(cart[i].id == id){
         cart[i].quantity = cart[i].quantity - 1
         if(cart[i].quantity <= 0){
           cart[i].quantity = 0 
+          removeButton(id, image);
         }
         setCount(cart[i].quantity - 1)
       }
@@ -203,7 +204,7 @@ export const Cart = () => {
                       <ProductAmountContainer>
                         <button className="qb" onClick={() => editQuantityUp(product.id)}>^</button>
                         <ProductAmount> {product.quantity} </ProductAmount>
-                        <button className="qb" onClick={() => editQuantityDown(product.id)}>v</button>
+                        <button className="qb" onClick={() => editQuantityDown(product.id, product.image)}>v</button>
                         <button className="qb" onClick={() => removeButton(product.id, product.image)}>-</button>
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
