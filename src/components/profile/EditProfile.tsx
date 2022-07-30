@@ -12,10 +12,11 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import eCommerceClient from '../../remote/e-commerce-api/eCommerceClient';
 import { useNavigate } from 'react-router-dom';
+import { apiLogout } from '../../remote/e-commerce-api/authService';
 
 const theme = createTheme();
 
-export default function EditProfile({updateLoginUser}: any) {
+export default function EditProfile({loginUser, updateLoginUser}: any) {
   const navigate = useNavigate(); 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -25,17 +26,24 @@ export default function EditProfile({updateLoginUser}: any) {
         console.log(`${data.get('firstName')}`)
 
         const response = await eCommerceClient.put<any>(
-            `users/${updateLoginUser.id}`,
+            `users/${loginUser.id}`,
             { 
-            id: updateLoginUser.id,
+            id: loginUser.id,
             email: `${data.get('email')}`,
             password: `${data.get('password')}`,
-            firstname: `${data.get('firstName')}`,
+            firstName: `${data.get('firstName')}`,
             lastName: `${data.get('lastName')}`, 
-            role: updateLoginUser.role
+            role: loginUser.role
             }
         );
-        if (response.status >= 200 && response.status < 300) navigate('/')
+
+        // If user was able to edit their profile, log out of the API, update the user object and redirect.
+        if (response.status >= 200 && response.status < 300) {
+
+          const res = await apiLogout();
+          updateLoginUser(res.payload);
+          navigate('/');
+        }
 
   };
 
@@ -65,7 +73,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   name="firstName"
                   id="firstName"
                   label="First Name"
-                  defaultValue={updateLoginUser.firstName}
+                  defaultValue={loginUser.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -75,7 +83,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   name="lastName"
                   id="lastName"
                   label="Last Name"
-                  defaultValue={updateLoginUser.lastName}
+                  defaultValue={loginUser.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -85,7 +93,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   name="email"
                   id="email"
                   label="Email Address"
-                  defaultValue={updateLoginUser.email}
+                  defaultValue={loginUser.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -97,7 +105,7 @@ export default function EditProfile({updateLoginUser}: any) {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  defaultValue={updateLoginUser.password}
+                  defaultValue={loginUser.password}
                 />
               </Grid>
             </Grid>

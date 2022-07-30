@@ -12,11 +12,11 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-export const DisplayProducts = ({updateLoginUser}: any) => {
+export const DisplayProducts = ({loginUser}: any) => {
 
   const [products, setProducts] = useState<Product[]>([])
 
-  console.log(updateLoginUser)
+  console.log(loginUser)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +78,7 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
 
   return (
     <React.Fragment>
-        <Navbar updateLoginUser={updateLoginUser}/>
+        <Navbar updateLoginUser={loginUser}/>
         <Container>
         {products.map((item) => (
             <ProductCard product={item} key={item.id} />
