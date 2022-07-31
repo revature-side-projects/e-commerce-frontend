@@ -1,11 +1,19 @@
 import {
     SearchOutlined,
     ShoppingCartOutlined,
+    
   } from "@material-ui/icons";
+  import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+  import UpgradeOutlinedIcon from '@mui/icons-material/UpgradeOutlined';
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import { useNavigate } from "react-router-dom";
+import React,{useState} from "react";
+
   
   const Info = styled.div`
     opacity: 0;
@@ -69,10 +77,35 @@ import Product from "../../models/Product";
   
   interface productProps {
       product: Product,
-      key: number
+      key: number,
+      updateUser: any
+    
   }
 
   export const ProductCard = (props: productProps) => {
+
+    let [counter, setCount] = useState(0);
+
+    if(counter < 1){
+        counter = 1;
+    };
+    
+    // Function to increment count by 1
+    const incrementCount = () => {
+      // Update state with incremented value
+      setCount(counter + 1);
+    };
+    
+    const decrementCount = () => {
+        setCount(counter -1);
+    };
+
+
+
+
+
+
+
     const { cart, setCart } = useContext(CartContext);
 
     const addItemToCart = (product: Product) => {
@@ -88,18 +121,33 @@ import Product from "../../models/Product";
       setCart(newCart)
     }
 
+    const navigate = useNavigate();
+
     return (
-      <Container>
+      <><Container>
+
         <Circle />
         <Image src={props.product.image} />
         <Info>
           <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
+            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: counter})}} />
+
           </Icon>
           <Icon>
             <SearchOutlined />
           </Icon>
+          <div className="app">
+            <button className="qb"  onClick={incrementCount}>+</button>
+            {counter}
+            <button className="qb" onClick={decrementCount}>-</button>
+          </div>
+          {props.updateUser.role == "ADMIN" && <Icon>
+
+            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)} />
+          </Icon>}
         </Info>
       </Container>
+
+      </>
     );
   };
