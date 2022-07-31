@@ -11,11 +11,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import eCommerceClient from '../../remote/e-commerce-api/eCommerceClient';
 import { apiLogout } from '../../remote/e-commerce-api/authService';
 import { EditOutlined } from '@material-ui/icons';
+import { useNavigate } from 'react-router-dom';
 
 
 const theme = createTheme();
 
 export default function EditProfile({loginUser, updateLoginUser}: any) {
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
@@ -41,7 +43,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
           const res = await apiLogout();
           updateLoginUser(res.payload);
           // Jest did not like navigate outside of <Router>, replaced with this to navigate to homepage.
-          window.location.href = "/";
+          navigate("/");
         }
 
   };
@@ -122,7 +124,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
             <Button
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => window.location.href="/"}
+              onClick={() => navigate("/")}
             >
              Cancel
             </Button>
