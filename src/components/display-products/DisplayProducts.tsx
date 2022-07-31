@@ -38,7 +38,7 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
         <Navbar/>
         <Container>
           
-        {products.map((item) => (
+        {updateLoginUser && products.map((item) => (
 
             <><ProductCard product={item} key={item.id} updateUser={updateLoginUser}/>
     
