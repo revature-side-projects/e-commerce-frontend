@@ -1,6 +1,5 @@
-import { getByTestId, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Router } from "react-router";
 import EditProfile from "../components/profile/EditProfile";
 
 const mockedUsedNavigate = jest.fn();
