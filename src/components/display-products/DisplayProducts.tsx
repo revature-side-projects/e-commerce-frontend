@@ -17,10 +17,11 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-export const DisplayProducts = ({updateLoginUser}: any) => {
+export const DisplayProducts = ({loginUser}: any) => {
 
   var [products, setProducts] = useState<Product[]>([])
 
+  console.log(loginUser)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,18 +34,18 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
   return (
 
     <React.Fragment>
-        <Navbar updateLoginUser={updateLoginUser}/>
+        <Navbar updateLoginUser={loginUser}/>
         <Container>
           
-        {products.map((item) => (
+        {loginUser && products.map((item) => (
 
-            <><ProductCard product={item} key={item.id} updateUser={updateLoginUser}/>
+            <><ProductCard product={item} key={item.id} updateUser={loginUser}/>
     
             {/* <Quantity products={products}/> */}
             </> 
             
         ))}
-          {updateLoginUser.role == "ADMIN" && 
+          {loginUser.role == "ADMIN" && 
         <Box
             sx={{
             display: 'flex',
