@@ -3,14 +3,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import eCommerceClient from '../../remote/e-commerce-api/eCommerceClient';
-import { useNavigate } from 'react-router-dom';
 import { apiLogout } from '../../remote/e-commerce-api/authService';
 import { EditOutlined } from '@material-ui/icons';
 
@@ -18,7 +16,6 @@ import { EditOutlined } from '@material-ui/icons';
 const theme = createTheme();
 
 export default function EditProfile({loginUser, updateLoginUser}: any) {
-  const navigate = useNavigate(); 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
@@ -43,7 +40,8 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
 
           const res = await apiLogout();
           updateLoginUser(res.payload);
-          navigate('/');
+          // Jest did not like navigate outside of <Router>, replaced with this to navigate to homepage.
+          window.location.href = "/";
         }
 
   };
@@ -75,6 +73,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
                   id="firstName"
                   label="First Name"
                   defaultValue={loginUser.firstName}
+                  placeholder="First Name"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -85,6 +84,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
                   id="lastName"
                   label="Last Name"
                   defaultValue={loginUser.lastName}
+                  placeholder="Last Name"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -95,6 +95,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
                   id="email"
                   label="Email Address"
                   defaultValue={loginUser.email}
+                  placeholder="Email"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -107,6 +108,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
                   id="password"
                   autoComplete="new-password"
                   defaultValue={loginUser.password}
+                  placeholder="Password"
                 />
               </Grid>
             </Grid>
@@ -120,7 +122,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
             <Button
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => navigate('/')}
+              onClick={() => window.location.href="/"}
             >
              Cancel
             </Button>
