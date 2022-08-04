@@ -7,8 +7,8 @@ import {
   CancelPresentationOutlined,
   KeyboardArrowUpOutlined,
   KeyboardArrowDownOutlined,
-  AddCircleIcon,
-  UpgradeOutlinedIcon
+  AddCircleOutlined,
+  UpgradeOutlined
 } from '@mui/icons-material';
 import{
   Button,
@@ -165,7 +165,7 @@ import React,{useState} from "react";
 
           {props.updateUser.role == "ADMIN" && <Icon>
 
-            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)} />
+            <UpgradeOutlined onClick={() => navigate(`/product/${props.product.id}/update`)} />
           </Icon>}
 
         </Info>
