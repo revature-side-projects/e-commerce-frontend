@@ -7,6 +7,7 @@ import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 import UpdateProduct from '../components/modify-products/UpdateProduct';
 import { CreateProduct } from '../components/create-product/CreateProduct';
+import { SearchProducts } from '../components/search/SearchProducts';
 
 export const AppRoutes: React.FC<unknown> = () => {
   const [user, setUser] = useState("");
@@ -20,6 +21,7 @@ export const AppRoutes: React.FC<unknown> = () => {
 
     <Route path="/product/:id/update" element={<UpdateProduct />} />
     <Route path="/product/create" element={<CreateProduct />} />
+    <Route path="/search" element={<SearchProducts/>}/>
   </Routes>
   )
 }
