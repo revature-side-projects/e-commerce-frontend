@@ -40,9 +40,24 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
 
           const res = await apiLogout();
           updateLoginUser(res.payload);
-          // Jest did not like navigate outside of <Router>, replaced with this to navigate to homepage.
           navigate("/");
         }
+
+  };
+
+  const handleDelete = async () => {
+
+    const response = await eCommerceClient.delete<any>(
+      `users/${loginUser.id}`,
+    );
+
+      if (response.status >= 200 && response.status < 300) {
+
+        const res = await apiLogout();
+        navigate("/");
+      }
+
+
 
   };
 
@@ -130,6 +145,7 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => handleDelete()}
             >
               Delete Profile
             </Button>
