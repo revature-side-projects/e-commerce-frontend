@@ -4,13 +4,13 @@ import {
   KeyboardArrowDownOutlined
 } from '@mui/icons-material';
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Navbar from "../navbar/Narbar";
 import {useState} from "react";
-import { CardTravel } from "@mui/icons-material";
+import React from 'react';
 
 
 const Container = styled.div``;
