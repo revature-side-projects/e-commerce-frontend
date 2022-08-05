@@ -57,7 +57,7 @@ const Navbar = ({updateLoginUser}: any) => {
           <MenuItem onClick={() => {navigate('/profile')}}>PROFILE</MenuItem>
         }
         {updateLoginUser &&
-          <MenuItem onClick={() => {navigate('/logout')}}>LOG OUT</MenuItem>
+          <MenuItem onClick={() => {window.location.href="/"}}>LOG OUT</MenuItem>
         }
           <MenuItem onClick={() => {navigate('/cart')}}> 
             <Badge color="primary">
