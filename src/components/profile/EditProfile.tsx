@@ -54,11 +54,9 @@ export default function EditProfile({loginUser, updateLoginUser}: any) {
       if (response.status >= 200 && response.status < 300) {
 
         const res = await apiLogout();
-        window.location.href="/";
+        updateLoginUser(res.payload);
+        navigate("/")
       }
-
-
-
   };
 
   return (
