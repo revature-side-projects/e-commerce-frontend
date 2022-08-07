@@ -6,7 +6,7 @@ import { DisplayProducts } from "../components/display-products/DisplayProducts"
 import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 import UpdateProduct from '../components/modify-products/UpdateProduct';
-import { CreateProduct } from '../components/create-product/CreateProduct';
+import CreateProduct from '../components/create-product/CreateProduct';
 import EditProfile from '../components/profile/EditProfile';
 
 export const AppRoutes: React.FC<unknown> = () => {
@@ -18,10 +18,10 @@ export const AppRoutes: React.FC<unknown> = () => {
     <Route path="/register" element={<Register />} />
     <Route path="/checkout" element={<Checkout loginUser={user} />} />
     <Route path="/profile" element={<EditProfile loginUser={user} updateLoginUser={setUser}/>} />
-    <Route path="/cart" element={<Cart />} />
+    <Route path="/cart" element={<Cart loginUser={user}/>} />
 
-    <Route path="/product/:id/update" element={<UpdateProduct />} />
-    <Route path="/product/create" element={<CreateProduct />} />
+    <Route path="/product/:id/update" element={<UpdateProduct loginUser={user}/>} />
+    <Route path="/product/create" element={<CreateProduct loginUser={user}/>} />
   </Routes>
   )
 }

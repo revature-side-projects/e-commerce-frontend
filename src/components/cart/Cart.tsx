@@ -156,12 +156,13 @@ const Button = styled.button`
 `;
 
 
-export const Cart = () => {
+export const Cart = ({loginUser}: any) => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
 
   let [count, setCount] = useState(0);
+  console.log(loginUser)
   
  
 
@@ -198,7 +199,7 @@ export const Cart = () => {
 
   return (
     <Container>
-      <Navbar />
+      <Navbar updateLoginUser={loginUser}/>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>

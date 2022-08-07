@@ -10,7 +10,7 @@ import { IconButton } from "@material-ui/core";
 
 const theme = createTheme();
 
-export default function UpdateProduct() {
+export default function UpdateProduct({loginUser}: any) {
 
     // funcitons and state varible to handle changing image
     let [URL, setURL] = useState(null);
@@ -63,7 +63,7 @@ export default function UpdateProduct() {
         <>
         {product ?
         <ThemeProvider theme={theme}>
-            <Navbar/>
+            <Navbar updateLoginUser={loginUser} />
             
             <Container component="form" onSubmit={handleUpdate} maxWidth="lg">
                 <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>
