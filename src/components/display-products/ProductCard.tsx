@@ -92,7 +92,7 @@ import React,{useState} from "react";
   interface productProps {
       product: Product,
       key: number,
-      updateUser: any
+      loginUser: any
     
   }
 
@@ -163,7 +163,7 @@ import React,{useState} from "react";
             <button className="qb" onClick={decrementCount}>-</button>
           </div>*/}
 
-          {props.updateUser.role == "ADMIN" && <Icon>
+          {props.loginUser.role == "ADMIN" && <Icon>
 
             <UpgradeOutlined onClick={() => navigate(`/product/${props.product.id}/update`)} />
           </Icon>}
