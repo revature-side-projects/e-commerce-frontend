@@ -34,11 +34,7 @@ export const SearchProducts = () =>{
                 (item) => (
                     <>
                         {item.name.toLocaleLowerCase().includes(keys ? keys.toLocaleLowerCase() : "") &&
-
-
-                        <SearchProductCard product={item}/>
-
-
+                            <SearchProductCard product={item}/>
                         }
                     </>
                 )
