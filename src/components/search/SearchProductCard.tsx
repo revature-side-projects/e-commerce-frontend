@@ -9,7 +9,8 @@ import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import { useNavigate } from "react-router-dom";
 import React,{useState} from "react";
-import { Typography } from "@material-ui/core";
+import { Typography} from "@material-ui/core";
+import { Grid } from "@mui/material";
 
   
   const Info = styled.div`
@@ -43,123 +44,44 @@ import { Typography } from "@material-ui/core";
     }
   `;
 
-  const Grid = styled.div`
+  const Grid2 = styled.div`
     flex: 1;
     margin: 5px;
     min-width: 280px;
     height: 350px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     background-color: #f5fbfd;
     position: relative;
     &:hover ${Info}{
       opacity: 1;
     }
   `;
-
-  const Circle = styled.div`
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: white;
-    position: absolute;
-  `;
   
   const Image = styled.img`
     height: 75%;
     z-index: 2;
   `;
-
-  const Icon = styled.div`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    transition: all 0.5s ease;
-    &:hover {
-      background-color: #e9f5f5;
-      transform: scale(1.1);
-    }
-  `;
-  
   
   interface productProps {
-      product: Product,
-      key: number,
-      updateUser: any
-    
-  }
-
-  export const ProductCard = (props: productProps) => {
-
-    let [counter, setCount] = useState(0);
-
-    if(counter < 1){
-        counter = 1;
-    };
-    
-    // Function to increment count by 1
-    const incrementCount = () => {
-      // Update state with incremented value
-      setCount(counter + 1);
-    };
-    
-    const decrementCount = () => {
-        setCount(counter -1);
-    };
-
-    const { cart, setCart } = useContext(CartContext);
-
-    const addItemToCart = (product: Product) => {
-
-      const newCart = [...cart]
-      const index = newCart.findIndex((searchProduct) => {
-        return searchProduct.id === product.id
-      })
-
-      if (index === -1) newCart.push(product)
-      else newCart[index].quantity += product.quantity
-
-      setCart(newCart)
+  product:Product
     }
 
-    const navigate = useNavigate();
-
- return (
-        <Grid>
-            <Grid>
+  export const SearchProductCard = (props: productProps) => {
+    return(
+    <Container>
+        <Grid container spacing={2}>
+            <Grid item xs={3}>
                 <Container>
-                    <Image src={props.product.image} />
-                    <Info>
-          <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: counter})}} />
-
-          </Icon>
-          <Icon>
-            <SearchOutlined />
-          </Icon>
-          <div className="app">
-            <button className="qb"  onClick={incrementCount}>+</button>
-            {counter}
-            <button className="qb" onClick={decrementCount}>-</button>
-          </div>
-          {props.updateUser.role == "ADMIN" && <Icon>
-
-            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)} />
-          </Icon>}
-        </Info>
+                    <img src={props.product.image} height="300" />
                 </Container>
             </Grid>
-            <Grid>
-                <Container>
-                    <Typography>Here is the name of the product</Typography>  
-                </Container>
-            </Grid>
+                <Grid item xs={9}>
+                    <Typography component="h1" variant="h5" align="left">{props.product.name}</Typography>
+                    <Typography component="h1" variant="h5" align="left">{props.product.price}</Typography>
+                </Grid>
         </Grid>
+    </Container>
     )
 }

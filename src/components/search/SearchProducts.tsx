@@ -4,11 +4,8 @@ import Navbar from "../navbar/Narbar";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Product from "../../models/Product";
 import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
-<<<<<<< HEAD
-=======
-import Pic from "./Pic.png"
-import { FormatPaint } from "@mui/icons-material";
->>>>>>> 16daf6a1015cb20f936220b4fd67c696bf700491
+import { SearchProductCard }  from "./SearchProductCard";
+import { StringDecoder } from "string_decoder";
 
 
 export const SearchProducts = () =>{
@@ -30,19 +27,6 @@ export const SearchProducts = () =>{
         <>
         <Navbar/>
         <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>
-<<<<<<< HEAD
-            <h1>
-                Results
-            </h1>
-            
-            <p>{new URLSearchParams(location.search).get('keyword')}</p>
-            {products.map((item) => (
-               <h1>
-                item
-               </h1>
-            ))}
-        </Box>
-=======
             <Typography component="h1" variant="h5">
                 Results for "{keys}"
             </Typography>
@@ -51,19 +35,15 @@ export const SearchProducts = () =>{
                     <>
                         {item.name.toLocaleLowerCase().includes(keys ? keys.toLocaleLowerCase() : "") &&
 
-                            <Container>
-                                <Typography align="center">{item.name}</Typography>
-                                <img src={item.image} height="300" />
-                            </Container>
-                        
+
+                        <SearchProductCard product={item}/>
+
+
                         }
                     </>
                 )
             )}
-            </Box>
->>>>>>> 16daf6a1015cb20f936220b4fd67c696bf700491
+        </Box>
         </>
-    
-
     )
 }
