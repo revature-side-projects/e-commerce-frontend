@@ -4,6 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+
 const Container = styled.div`
   height: 60px;
 `;
@@ -43,6 +44,7 @@ const Navbar = ({updateLoginUser}: any) => {
   return (
     <Container>
       <Wrapper>
+
         <Left>
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
