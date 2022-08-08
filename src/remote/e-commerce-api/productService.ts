@@ -1,3 +1,4 @@
+import noIdProduct from "../../models/noIdProduct";
 import Product from "../../models/Product";
 import eCommerceClient, { eCommerceApiResponse } from "./eCommerceClient";
 
@@ -17,10 +18,10 @@ export const apiGetProductById = async (id: number): Promise<eCommerceApiRespons
     return { status: response.status, payload: response.data };
 }
 
-export const apiUpsertProduct = async (product: Product): Promise<eCommerceApiResponse> => {
+export const apiUpsertProduct = async (noIdProduct: noIdProduct): Promise<eCommerceApiResponse> => {
     const response = await eCommerceClient.put<any>(
         `${baseURL}`,
-        product
+        noIdProduct
     );
     return { status: response.status, payload: response.data };
 }
