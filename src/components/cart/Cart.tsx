@@ -182,6 +182,7 @@ export const Cart = () => {
           removeButton(id, image);
         }
         setCount(cart[i].quantity - 1)
+       
       }
     }
   }
@@ -199,11 +200,13 @@ export const Cart = () => {
   return (
     <Container>
       <Navbar />
+       
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
           <TopButton onClick={() => {navigate('/')}}>CONTINUE SHOPPING</TopButton>
           <TopButton onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</TopButton>
+          
         </Top>
         <Bottom>
           <Info>
@@ -216,7 +219,8 @@ export const Cart = () => {
                       <Details>
                         <ProductName>
                           <b>Product:</b> {product.name}
-                        </ProductName>
+                           
+                        </ProductName> 
                         <ProductId>
                           <b>ID:</b> {product.id}
                         </ProductId>
