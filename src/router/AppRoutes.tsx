@@ -7,9 +7,9 @@ import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 import ProductDetail from '../pages/ProductDetail';
 import UpdateProduct from '../components/modify-products/UpdateProduct';
-import { CreateProduct } from '../components/create-product/CreateProduct';
 import CreateProduct from '../components/create-product/CreateProduct';
 import EditProfile from '../components/profile/EditProfile';
+import { SearchProducts } from '../components/search/SearchProducts';
 
 export const AppRoutes: React.FC<unknown> = () => {
   const [user, setUser] = useState("");
