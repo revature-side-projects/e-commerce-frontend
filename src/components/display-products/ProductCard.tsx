@@ -145,7 +145,6 @@ import React,{useState} from "react";
         <Info>
           <Icon>
             <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: counter})}} />
-
           </Icon>
           <Icon>
             <SearchOutlined />
