@@ -1,27 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { apiGetProductById } from "../remote/e-commerce-api/productService";
 import Navbar from '../components/navbar/Narbar';
-import { Button } from '@mui/material';
-//import ProductCard from '../display-products/ProductCard';
-import Product from "../models/Product";
-import { useContext } from "react";
 import { CartContext } from "../context/cart.context";
-import {
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from "@material-ui/icons";
-type Props ={
- 
-}
 
-/*
-interface Props{
-  product: Product,
-  key: number
-}
-*/
+type Props ={};
 
 const ProductDetail = (props: Props) => {
+  let navigate = useNavigate();
+
   const detail = {
     margin:"20px 0px 0px 0px",
     backgroundColor:"rgba(242, 105, 38)"
@@ -67,10 +54,8 @@ const ProductDetail = (props: Props) => {
  
     const location = window.location.href;
     const productId = parseInt(location.split("/")[4]);
-
-    
+   
     const { cart, setCart } = useContext(CartContext);
-
 
       useEffect(() => {
         getProduct();
@@ -83,11 +68,9 @@ const ProductDetail = (props: Props) => {
         setLoading(false);
       };    
       
-
       const addItemToCart = (props: Props) => {
         const readyProduct=product.payload;
         const newCart = [...cart]
-        //let tempQuantity=readyProduct.quantity;
 
         const index = newCart.findIndex((searchProduct) => {
           console.log("SearchProduct: ",searchProduct)
@@ -95,68 +78,37 @@ const ProductDetail = (props: Props) => {
         })
   
         if (index === -1) {
-          //newCart.push(readyProduct)
-
-          //before
           readyProduct.quantity=count;
-          
-          //after
-          //readyProduct.quantity=readyProduct.quantity-count;
-          
-
-          //readyProduct.quantity=0;
-
 
           newCart.push(readyProduct)
-
-          //tempQuantity-=count;
-          //readyProduct.quantity=tempQuantity;
-
-          
-          //setCart(newCart)
-          //newCart[index].quantity= count;
-          //setCart(newCart)
-        //console.log("Added to cart for the first time!")
-        //console.log("First Count: ", count)
-        
-        //else newCart[index].quantity += readyProduct.quantity
         }
-        else
-        
-        
+        else       
         newCart[index].quantity += count;
-        setCart(newCart)
-        console.log("Added to cart!")
-        
-        console.log("Count: ", count)
-        //
-        
-            if(newCart[index].quantity<=0){
-              newCart[index].quantity=0;
-              console.log("Out of Stock!");
-            }
-          
-        
-        
 
+
+        navigate("/cart", {replace: true});
+        setCart(newCart)
+        if(newCart[index].quantity<=0){
+          newCart[index].quantity=0;
+          console.log("Out of Stock!");
+        }
       }
       
-      
-if (loading) {
-  return (
-    <>
-      Loading
-    </>
-  )
-}
+  if (loading) {
+    return (
+      <>
+        Loading
+      </>
+    )
+  }
+
   return (
     <React.Fragment>
       <Navbar/>
       <>
       <div style={detail}>
         <img style={image} src={product.payload.image} />
-        
-        
+               
         <div style={content}>
           <div>Product Detail</div>
           <h1>{product.payload.name}</h1>
@@ -169,10 +121,9 @@ if (loading) {
             {count}
             <button className="" onClick={decrementCount}>-</button>
           </div>
-        
-            <button onClick={() => {addItemToCart({...product.payload, quantity: count})}} style={button}>Add To Cart</button>
-            
-          
+            <button onClick={() => {addItemToCart({...product.payload, quantity: count})}} style={button}>
+              Add To Cart
+            </button>           
           </div>
           <div style={desc}>
           <p>Description: {product.payload.description}</p>
@@ -183,9 +134,6 @@ if (loading) {
       </>
     </React.Fragment>
   )
-}
+};
 
-
-
-
-export default ProductDetail
+export default ProductDetail;
