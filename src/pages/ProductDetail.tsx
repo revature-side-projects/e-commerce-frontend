@@ -11,8 +11,7 @@ const ProductDetail = (props: Props) => {
 
   const detail = {
     margin:"20px 0px 0px 0px",
-    backgroundColor:"rgba(242, 105, 38)"
-,
+    backgroundColor:"rgba(242, 105, 38)",
     display: "flex"
   };
   const image={

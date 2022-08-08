@@ -5,6 +5,7 @@ import Checkout from '../components/checkout/Checkout';
 import { DisplayProducts } from "../components/display-products/DisplayProducts";
 import Login from '../components/login/Login';
 import Register from '../components/register/Register';
+import ProductDetail from '../pages/ProductDetail';
 import UpdateProduct from '../components/modify-products/UpdateProduct';
 import CreateProduct from '../components/create-product/CreateProduct';
 import EditProfile from '../components/profile/EditProfile';
@@ -23,7 +24,6 @@ export const AppRoutes: React.FC<unknown> = () => {
 
     <Route path="/product/:id/update" element={<UpdateProduct loginUser={user}/>} />
     <Route path="/product/create" element={<CreateProduct loginUser={user}/>} />
-  
     <Route path="/product/:id" element={<ProductDetail />} />
   </Routes>
   )
