@@ -78,7 +78,6 @@ export default function Checkout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <AppBar
         position="absolute"
         color="default"

@@ -16,7 +16,6 @@ import DarkMode from "../../DarkMode";
 
 
 
-const theme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -85,7 +83,6 @@ export default function Login() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 
 }

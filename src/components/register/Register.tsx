@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiRegister } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 
-const theme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate(); 
@@ -26,9 +25,8 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        
         <Box
           sx={{
             marginTop: 8,
@@ -106,6 +104,5 @@ export default function Register() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
