@@ -155,7 +155,7 @@ import React,{useState} from "react";
           </Icon>
           <ProductAmount>{counter}</ProductAmount>
           <Icon>
-            <KeyboardArrowDownOutlined onClick={incrementCount} />
+            <KeyboardArrowDownOutlined onClick={decrementCount} />
           </Icon>
            {/*<div className="app">
             <button className="qb"  onClick={incrementCount}>+</button>
