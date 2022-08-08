@@ -1,10 +1,16 @@
+import {
+  CancelPresentationOutlined,
+  KeyboardArrowUpOutlined,
+  KeyboardArrowDownOutlined
+} from '@mui/icons-material';
+
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Navbar from "../navbar/Narbar";
 import {useState} from "react";
-import { CardTravel } from "@mui/icons-material";
+import React from 'react';
 
 
 const Container = styled.div``;
@@ -60,6 +66,22 @@ const Details = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
+
+const Icon = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    transition: all 0.5s ease;
+    &:hover {
+      background-color: #e9f5f5;
+      transform: scale(1.1);
+    }
+  `;
 
 const ProductName = styled.span``;
 
@@ -134,12 +156,14 @@ const Button = styled.button`
 `;
 
 
-export const Cart = () => {
+export const Cart = ({loginUser}: any) => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
 
   let [count, setCount] = useState(0);
+  console.log(loginUser)
+  
  
 
   const editQuantityUp =(id: any)=>{
@@ -150,21 +174,32 @@ export const Cart = () => {
       }
     }
   }
-  const editQuantityDown =(id: any)=>{
+  const editQuantityDown =(id: any, image: any)=>{
     for (let i =0;i<cart.length;i++){
       if(cart[i].id == id){
         cart[i].quantity = cart[i].quantity - 1
         if(cart[i].quantity <= 0){
           cart[i].quantity = 0 
+          removeButton(id, image);
         }
         setCount(cart[i].quantity - 1)
       }
     }
   }
 
+  const removeButton =(id: any, image: any)=>{
+    for (let i =0;i<cart.length;i++){
+      if(cart[i].id == id){
+           setCart(cart.filter(product => product.image !== image));
+      }
+    }
+  }
+
+ 
+
   return (
     <Container>
-      <Navbar />
+      <Navbar updateLoginUser={loginUser}/>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
@@ -190,9 +225,22 @@ export const Cart = () => {
                     </ProductDetail>
                     <PriceDetail>
                       <ProductAmountContainer>
-                        <button className="qb" onClick={() => editQuantityUp(product.id)}>+</button>
+                        <Icon>
+                          <KeyboardArrowUpOutlined onClick={() => editQuantityUp(product.id)} />
+                        </Icon>
                         <ProductAmount> {product.quantity} </ProductAmount>
-                        <button className="qb" onClick={() => editQuantityDown(product.id)}>-</button>
+                        <Icon>
+                          <KeyboardArrowDownOutlined onClick={() => editQuantityDown(product.id, product.image)} />
+                        </Icon>
+                        <Icon>
+                          <CancelPresentationOutlined onClick={() => removeButton(product.id, product.image)} />
+                        </Icon>
+                        {/*}
+                        <button className="qb" onClick={() => editQuantityUp(product.id)}>^</button>
+                        <ProductAmount> {product.quantity} </ProductAmount>
+                        <button className="qb" onClick={() => editQuantityDown(product.id, product.image)}>v</button>
+                        <button className="qb" onClick={() => removeButton(product.id, product.image)}>-</button>
+                      */}
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>

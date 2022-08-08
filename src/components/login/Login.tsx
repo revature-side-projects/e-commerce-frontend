@@ -12,9 +12,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
- 
+import DarkMode from "../../DarkMode";
+import User from '../../models/User';
 
-const theme = createTheme();
+
 
 export default function Login({updateLoginUser}: any) {
   const navigate = useNavigate();
@@ -23,21 +24,21 @@ export default function Login({updateLoginUser}: any) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const response = await apiLogin(`${data.get('email')}`, `${data.get('password')}`);
-    handleData(response.payload);
-    if (response.status >= 200 && response.status < 300) navigate('/')
+    
+    // only redirect and save payload if successful.
+    if (response.status >= 200 && response.status < 300) {
+      handleData(response.payload);
+      navigate('/')
+    }
   };
 
-  async function handleData(data: any) {
-      const {id, email, firstName, lastName} = data;
-
+  // update the loginuser with the user object.
+  async function handleData(data: User) {
       updateLoginUser(data);
   }
 
   return (
-    
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
           
         <Box
           sx={{
@@ -93,6 +94,5 @@ export default function Login({updateLoginUser}: any) {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

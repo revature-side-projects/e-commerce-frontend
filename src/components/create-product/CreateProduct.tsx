@@ -1,6 +1,6 @@
 import Navbar from "../navbar/Narbar"
 import { Box, TextField, ThemeProvider, Container, createTheme, Button, Typography, Grid, InputAdornment } from "@mui/material"
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiUpsertProduct } from "../../remote/e-commerce-api/productService";
 import noIdProduct from "../../models/noIdProduct";
@@ -9,9 +9,10 @@ import { IconButton } from "@material-ui/core";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 
+
 const theme = createTheme();
 
-export function CreateProduct() {
+export default function CreateProduct({loginUser}: any) {
     // funcitons and state varible to handle changing image
     let [URL, setURL] = useState(null);
     //sets changed image when button pressed
@@ -22,6 +23,7 @@ export function CreateProduct() {
     function handleChangeURL(event: any){
         setURL(event.target.value);
     }
+    console.log(loginUser)
     
     const navigate = useNavigate();
     
@@ -43,8 +45,7 @@ export function CreateProduct() {
     return (
         <>
         <ThemeProvider theme={theme}>
-            <Navbar/>
-            
+            <Navbar updateLoginUser={loginUser}/>
             <Container component="form" onSubmit={handleCreate} maxWidth="lg">
                 <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>
                     <Grid container spacing={2}>

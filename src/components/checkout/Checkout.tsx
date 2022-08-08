@@ -80,7 +80,6 @@ export default function Checkout({updateLoginUser}: any) {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <AppBar
         position="absolute"
         color="default"

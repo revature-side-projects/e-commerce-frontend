@@ -3,10 +3,18 @@ import {
     ShoppingCartOutlined,
     
   } from "@material-ui/icons";
-  import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-  import UpgradeOutlinedIcon from '@mui/icons-material/UpgradeOutlined';
+import {
+  CancelPresentationOutlined,
+  KeyboardArrowUpOutlined,
+  KeyboardArrowDownOutlined,
+  AddCircleOutlined,
+  UpgradeOutlined
+} from '@mui/icons-material';
+import{
+  Button,
+  Box
+} from '@mui/material'
+
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -75,10 +83,16 @@ import React,{useState} from "react";
     }
   `;
   
+  const ProductAmount = styled.div`
+  font-size: 24px;
+  margin: 5px;
+`;
+
+
   interface productProps {
       product: Product,
       key: number,
-      updateUser: any
+      loginUser: any
     
   }
 
@@ -135,15 +149,24 @@ import React,{useState} from "react";
           <Icon>
             <SearchOutlined />
           </Icon>
-          <div className="app">
+          <Icon>
+            <KeyboardArrowUpOutlined onClick={incrementCount} />
+          </Icon>
+          <ProductAmount>{counter}</ProductAmount>
+          <Icon>
+            <KeyboardArrowDownOutlined onClick={decrementCount} />
+          </Icon>
+           {/*<div className="app">
             <button className="qb"  onClick={incrementCount}>+</button>
             {counter}
             <button className="qb" onClick={decrementCount}>-</button>
-          </div>
-          {props.updateUser.role == "ADMIN" && <Icon>
+          </div>*/}
 
-            <UpgradeOutlinedIcon onClick={() => navigate(`/product/${props.product.id}/update`)} />
+          {props.loginUser.role == "ADMIN" && <Icon>
+
+            <UpgradeOutlined onClick={() => navigate(`/product/${props.product.id}/update`)} />
           </Icon>}
+
         </Info>
       </Container>
 

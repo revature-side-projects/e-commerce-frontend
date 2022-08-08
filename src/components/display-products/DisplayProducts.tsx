@@ -9,6 +9,7 @@ import Navbar from '../navbar/Narbar';
 // import { Quantity } from '../quantity/Quantity';
 import { ProductCard } from "./ProductCard";
 import { PropaneSharp } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     padding: 20px;
@@ -17,11 +18,12 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-export const DisplayProducts = ({updateLoginUser}: any) => {
-
+export const DisplayProducts = ({loginUser}: any) => {
+  
+  const navigate = useNavigate()
   var [products, setProducts] = useState<Product[]>([])
 
-  console.log(updateLoginUser)
+  console.log(loginUser)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,19 +36,18 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
   return (
 
     <React.Fragment>
-       
-        <Navbar/>
+        <Navbar updateLoginUser={loginUser}/>
         <Container>
           
-        {updateLoginUser && products.map((item) => (
+        {loginUser && products.map((item) => (
 
-            <><ProductCard product={item} key={item.id} updateUser={updateLoginUser}/>
+            <><ProductCard product={item} key={item.id} loginUser={loginUser}/>
     
             {/* <Quantity products={products}/> */}
             </> 
             
         ))}
-          {updateLoginUser.role == "ADMIN" && 
+          {loginUser.role == "ADMIN" && 
         <Box
             sx={{
             display: 'flex',
@@ -58,7 +59,7 @@ export const DisplayProducts = ({updateLoginUser}: any) => {
             },
             }}
           >
-          <Button href="/product/create" color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />}>
+          <Button onClick={() => navigate('/product/create')} color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />} >
           Add new product
           </Button>
         </Box>}

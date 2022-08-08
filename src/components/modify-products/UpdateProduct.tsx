@@ -1,6 +1,6 @@
 import Navbar from "../navbar/Narbar"
 import { Box, TextField, ThemeProvider, Container, createTheme, Button, Typography, Grid, InputAdornment, TextFieldClasses } from "@mui/material"
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { apiGetProductById } from "../../remote/e-commerce-api/productService";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiUpsertProduct } from "../../remote/e-commerce-api/productService";
@@ -10,7 +10,7 @@ import { IconButton } from "@material-ui/core";
 
 const theme = createTheme();
 
-export default function UpdateProduct() {
+export default function UpdateProduct({loginUser}: any) {
 
     // funcitons and state varible to handle changing image
     let [URL, setURL] = useState(null);
@@ -63,7 +63,7 @@ export default function UpdateProduct() {
         <>
         {product ?
         <ThemeProvider theme={theme}>
-            <Navbar/>
+            <Navbar updateLoginUser={loginUser} />
             
             <Container component="form" onSubmit={handleUpdate} maxWidth="lg">
                 <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>

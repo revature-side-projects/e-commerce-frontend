@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiRegister } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 
-const theme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate(); 
@@ -21,14 +20,14 @@ export default function Register() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log(`${data.get('firstName')}`)
     const response = await apiRegister(`${data.get('firstName')}`, `${data.get('lastName')}`, `${data.get('email')}`, `${data.get('password')}`)
     if (response.status >= 200 && response.status < 300) navigate('/login')
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        
         <Box
           sx={{
             marginTop: 8,
@@ -106,6 +105,5 @@ export default function Register() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
