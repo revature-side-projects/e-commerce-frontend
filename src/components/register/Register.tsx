@@ -20,6 +20,7 @@ export default function Register() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log(`${data.get('firstName')}`)
     const response = await apiRegister(`${data.get('firstName')}`, `${data.get('lastName')}`, `${data.get('email')}`, `${data.get('password')}`)
     if (response.status >= 200 && response.status < 300) navigate('/login')
   };

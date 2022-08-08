@@ -42,10 +42,12 @@ let paymentDetail = [
 
 const theme = createTheme();
 
-export default function Checkout() {
+export default function Checkout({updateLoginUser}: any) {
   const [activeStep, setActiveStep] = React.useState(0);
   const { cart, setCart } = useContext(CartContext);
   const navigate = useNavigate();
+
+  console.log(updateLoginUser)
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

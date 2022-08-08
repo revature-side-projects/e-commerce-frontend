@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*
+.qb {
+  padding: 2px;
+  background-color: #FFFFFF;
+  width: 30px;
+  margin: 10px;
+  border: 1px solid #474C55;
+  color: #474C55;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.qrb {
+  padding: 2px;
+  background-color: #FFFFFF;
+  width: 62px;
+  margin: 10px;
+  border: 1px solid #474C55;
+  color: #474C55;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+*/
