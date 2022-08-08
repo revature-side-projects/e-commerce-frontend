@@ -5,16 +5,19 @@ import { Box, Container, Typography } from "@mui/material";
 import Product from "../../models/Product";
 import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
 import Pic from "./Pic.png"
+import { FormatPaint } from "@mui/icons-material";
 
 
 export const SearchProducts = () =>{
     const location = useLocation();
+    const keys = new URLSearchParams(location.search).get('keyword')
 
     var [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
         const fetchData = async () => {
         const result = await apiGetAllProducts()
+
         setProducts(result.payload)
         }
         fetchData()
@@ -24,20 +27,26 @@ export const SearchProducts = () =>{
         <>
         <Navbar/>
         <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>
-            <h1>
-                Results
-            </h1>
-            <p>{new URLSearchParams(location.search).get('keyword')}</p>
-            {products.map((item) => (
-            <>
-            <Container>
-                <Typography align="center">name</Typography>
-                <img src={Pic} height="300"/>
-            </Container>
-            </> 
-            ))}
-        </Box>
+            <Typography component="h1" variant="h5">
+                Results for "{keys}"
+            </Typography>
+            {products.map(
+                (item) => (
+                    <>
+                        {item.name.toLocaleLowerCase().includes(keys ? keys.toLocaleLowerCase() : "") &&
+
+                            <Container>
+                                <Typography align="center">{item.name}</Typography>
+                                <img src={item.image} height="300" />
+                            </Container>
+                        
+                        }
+                    </>
+                )
+            )}
+            </Box>
         </>
+    
 
     )
 }
