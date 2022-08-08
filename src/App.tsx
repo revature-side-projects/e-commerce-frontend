@@ -13,14 +13,15 @@ function App() {
 
   return (
     <CartContext.Provider value={value}>
-      <Router>
-        <DarkMode /><AppRoutes></AppRoutes>
+      <Router><DarkMode />
+
+        <AppRoutes></AppRoutes>
     <div className="App">
       <header className="App-header">
    
       </header>
     </div>
-      </Router>
+</Router>
     </CartContext.Provider>
     
 
