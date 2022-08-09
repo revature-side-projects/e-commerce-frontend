@@ -25,7 +25,7 @@ const TopButton = styled.button`
 
 
 
-export const DisplayProducts = ({loginUser}: any, {test}: any) => {
+export const DisplayProducts = ({loginUser}: any) => {
 
   var [products, setProducts] = useState<Product[]>([])
 
@@ -53,18 +53,11 @@ export const DisplayProducts = ({loginUser}: any, {test}: any) => {
     <React.Fragment>
         <Navbar updateLoginUser={loginUser}/>
         <Container>
-        {test && products.map((item) => (
-
-<><ProductCard product={item} key={item.id} updateUser={loginUser}/>
-
-{/* <Quantity products={products}/> */}
-</> 
-
-))}
+       
           
         {loginUser && products.map((item) => (
 
-            <><ProductCard product={item} key={item.id} updateUser={loginUser}
+            <><ProductCard product={item} key={item.id} loginUser={loginUser}
             /> <br></br><br></br>
             {loginUser.role =="ADMIN" &&
             <Button onClick={() => removeButton(item.id, item.image)}>REMOVE<br></br> {item.name}</Button> }
