@@ -12,10 +12,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
+import DarkMode from "../../DarkMode";
 import User from '../../models/User';
- 
 
-const theme = createTheme();
+
 
 export default function Login({updateLoginUser}: any) {
   const navigate = useNavigate();
@@ -46,10 +46,7 @@ export default function Login({updateLoginUser}: any) {
   }
 
   return (
-    
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
           
         <Box
           sx={{
@@ -107,6 +104,5 @@ export default function Login({updateLoginUser}: any) {
        
         
       </Container>
-    </ThemeProvider>
   );
 }

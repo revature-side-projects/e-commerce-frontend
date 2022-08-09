@@ -12,7 +12,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const theme = createTheme();
 
-export function CreateProduct() {
+export default function CreateProduct({loginUser}: any) {
     // funcitons and state varible to handle changing image
     let [URL, setURL] = useState(null);
     //sets changed image when button pressed
@@ -23,6 +23,7 @@ export function CreateProduct() {
     function handleChangeURL(event: any){
         setURL(event.target.value);
     }
+    console.log(loginUser)
     
     const navigate = useNavigate();
     
@@ -44,8 +45,7 @@ export function CreateProduct() {
     return (
         <>
         <ThemeProvider theme={theme}>
-            <Navbar/>
-            
+            <Navbar updateLoginUser={loginUser}/>
             <Container component="form" onSubmit={handleCreate} maxWidth="lg">
                 <Box sx={{marginTop: 8,display: 'flex',flexDirection: 'column',alignItems: 'center',}}>
                     <Grid container spacing={2}>

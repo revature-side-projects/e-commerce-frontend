@@ -93,7 +93,7 @@ import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
   interface productProps {
       product: Product,
       key: number,
-      updateUser: any
+      loginUser: any
     
   }
 
@@ -157,7 +157,10 @@ import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
         <Info>
           <Icon>
             <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: counter})}} />
+<<<<<<< HEAD
             
+=======
+>>>>>>> development
           </Icon>
           <Icon>
             <SearchOutlined />
@@ -176,7 +179,7 @@ import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
             <button className="qb" onClick={decrementCount}>-</button>
           </div>*/}
 
-          {props.updateUser.role == "ADMIN" && <Icon>
+          {props.loginUser.role == "ADMIN" && <Icon>
 
             <UpgradeOutlined onClick={() => navigate(`/product/${props.product.id}/update`)} />
           </Icon> }

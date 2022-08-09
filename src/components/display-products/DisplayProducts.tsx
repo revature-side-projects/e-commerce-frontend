@@ -9,6 +9,7 @@ import Navbar from '../navbar/Narbar';
 // import { Quantity } from '../quantity/Quantity';
 import { ProductCard } from "./ProductCard";
 import { PropaneSharp } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     padding: 20px;
@@ -26,7 +27,8 @@ const TopButton = styled.button`
 
 
 export const DisplayProducts = ({loginUser}: any) => {
-
+  
+  const navigate = useNavigate()
   var [products, setProducts] = useState<Product[]>([])
 
   console.log(loginUser)
@@ -57,11 +59,15 @@ export const DisplayProducts = ({loginUser}: any) => {
           
         {loginUser && products.map((item) => (
 
+<<<<<<< HEAD
             <><ProductCard product={item} key={item.id} loginUser={loginUser}
             /> <br></br><br></br>
             {loginUser.role =="ADMIN" &&
             <Button onClick={() => removeButton(item.id, item.image)}>REMOVE<br></br> {item.name}</Button> }
             
+=======
+            <><ProductCard product={item} key={item.id} loginUser={loginUser}/>
+>>>>>>> development
     
             {/* <Quantity products={products}/> */}
             </> 
@@ -85,7 +91,7 @@ export const DisplayProducts = ({loginUser}: any) => {
             },
             }}
           >
-          <Button href="/product/create" color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />}>
+          <Button onClick={() => navigate('/product/create')} color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />} >
           Add new product
           </Button>
         </Box>}
