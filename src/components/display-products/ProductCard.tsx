@@ -116,19 +116,7 @@ import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
         setCount(counter -1);
     };
 
-    const removeButton =(id: any, image: any)=>{
-      for (let i =0;i<products.length;i++){
-        if(products[i].id == id){
-          let c = products[i].id;
-          let b = products.indexOf(id);
-           products.splice(b);
-
-           setProducts(products);
-
-             
-        }
-      }
-    }
+    
 
     useEffect(() => {
       const fetchData = async () => {
@@ -188,12 +176,10 @@ import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
             <button className="qb" onClick={decrementCount}>-</button>
           </div>*/}
 
-          {props.updateUser.role == "ADMIN" && <><Icon>
+          {props.updateUser.role == "ADMIN" && <Icon>
 
             <UpgradeOutlined onClick={() => navigate(`/product/${props.product.id}/update`)} />
-          </Icon><Icon>
-
-              <Button onClick={() => removeButton(props.product.id, props.product.image)}>REMOVE<br></br> {props.product.name}</Button> </Icon></>}
+          </Icon> }
 
         </Info>
       </Container>
