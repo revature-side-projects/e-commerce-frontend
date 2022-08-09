@@ -1,5 +1,6 @@
 import "./DarkMode.css";
 import { ChangeEventHandler } from "react";
+import React from "react";
 
 /* NEW (START) */
 const setDark = () => {
