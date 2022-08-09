@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import styled from "styled-components";
 import Product from '../../models/Product';
 import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
 import Navbar from '../navbar/Narbar';
+// import { Quantity } from '../quantity/Quantity';
 import { ProductCard } from "./ProductCard";
+import { PropaneSharp } from '@mui/icons-material';
 
 const Container = styled.div`
     padding: 20px;
@@ -12,9 +17,28 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-export const DisplayProducts = () => {
+const TopButton = styled.button`
+  padding: 10px;
+  font-weight: 10;
+  cursor: pointer;
+`;
 
-  const [products, setProducts] = useState<Product[]>([])
+
+
+export const DisplayProducts = ({loginUser}: any, {test}: any) => {
+
+  var [products, setProducts] = useState<Product[]>([])
+
+  console.log(loginUser)
+
+  const removeButton =(id: any, image: any)=>{
+    for (let i =0;i<products.length;i++){
+      if(products[i].id == id){
+           setProducts(products.filter(product => product.image !== image));
+      }
+    }
+  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,64 +47,55 @@ export const DisplayProducts = () => {
     }
     fetchData()
   }, [])
-  // const products: Product[] = [
-  //   {
-  //       id:1,
-  //       image:"https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:3,
-  //       image:"https://www.prada.com/content/dam/pradanux_products/U/UCS/UCS319/1YOTF010O/UCS319_1YOT_F010O_S_182_SLF.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:4,
-  //       image:"https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:5,
-  //       image:"https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:6,
-  //       image:"https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:8,
-  //       image:"https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  // ]
 
   return (
+
     <React.Fragment>
-        <Navbar/>
+        <Navbar updateLoginUser={loginUser}/>
         <Container>
-        {products.map((item) => (
-            <ProductCard product={item} key={item.id} />
+        {test && products.map((item) => (
+
+<><ProductCard product={item} key={item.id} updateUser={loginUser}/>
+
+{/* <Quantity products={products}/> */}
+</> 
+
+))}
+          
+        {loginUser && products.map((item) => (
+
+            <><ProductCard product={item} key={item.id} updateUser={loginUser}
+            /> <br></br><br></br>
+            {loginUser.role =="ADMIN" &&
+            <Button onClick={() => removeButton(item.id, item.image)}>REMOVE<br></br> {item.name}</Button> }
+            
+    
+            {/* <Quantity products={products}/> */}
+            </> 
+
+             
+            
         ))}
+         {/* {loginUser.role == "ADMIN" && products.map((item) => <><TopButton onClick={() => removeButton(item.id, item.image)} /></>)} */}
+          
+          
+
+          {loginUser.role == "ADMIN" && 
+        <Box
+            sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+            m: 2,
+            width: 300,
+            height: 350,
+            },
+            }}
+          >
+          <Button href="/product/create" color="success" size="large" variant="outlined" startIcon={<AddCircleIcon />}>
+          Add new product
+          </Button>
+        </Box>}
         </Container>
     </React.Fragment>
     

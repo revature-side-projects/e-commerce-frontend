@@ -37,7 +37,7 @@ const MenuItem = styled.div`
   margin-left: 25px;
 `;
 
-const Navbar = () => {
+const Navbar = ({updateLoginUser}: any) => {
   const navigate = useNavigate();
 
   return (
@@ -47,9 +47,19 @@ const Navbar = () => {
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
         <Right>
+        {!updateLoginUser && 
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
+        }
+        {!updateLoginUser && 
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
-          <MenuItem onClick={() => {navigate('/cart')}}>
+        }
+        {updateLoginUser &&
+          <MenuItem onClick={() => {navigate('/profile')}}>PROFILE</MenuItem>
+        }
+        {updateLoginUser &&
+          <MenuItem onClick={() => {window.location.href="/"}}>LOG OUT</MenuItem>
+        }
+          <MenuItem onClick={() => {navigate('/cart')}}> 
             <Badge color="primary">
               <ShoppingCartOutlined />
             </Badge>

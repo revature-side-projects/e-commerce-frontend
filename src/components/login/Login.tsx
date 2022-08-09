@@ -12,23 +12,45 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
+import User from '../../models/User';
+ 
 
 const theme = createTheme();
 
-export default function Login() {
+export default function Login({updateLoginUser}: any) {
   const navigate = useNavigate();
+
+  
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const response = await apiLogin(`${data.get('email')}`, `${data.get('password')}`);
-    if (response.status >= 200 && response.status < 300) navigate('/')
+    
+    // only redirect and save payload if successful.
+    if (response.status >= 200 && response.status < 300) {
+      handleData(response.payload);
+ 
+      navigate('/')
+
+    }
   };
 
+ 
+  // update the loginuser with the user object.
+  async function handleData(data: User) {
+      updateLoginUser(data);
+
+      
+
+  }
+
   return (
+    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+          
         <Box
           sx={{
             marginTop: 8,
@@ -43,7 +65,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form"  onSubmit={handleSubmit}   noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -64,6 +86,7 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
             />
+             
             <Button
               type="submit"
               fullWidth
@@ -81,6 +104,8 @@ export default function Login() {
             </Grid>
           </Box>
         </Box>
+       
+        
       </Container>
     </ThemeProvider>
   );

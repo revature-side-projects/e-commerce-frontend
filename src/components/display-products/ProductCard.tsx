@@ -1,11 +1,28 @@
 import {
     SearchOutlined,
     ShoppingCartOutlined,
+    
   } from "@material-ui/icons";
-import { useContext } from "react";
+import {
+  CancelPresentationOutlined,
+  KeyboardArrowUpOutlined,
+  KeyboardArrowDownOutlined,
+  AddCircleOutlined,
+  UpgradeOutlined
+} from '@mui/icons-material';
+import{
+  Button,
+  Box
+} from '@mui/material'
+
+import { useContext, useEffect } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
+import { useNavigate } from "react-router-dom";
+import React,{useState} from "react";
+import { apiGetAllProducts } from "../../remote/e-commerce-api/productService";
+
   
   const Info = styled.div`
     opacity: 0;
@@ -67,12 +84,54 @@ import Product from "../../models/Product";
     }
   `;
   
+  const ProductAmount = styled.div`
+  font-size: 24px;
+  margin: 5px;
+`;
+
+
   interface productProps {
       product: Product,
-      key: number
+      key: number,
+      updateUser: any
+    
   }
 
   export const ProductCard = (props: productProps) => {
+
+    let [counter, setCount] = useState(0);
+    var [products, setProducts] = useState<Product[]>([])
+
+    if(counter < 1){
+        counter = 1;
+    };
+    
+    // Function to increment count by 1
+    const incrementCount = () => {
+      // Update state with incremented value
+      setCount(counter + 1);
+    };
+    
+    const decrementCount = () => {
+        setCount(counter -1);
+    };
+
+    
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const result = await apiGetAllProducts()
+        setProducts(result.payload)
+      }
+      fetchData()
+    }, [])
+
+ 
+
+
+
+
+
     const { cart, setCart } = useContext(CartContext);
 
     const addItemToCart = (product: Product) => {
@@ -88,18 +147,43 @@ import Product from "../../models/Product";
       setCart(newCart)
     }
 
+    const navigate = useNavigate();
+
     return (
-      <Container>
+      <><Container>
+
         <Circle />
         <Image src={props.product.image} />
         <Info>
           <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
+            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: counter})}} />
+            
           </Icon>
           <Icon>
             <SearchOutlined />
           </Icon>
+          <Icon>
+            
+            <KeyboardArrowUpOutlined onClick={incrementCount} />
+          </Icon>
+          <ProductAmount>{counter}</ProductAmount>
+          <Icon>
+            <KeyboardArrowDownOutlined onClick={decrementCount} />
+          </Icon>
+           {/*<div className="app">
+            <button className="qb"  onClick={incrementCount}>+</button>
+            {counter}
+            <button className="qb" onClick={decrementCount}>-</button>
+          </div>*/}
+
+          {props.updateUser.role == "ADMIN" && <Icon>
+
+            <UpgradeOutlined onClick={() => navigate(`/product/${props.product.id}/update`)} />
+          </Icon> }
+
         </Info>
       </Container>
+
+      </>
     );
   };
